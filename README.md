@@ -54,7 +54,7 @@
   * 
 * 쿠키와 세션이 무엇이고 차이가 뭔지
   * 
-* RESTFul가 뭔지
+* RESTFul
   * 
 * TCP 3-way handshake가 언제 일어나고 어떤 과정인지
   * 
@@ -75,13 +75,13 @@
   * 
 * Binary Search Tree의 최악의 시간복잡도와 최악의 시간복잡도를 유발하는 케이스
   * 
-* 해쉬테이블이 뭔지
+* 해쉬테이블
   * 
 
 ### Algorithm
 * Fibonacci 공식을 재귀적인 방법과 동적 계획법을 이용했을 때 각각의 차이
   *
-* DFS와 BFS거 뭔지
+* DFS와 BFS
   *
 
 
