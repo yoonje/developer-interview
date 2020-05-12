@@ -355,7 +355,6 @@
 * Wrapper class
   * 
 * Synchronized
-  *
   * 
 * ThreadLocal
   * 
