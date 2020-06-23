@@ -181,6 +181,9 @@
   * `GET은 정보를 조회하기 위한 메소드`이고 `POST는 서버로 데이터를 전송하기 위해 설계된 메소드`
   * 둘다 데이터를 서버에 전달할 수 있다는 것이 공통점이지만 GET은 URL의 파라미터로 이름과 데이터가 쌍으로 명시되어 전달되고, POST는 HTTP Request Message의 Body 부분에 데이터가 담겨있음
   * GET은 `URL의 길이는 제한적이기` 때문에 많은 양의 데이터를 전송할 수 없지만 POST는 `HTTP Request Message의 Body 부분에` 데이터가 담겨있어 제한이 없음
+* HTTP POST 방식과 PUT 방식의 차이
+  * 일반적으로 POST는 생성, PUT은 수정이지만 PUT으로도 생성이 가능
+  * POST와 가장 큰차이는 PUT 메서드는 자원의 식별자를 이미 알고있는 상태로 POST는 request message로 포함된 엔티티를 이용해 새로운 자원을 생성해 내는 것이고, PUT은 request message와 함께 넘어온 식별자의 자원을 만드는 것
 * 웹 캐시
   * 대부분의 브라우저에서는 `HTTP 헤더`에 캐시 구현이 포함되어 있어서 웹 캐시를 구현
   * 응답헤더의 `Last-Modified`, Etag, Expires, Cache-Control 항목 등과 같은 여러 부분의 여러 개의 태그를 통해서 캐싱
