@@ -1,7 +1,7 @@
 # Developer Interview
 개발자 인터뷰 질문에 관련된 팁과 최소 개념입니다. 모든 내용을 자세하게 담기엔 가성비가 떨어지므로 모르는 부분이 나오신다면 검색을 통해 추가적인 학습을 추천합니다. 기본적인 CS 지식 정리와 IT 서비스 회사(NAVER,KAKAO,LINE), 통신회사(SKT)의 실제 인터뷰 경험을 참고하여 만들었습니다. 기본 CS 지식은 동일하나 면접 본 직무가 `백앤드, 빅데이터 플랫폼, 클라우드` 관련 직무이므로 이를 감안하시길 바랍니다.
 
-### 추천 자료
+## 추천 자료
 ##### Easy
 - https://github.com/jwasham/coding-interview-university/blob/master/translations/README-ko.md
 - https://github.com/tvandame/back-end-developer-interview-questions/blob/master/Translations/Korean/README_KR.md
@@ -15,7 +15,7 @@
 - https://github.com/careercup/CtCI-6th-Edition
 - https://github.com/donnemartin/system-design-primer
 
-### Table of Content
+## Table of Content
 - [Basics](#basics)
 - [OS](#os)
 - [Network](#network)
