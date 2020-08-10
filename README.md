@@ -11,7 +11,7 @@
 - https://github.com/JaeYeopHan/Interview_Question_for_Beginner
 - https://github.com/KNU-CS-Study/Tech-Interview
 
-##### Advance
+##### Hard
 - https://github.com/careercup/CtCI-6th-Edition
 - https://github.com/donnemartin/system-design-primer
 
