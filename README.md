@@ -3,7 +3,6 @@
 
 ## 추천 자료
 ##### Easy
-- https://github.com/jwasham/coding-interview-university/blob/master/translations/README-ko.md
 - https://github.com/tvandame/back-end-developer-interview-questions/blob/master/Translations/Korean/README_KR.md
 - https://github.com/gyoogle/tech-interview-for-developer
 - https://github.com/WooVictory/Ready-For-Tech-Interview
@@ -14,6 +13,7 @@
 - [프로그래밍 면접 이렇게 준비한다](https://www.aladin.co.kr/shop/wproduct.aspx?ISBN=K172635329&start=pnaver_02)
 
 ##### Hard
+- https://github.com/jwasham/coding-interview-university
 - https://github.com/careercup/CtCI-6th-Edition
 - https://github.com/donnemartin/system-design-primer
 
