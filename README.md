@@ -484,7 +484,7 @@
 ### Java
 * JVM과 Java 프로그램 실행 과정
   * JVM은 Java Virtual Machine의 약자로 자바 프로그램을 실행하는 역할을 하고 프로그램이 시작되면 컴파일러를 통해 바이트 코드로 변환하고 변환된 파일을 JVM에 로딩하여 실행
-  ![jvm](https://user-images.githubusercontent.com/38900338/103631397-46626e80-4f86-11eb-8d28-3ef22c4ecc52.JPG {: width="60%"})
+  <img src = "https://user-images.githubusercontent.com/38900338/103631397-46626e80-4f86-11eb-8d28-3ef22c4ecc52.JPG" width="60%">
 * Java에서 Garbage Collection이 필요한 이유에 대해서 설명
   * 자바는 메모리를 명시적으로 해제하지 않기 때문에 GC를 통해서 필요없는 객체를 지우는 작업을 수행
 * JVM 메모리 구조
