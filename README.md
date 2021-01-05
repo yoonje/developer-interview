@@ -502,10 +502,13 @@
 * JVM과 Java 프로그램 실행 과정
   * JVM은 Java Virtual Machine의 약자로 자바 프로그램을 실행하는 역할을 하고 프로그램이 시작되면 컴파일러를 통해 바이트 코드로 변환하고 변환된 파일을 JVM에 로딩하여 실행
   * `Java Source code (.java)` -> 컴파일(파일 저장 시, 자동 생성) -> `Java Application (.class)` -> 실행 -> `JVM` -> 실행 -> `컴퓨터`
-* Java에서 Garbage Collection이 필요한 이유에 대해서 설명
-  * 자바는 메모리를 명시적으로 해제하지 않기 때문에 GC를 통해서 필요없는 객체를 지우는 작업을 수행
 * JVM 메모리 구조
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation, Permanent Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
+* Java에서 Garbage Collection이 필요한 이유에 대해서 설명
+  * 자바는 메모리를 명시적으로 해제하지 않기 때문에 GC를 통해서 필요없는 객체를 지우는 작업을 수행
+  * 더이상 사용하지 않는 동적 할당된 메모리 블럭(Heap)을 찾아 다시 사용 가능한 자원으로 회수
+  * 장점: 유효하지 않는 포인터 접근, 이중 해제, 메모리 누수의 버그를 줄임
+  * 단점: 오버헤드, 비용, 프로그램 예측 불가, 실시간 시스템에는 적합X
 * Java Garbage Collection 동작 방식
   * 새롭게 생성된 객체는 `Young의 Eden 영역`으로 들어가게 되고 `Eden 영역이 다 차면 Minor GC`가 발생하여 참조 횟수에 따라 증가하는 `age bit`를 보고 불필요한 객체를 삭제하고 생존한 객체는 S0으로 이동
   * Minor GC가 발생할 때마다 각각 Young 영역의 객체들은 삭제와 이동을 하게되는데 (Eden -> S0 / S0 -> S1)
