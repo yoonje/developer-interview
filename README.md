@@ -154,18 +154,48 @@
 * TCP와 UDP의 차이
   * TCP는 `신뢰성을 보장하는 연결형 프로토콜`로 `흐름제어, 혼잡제어`를 제공
   * UDP는 `신뢰성을 보장하지 않는 비연결형 프로토콜`로 흐름제어, 혼잡제어를 제공하지 않음
-* TCP 흐름제어와 혼잡제어
-  * 흐름제어: 수신자와 송신자 세그먼트 간의 TCP Header에 `remain window data`를 통해 남은 버퍼를 알고 흐름을 파악할 수 있음 -> `Stop and Wait`이나 `Go Back N`과 같은 정책을 사용
-  * 혼잡제어: 패킷 loss 시의 확인되는 `timeout이나 duplicate ACK`을 통해서 파악 할 수 있음 -> `TCP Tahoe`나 `TCP Reno`와 같은 정책을 사용
+* TCP 흐름제어: 수신자와 송신자의 메시지 처리속도 차이를 해결하기 위한 방법
+  - 수신자와 송신자 세그먼트 간의 TCP Header에 `remain window data`를 통해 남은 버퍼를 알고 흐름을 파악할 수 있음
+  * `Stop and Wait`: 전송한 패킷의 ACK을 수신하면 다음 패킷 전송
+  * `Sliding Window`: N개의 패킷을 ACK의 확인 없이 전송, 데이터의 흐름을 동적으로 조절
+    * `Go Back N`: Cumulative ACK(마지막으로 수신 성공한 패킷의 ACK을 계속 전송), 문제가 된 패킷부터 모두 재전송
+    * `Selective Repeat`: Individual ACK(수신 성공한 패킷의 개별 ACK 전송), 문제가 된 패킷만 재전송
+* TCP 혼잡제어: 송신자와 네트워크(라우터)의 데이터 처리 속도 차이를 해결하기 위한 방법
+  - 패킷 loss 시의 확인되는 `timeout이나 3개의 duplicate ACK`을 통해서 파악 가능
+  * `TCP Tahoe`
+    * 3개의 duplicate ACK, Timeout 발생 -> Slow Start(CWND가 1부터 지수적으로, 2배씩 증가), Congestion Avoidance(CWND가 1씩 증가)
+  * `TCP Reno`
+    * Congestion Avoidance 상황에서 3개의 duplicate ACK 발생 -> CWND를 1/2배로 감소하고 선형적 증가
+     (TCP Tahoe는 Slow Start로 진입)
+    * Congestion Avoidance 상황에서 Timeout 발생 -> Slow Start (CWND = 1)
+* TCP 3-way handshake가 언제 일어나고 어떤 과정인지
+  * 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
+  * Client -> Server: `SYN 전송`
+  * Server -> Client: `SYN 전송 + ACK 전송`
+  * Client -> Server: `ACK 전송`
+  * TCP는 양방향성 연결이기 때문에 발생하는 매커니즘으로 연결을 성립할 때는 서버가 준비가 다 된 상태인 대기 상태에서 시작하여 3-way로 가능
+  * TCP는 양방향 프로토콜이므로 클라이언트와 서버가 각각 서로에게 패킷을 전송할 수 있다는 것을 확인해야 되므로 3 way 사용
+* TCP 4-way handshake가 언제 일어나고 어떤 과정인지
+  * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
+  * Client -> Server : `FIN 전송`
+  * Server -> Client : `ACK 전송`
+  * Server -> Client : `FIN 전송`
+  * Client -> Server : `ACK 전송`
+  * 서버의 지연된 패킷을 수신하기 위해 클라이언트에 Timeout 존재
+  * TCP는 양방향성 연결이기 때문에 발생하는 매커니즘으로 연결 해제할 때는 한 쪽이 준비가 되지 않은 상태이기 때문에 연결 해제 대기 상태로 만들기 위해서 4-way로 해야 가능
+  * 클라이언트가 일방적으로 끊으면 서버는 '연결은 되어 있으나 요청이 없는 상태'로 오해할 수 있어 4 way 사용
+  * 클라이언트는 데이터 전송을 끝냈다고 하더라도 서버는 전송할 것이 남아있을 수 있어 4 way 사용
 * OSI 7계층와 각 계층 역할
+  * 정의: 네트워크의 통신 과정을 7단계로 나눈 것
+  * 사용 이유: 이해하기 쉬움, 문제 발생시 해당 단계의 장비와 SW만 수정하면 됨
   * Application - Application(7), Presentation(6), Session(5) 계층으로 분리
-  * Application(7): 사용자에게 `실제 애플리케이션 서비스`를 제공하는 계층 / HTTP
-  * Presentation(6): 애플리케이션의 `데이터 형태와 구조를 변환`시키는 계층
-  * Session(5): 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
-  * Transport(4): 통신 `양단 간의 신뢰성 있는 통신`을 보장하는 계층 / TCP or UDP
-  * Network(3): 목적지까지의 경로를 선택하고 `경로에 따라 패킷을 전달`해주는 계층 / IP
-  * Link(2): 인접한 `피어 간의 신뢰성 있는 통신`을 보장하는 계층 / MAC
-  * Physical(1): 전기적, 기계적, 기능적인 특성을 이용해서 통신 케이블로 데이터를 전송
+  * Application(7, Data): 사용자에게 `실제 애플리케이션 서비스`를 제공하는 계층 / HTTP
+  * Presentation(6, Data): 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
+  * Session(5, Data): 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
+  * Transport(4, Segment): 통신 `양단 간의 신뢰성 있는 통신`을 보장하는 계층 / TCP or UDP
+  * Network(3, Packet or Datagram): 목적지까지의 경로를 선택하고 `경로에 따라 패킷을 전달(라우팅)`해주는 계층 / IP
+  * Link(2, Frame): 인접한 `피어 간의 신뢰성 있는 통신`을 보장하는 계층 / MAC
+  * Physical(1, Bit): 전기적, 기계적, 기능적인 특성을 이용해서 통신 케이블로 데이터를 전송
 * HTTP와 HTTPS의 차이
   * HTTP는 웹 브라우저와 웹 서버가 통신하기 위한 프로토콜이고 HTTPS는 HTTP Secure의 약자로 HTTP에 SSL/TLS 기반의 Secure Socket을 활용한 프로토콜
   * HTTP는 평문 통신이기 때문에 `도청`이 가능하고 `변조`가 가능하며 통신 상대를 특정하지 않기 때문에 `위장`이 가능
@@ -186,19 +216,6 @@
 * 웹 서버와 웹 애플리케이션 서버의 차이점
   * 웹 서버: Http 프로토콜을 기반으로, 클라이언트의 요청을 서비스하는 기능을 담당하는 서버로 정적 컨텐츠만 처리하는 고성능 서버
   * 웹 애플리케이션 서버: 보통 웹서버 뒤에서 DB 조회 및 다양한 로직 처리 요구시 동적인 컨텐츠를 처리하는 서버
-* TCP 3-way handshake가 언제 일어나고 어떤 과정인지
-  * 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
-  * Client -> Server: `SYN 전송`
-  * Server -> Client: `SYN 전송 + ACK 전송`
-  * Client -> Server: `ACK 전송`
-  * TCP는 양방향성 연결이기 때문에 발생하는 매커니즘으로 연결을 성립할 때는 서버가 준비가 다 된 상태인 대기 상태에서 시작하여 3-way로 가능
-* TCP 4-way handshake가 언제 일어나고 어떤 과정인지
-  * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
-  * Client -> Server : `FIN 전송`
-  * Server -> Client : `ACK 전송`
-  * Server -> Client : `FIN 전송`
-  * Client -> Server : `ACK 전송`
-  * TCP는 양방향성 연결이기 때문에 발생하는 매커니즘으로 연결 해제할 때는 한 쪽이 준비가 되지 않은 상태이기 때문에 연결 해제 대기 상태로 만들기 위해서 4-way로 해야 가능
 * 웹 브라우저에 URL을 입력했을 때의 수행 과정
   * 사용자의 PC는 `DHCP 서버`에서 사용자 `자신의 IP 주소`, `가장 가까운 라우터의 IP 주소`, `가장 가까운 DNS 서버의 IP 주소`를 받는다.
   * `ARP`를 이용하여 IP 주소를 기반으로 가장 가까운 라우터의 MAC 주소를 받는다.
@@ -484,10 +501,14 @@
 ### Java
 * JVM과 Java 프로그램 실행 과정
   * JVM은 Java Virtual Machine의 약자로 자바 프로그램을 실행하는 역할을 하고 프로그램이 시작되면 컴파일러를 통해 바이트 코드로 변환하고 변환된 파일을 JVM에 로딩하여 실행
-* Java에서 Garbage Collection이 필요한 이유에 대해서 설명
-  * 자바는 메모리를 명시적으로 해제하지 않기 때문에 GC를 통해서 필요없는 객체를 지우는 작업을 수행
+  * `Java Source code (.java)` -> 컴파일(파일 저장 시, 자동 생성) -> `Java Application (.class)` -> 실행 -> `JVM` -> 실행 -> `컴퓨터`
 * JVM 메모리 구조
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation, Permanent Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
+* Java에서 Garbage Collection이 필요한 이유에 대해서 설명
+  * 자바는 메모리를 명시적으로 해제하지 않기 때문에 GC를 통해서 필요없는 객체를 지우는 작업을 수행
+  * 더이상 사용하지 않는 동적 할당된 메모리 블럭(Heap)을 찾아 다시 사용 가능한 자원으로 회수
+  * 장점: 유효하지 않는 포인터 접근, 이중 해제, 메모리 누수의 버그를 줄임
+  * 단점: 오버헤드, 비용, 프로그램 예측 불가, 실시간 시스템에는 적합X
 * Java Garbage Collection 동작 방식
   * 새롭게 생성된 객체는 `Young의 Eden 영역`으로 들어가게 되고 `Eden 영역이 다 차면 Minor GC`가 발생하여 참조 횟수에 따라 증가하는 `age bit`를 보고 불필요한 객체를 삭제하고 생존한 객체는 S0으로 이동
   * Minor GC가 발생할 때마다 각각 Young 영역의 객체들은 삭제와 이동을 하게되는데 (Eden -> S0 / S0 -> S1)
