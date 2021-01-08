@@ -535,21 +535,30 @@
   * 
 * ==와 equals()의 차이
   * == 연산자는 참조형을 비교할 때 `레퍼런스를 비교`하고 eqals()는 참조형을 비교할 때 `값을 비교`
+* equals() 메소드 동작 원리
+  * 
 * 기본(원시)형과 참조형의 차이점
   * 기본형: boolean, char, byte, short, int, long, float, double
   * 참조형: 기본형 8가지를 제외한 나머지 타입, Integer, Long, Double, Boolean 등
-  * 참조형은 할당연산자 사용 시에 값의 주소가 전달되고 기본형은 값 자체가 전달
   * 참조형은 null을 입력할 수 있지만 기본형은 null 불가능
   ```java
   int i = null; //불가능
   Integer ii = null; //가능
   ```
   * 참조형은 제너릭 타입에서 사용 가능하지만 기본형은 불가능
+    * 제너릭(Generic): 클래스에서 사용할 타입을 클래스 외부에서 설정, 타입을 파라미터화해서 컴파일시 구체적인 타입이 결정
   ```java
   List<int> i; //불가능
   List<Integer> ii; //가능
   ```
-  
+    * 참조형은 할당연산자 사용 시에 값의 주소가 전달되고 기본형은 값 자체가 전달 -> 기본형은 `스택`에 값이 존재, 참조형은 값은 `힙`에 존재하고 `스택`에 참조 값이 존재해 언박싱 필요
+    * 참조형은 기본형보다 차지하는 메모리가 크고 접근 속도가 느림
+* Integer vs int
+  * 
+* int와 short
+  *
+* Java String
+  * 
 * non-static과 static 멤버의 차이
   * 
 * 변수의 종류와 메모리 구조
@@ -557,15 +566,7 @@
 * reflection
   * 
 * Java Thread
-  * 
-* Java String
-  * 
-* int와 short
-  * 
-* equals() 메소드 동작 원리
-  * 
-* Integer vs int
-  * 
+  *  
 * Casting(업케스팅, 다운케스팅)
   * 
 * 고유 락
@@ -576,6 +577,7 @@
   * 
 * Java7에서 Java8로 올라오면서 달라진 점
   *
+* 벡터에 값이 추가되는 원리
 
 ### Python
 * Generator와 사용 시의 장점
