@@ -10,7 +10,6 @@
 * [Java Garbage Collection 동작 방식](#java-garbage-collection-동작-방식)
 * [추상 클래스와 인터페이스](#추상-클래스와-인터페이스)
 * [Collection](#collection)
-* [List, Set, Map 차이](#list-set-map-차이)
 * [Hash Map과 Hash Table의 차이](#hash-map과-hash-table의-차이)
 * [Hash Set과 Tree Set의 차이](#hash-set과-tree-set의-차이)
 * [Annotation](#annotation)
