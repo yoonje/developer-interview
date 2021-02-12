@@ -9,9 +9,10 @@
 * [Java에서 Garbage Collection이 필요한 이유](#java에서-garbage-collection이-필요한-이유)
 * [Java Garbage Collection 동작 방식](#java-garbage-collection-동작-방식)
 * [추상 클래스와 인터페이스](#추상-클래스와-인터페이스)
-* [Collection](#collection) *
-* [List, Set, Map 차이](#list-set-map-차이) *
-* [Hash Set과 Tree Set의 차이](#hash-set과-tree-set의-차이) *
+* [Collection](#collection)
+* [List, Set, Map 차이](#list-set-map-차이)
+* [Hash Map과 Hash Table의 차이](#hash-map과-hash-table의-차이)
+* [Hash Set과 Tree Set의 차이](#hash-set과-tree-set의-차이)
 * [Annotation](#annotation)
 * [Generic](#generic)
 * [Access Modifier(접근 제한자)](#access-modifier접근-제한자)
@@ -19,16 +20,16 @@
 * [Wrapper Class](#wrapper-class)
 * [String, StringBuilder, StringBuffer](#string-stringBuilder-stringbuffer)
 * [==와 equals()의 차이](#와-equals의-차이)
-* [equals() 메소드 동작 원리](#equals-메소드-동작-원리)
+* [equals() 메소드 동작 원리](#equals-메소드-동작-원리) *
 * [기본(원시)형과 참조형의 차이점](#기본원시형과-참조형의-차이점)
-* [Java String](#java-string)
+* [Java String](#java-string) *
 * [non-static과 static 멤버의 차이](#non-static과-static-멤버의-차이)
 * [람다식](#람다식)
 * [reflection](#reflection)
-* [Java Thread](#java-thread)
+* [Java Thread 생성방법](#java-thread-생성방법)
+* [고유 락](#고유-락)
 * [Synchronized](#synchronized)
 * [ThreadLocal](#threadLocal)
-* [고유 락](#고유-락)
 * [Casting(업케스팅, 다운케스팅)](#casting업케스팅-다운케스팅)
 * [Promotion & Casting](#promotion--casting)
 * [Error & Exception](#error--exception)
@@ -145,14 +146,25 @@ public interface Interface {
 * 인터페이스는 추상 클래스와 달리 구현을 강제함으로써 구현 객체의 같은 동작을 보장하여 인터페이스를 이용하여 `표준화를 확립할 수 있으므로 서로 관계가 없는 객체들이 상호 작용을 가능하게 함`
 
 ## Collection
-* List: 대표적인 구현체로는 `ArrayList`가 존재한다. 이는 기존에 있었던 `Vector`를 개선한 것이다.
-* Map: 대표적인 구현체로 `HashMap`이 존재한다. 해시테이블처럼 `key-value`의 구조로 이루어져 있으며 key를 기준으로 중복된 값을 저장하지 않으며 순서를 보장하지 않는다. 
-* Set: 대표적인 구현체로 `HashSet`이 존재한다. `value에 대해서 중복된 값을 저장하지 않는다.`
-* Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
+### (1) List
+* 순서가 있는 데이터 집합, 데이터의 중복 허용
+* `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `Linked List`
+* * Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
+### (2) Map
+* 키와 값의 쌍으로 이루어진 데이터 집합
+* 키는 중복을 허용하지 않고 값의 중복은 허용
+* `Hash Map`: 해시테이블처럼 `key-value`의 구조로 이루어져 있으며 key를 기준으로 중복된 값을 저장하지 않으며 순서를 보장하지 않음 
+### (3) Set
+* 데이터의 중복을 허용하지 않음
+* `Hash Set`: `value에 대해서 중복된 값을 저장하지 않음`
 
-## List, Set, Map 차이
+## Hash Map과 Hash Table의 차이
+* Hash Map: 메소드 동기화X, Thread Safe 아님, 성능 빠름
+* Hash Table: 메소드 동기화 지원, Thread Safe, 성능 느림
 
 ## Hash Set과 Tree Set의 차이
+* Hash Set: 해싱으로 구현, 삽입된 요소는 랜덤 정렬, Null 저장 가능, 성능 빠름, 값 비교에 equals 사용
+* Tree Set: 이진탐색트리로 구현, 정렬 순서 유지(자동 정렬), Null 저장 불가, 성능 느림, 값 비교에 comparedTo 사용
 
 ## Annotation
 * 어노테이션이란 본래 주석이란 뜻이지만, 자바에서는 인터페이스를 기반으로 한 문법으로 주석과 다른 점은 주석처럼 `코드에 달아 클래스에 특별한 의미를 부여하거나 기능을 주입함`
@@ -210,7 +222,7 @@ System.out.println(a.equals(b)); // true
 System.out.println(a.equals(c)); // true
 ```
 ## equals() 메소드 동작 원리
-  * 
+
 
 ## 기본(원시)형과 참조형의 차이점
 * 기본형: boolean, char, byte, short, int, long, float, double
@@ -264,11 +276,15 @@ List<Integer> ii; //가능
 * 예시: Optional, Stream
 
 ## reflection
-  * 
-  
-## Java Thread 
-* 구현방법 2가지
-  *  
+* JVM에서 실행되는 애플리케이션의 런타임 동작을 검사하거나 수정할 수 있는 기능이 필요한 프로그램에서 사용
+
+## Java Thread 생성방법 
+* `Thread 클래스 상속`
+* `Runnable 인터페이스 구현`
+
+## 고유 락
+* 자바의 모든 객체는 lock을 가짐
+* Synchronized 블록은 고유 락을 이용해서, Thread의 접근을 제어
 
 ## Synchronized
 * 공유 자원에 두개 이상의 쓰레드가 동시에 접근하지 못하도록 lock
@@ -276,17 +292,56 @@ List<Integer> ii; //가능
 * 객체에도 사용 가능
 
 ## ThreadLocal
-  * 
+* 오직 한 쓰레드에 의해 읽고 쓰여질 수 있는 변수를 생성
+* 오직 한 쓰레드 당 한 번의 실행을 허용
 
-  * 
-## 고유 락
-  * 
-
-## Casting(업케스팅, 다운케스팅)
+## Casting(업캐스팅, 다운캐스팅)
+### (1) 업캐스팅
+* 자식 클래스의 객체가 부모 클래스의 객체로 캐스팅
+```java
+SuperClass super = new ChildClass();
+super.childFunction(); // 자식 클래스의 함수 실행
+```
+* 부모 클래스의 함수를 오버라이딩한 자식 클래스의 함수 실행 가능
+* 부모 클래스의 static 메소드 실행 가능
+* 자식 클래스에만 있는 멤버는 실행 불가(컴파일 에러)
+### (2) 다운캐스팅
+* 부모 클래스의 객체가 자식 클래스로 캐스팅 -> 업캐스팅되어 고유의 특성을 잃은 자식 클래스의 객체를 복구시키는 것
+```java
+SuperClass super = new ChildClass();
+ChildClass child = (ChildClass)super;
+child.superFunction(); //가능
+```
 
 ## Promotion & Casting
-  * 
+### (1) Promotion: 묵시적 형변환
+* 작은 타입이 큰 타입으로 변환
+```java
+int a = 10; float b;
+b = a;
+
+SuperClass super = new SubClass();
+```
+### (2) Casting: 명시적 형변환
+* 큰 타입을 작은 타입으로 변환
+```java
+int a; float b = 1.1;
+a = (int)b;
+
+SuperClass super;
+SubClass sub = (SubClass)super;
+```
+
 ## Error & Exception
-  * 
+### (1) Error
+* 런타임에서 실행 시 발생되며 모두 예측 불가능한 Unchecked Error
+* 핸들링 불가능
+### (2) Exception
+* Checked Exception: 실행하기 전에 예측 가능 -> SQLException, FileNotFoundException 
+* Unchecked Exception: 실행하고 난 후에 알 수 있음 -> ArrayIndexOutOfBoundException, NullPointerException
+* 핸들링 가능, 예외 처리 가능(try ~ catch)
+
 ## Java7에서 Java8로 올라오면서 달라진 점
-  * 
+* 람다 표현식 추가: 함수형 프로그래밍
+* stream API: 데이터의 추상화
+* java.time 패키지: Joda-Time을 이용한 새로운 날짜와 시간 API
