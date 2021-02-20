@@ -64,7 +64,7 @@ public static void bubbleSort() {
 ```
 
 ## Merge Sort
-* 최선, 평균, 최악: O(NlonN)
+* 최선, 평균, 최악: O(NlogN)
 * `안정 정렬 알고리즘`
 * 배열을 반으로 쪼개 가면서 하나의 원소를 가진 배열로 만든 이후에 쪼개진 각 배열을 정렬하면서 병합하여 최종 정렬된 배열을 완성
 ```java
@@ -98,7 +98,7 @@ public static void merge(int left, int mid, int right) {
 * 최선, 평균: o(nlogn) / 최악: O(n^2)
 * `불안정 정렬 알고리즘`
 * 분할 정복 알고리즘으로 `파티셔닝` 아이디어를 재귀적으로 활용
-* `파티셔닝`이란 pivot 원소를 기준으로 왼쪽은 pivot보다 작은 원소들로 모으고 오른쪽은 pivot보다 큰 원소로 모으는 것을 의미하는데 pivot을 기준으로 파티셔닝이 완료되면 pivot을 고정하고 재귀호출 하여 구현
+* `파티셔닝`이란 pivot 원소를 기준으로 왼쪽은 pivot보다 작은 원소들로 모으고 오른쪽은 pivot보다 큰 원소로 모으는 것을 의미하는데 pivot을 기준으로 파티셔닝이 완료되면 pivot을 고정하고 `재귀호출` 하여 구현
 * Quick Sort가 통상적으로 가장 빠른 정렬을 지원하지만 `Worst Case에서 O(n^2)`이므로 Tim Sort나 Heap Sort를 사용하기도 함
 ```java
 quickSort(0, array.length-1);
