@@ -23,15 +23,15 @@
 
 ## Table of Content
 - [Basics](./Basics/README.md)
-- [OS](./OS/README.md)
-- [Network](./Network/README.md)
+- [Algorithm](./Algorithm/README.md)
 - [Database](./Database/README.md)
 - [Datastructure](./Datastructure/README.md)
-- [Algorithm](./Algorithm/README.md)
+- [Design](./Design/README.md)
+- [Network](./Network/README.md)
 - [OOP](./OOP/README.md)
-- [Etc](./Etc/README.md)
+- [OS](./OS/README.md)
 - [PL:Java](./Java/README.md)
 - [PL:Python](./Python/README.md)
-- [Design](./Design/README.md)
 - [Live Coding](./LiveCoding/README.md)
+- [Etc](./Etc/README.md)
 

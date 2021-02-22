@@ -10,7 +10,9 @@
 * [Java Garbage Collection 동작 방식](#java-garbage-collection-동작-방식)
 * [추상 클래스와 인터페이스](#추상-클래스와-인터페이스)
 * [Collection](#collection)
+* [Vector와 ArrayList 차이](#vector와-arraylist-차이)
 * [Hash Map과 Hash Table의 차이](#hash-map과-hash-table의-차이)
+* [Hash Map과 Tree Map의 차이](#hash-map과-tree-map의-차이)
 * [Hash Set과 Tree Set의 차이](#hash-set과-tree-set의-차이)
 * [Annotation](#annotation)
 * [Generic](#generic)
@@ -26,15 +28,17 @@
 * [람다식](#람다식)
 * [reflection](#reflection)
 * [Java Thread 생성방법](#java-thread-생성방법)
-* [고유 락](#고유-락)
 * [Synchronized](#synchronized)
-* [ThreadLocal](#threadLocal)
-* [Casting(업케스팅, 다운케스팅)](#casting업케스팅-다운케스팅)
+* [고유 락](#고유-락)
+* [ThreadLocal](#threadlocal)
+* [Casting(업케스팅, 다운케스팅)](#casting업캐스팅-다운캐스팅)
 * [Promotion & Casting](#promotion--casting)
 * [Error & Exception](#error--exception)
 * [Java7에서 Java8로 올라오면서 달라진 점](#java7에서-java8로-올라오면서-달라진-점)
+* [Serialize](#serialize)
 
 ## Java 특징
+* 미국의 Sun마이크로시스템이 개발
 * 객체 지향 프로그래밍 언어
 * JVM만 있으면 OS와 상관없이 동작 가능(운영체제에 독립적)
 * 고성능(High Performance): 바이트 코드로 변환되어 실행
@@ -55,12 +59,13 @@
 * 로딩된 Class 파일을 `Excution Engine을 사용해 해석`
 * 해석된 바이트 코드는 `Runtime Data Area`에 배치되어 `실행`
 
+
 ## JVM 메모리(Runtime Data Area) 구조 
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
 ### (1) 메소드(Static) 영역
 * 클래스가 사용되면 해당 클래스의 클래스 파일(.class)을 읽어들여, `클래스에 대한 정보(바이트 코드)`를 메소드 영역에 저장
 * 클래스와 인터페이스, 메소드, 필드, Static 변수
-* 런타임 상수 풀(클래스와 인터페이스에 대한 상수, 메소드, 필드에 대한 모든 레퍼런스)
+* 런타임 상수 풀(클래스와 인터페이스에 대한 상수, 메소드, 필드에 대한 모든 레퍼런스): JVM은 이를 이용해 실제 메모리 주소를 찾아 참조
 ### (2) JVM 스택
 * 스레드마다 존재, 스레드가 시작될 때 할당, LIFO
 * 메소드 정보, 지역변수, 매개변수, 연산 중 발생하는 임시 데이터 저장
@@ -107,6 +112,8 @@ public class Test{
 * Minor GC가 발생할 때마다 Young 영역의 객체들은 삭제와 이동을 함 (Eden -> S0 / S0 -> S1 / S0 <- S1)
 * S1이 가득 차면 필요한 객체는 `OLD 영역으로 이동(Promition)`하고 `OLD 영역이 가득차면 Major GC`를 통해서 값을 삭제
 * GC가 실행될 때마다 `STOP THE WORLD`가 발생하여 프로그램이 중지
+* [추가] age bit: 각 객체가 Minor GC에서 살아남은 횟수를 기록, Minor GC가 발생할 때마다 하나씩 증가, age bit 값이 MaxTenuringThreshold 라는 설정 값을 초과하면 Old Generation으로 객체가 이동
+* [추가] STOP THE WORLD: GC를 실행하는 쓰레드를 제외한 나머지 쓰레드는 모두 작업을 멈춤, GC 작업을 완료한 이후에야 중단했던 작업을 다시 시작
 
 ## 추상 클래스와 인터페이스
 ### (1) 추상 클래스
@@ -115,18 +122,21 @@ public class Test{
 * 추상 메소드와 클래스 모두에 `abstract` 키워드를 붙여서 표기, 추상 클래스의 상속에는 'extends' 키워드 사용
 * 추상 클래스와 실체 클래스는 `상속관계` -> 실체 클래스는 추상 클래스의 추상 메소드를 상속받아 `오버라이딩` 해야 함
 * 사용 이유: 필드와 메소드 통일, 규격에 맞는 실체 클래스 구현
+* 일반적인 추상화 및 상속에 더 초점, 상속 받아서 기능을 확장시키는데 목적
 ```java
 public abstract class AbstractClass {
-  public void function();
+  public void function() {};
   public abstract void abstractFunction();
 }
 ```
 ### (2) 인터페이스
-* 추상 클래스의 일종으로 `추상 메소드와 상수만` 가짐
-* 상속 관계가 없는 클래스에서 곧통되는 로직을 구현하여 사용
+* 어떤 메소드를 제공하는지 알려주는 명세(Specification)
+* 추상 클래스의 일종으로 default 메소드와 static 메소드를 제외하면 `추상 메소드와 상수만` 가짐
+* 상속 관계가 없는 클래스에서 공통되는 로직을 구현하여 사용
 * `interface` 키워드를 통해 선언, `implements`로 일반 클래스에서 인터페이스를 구현
 * 메소드에도 abstract 키워드를 붙이지 않고 표기
 * 사용 이유: 다형성 극대화 -> 코드의 수정은 감소, 유지보수성 증가
+* 메서드를 구현하게 하는 것에 초점
 ```java
 public interface Interface {
   public int max = 10; // 상수
@@ -141,13 +151,16 @@ public interface Interface {
 * 두 가지 개념 모두 독립 생성이 불가능하고(객체 생성 불가) 상속을 목적으로 사용
 * 추상 메소드는 오버라이딩이 필요
 ### (4) 차이점
-* 추상 클래스는 1번만 상속받을 수 있지만 인터페이스는 여러번 상속 가능
-* 인터페이스는 추상 클래스와 달리 구현을 강제함으로써 구현 객체의 같은 동작을 보장하여 인터페이스를 이용하여 `표준화를 확립할 수 있으므로 서로 관계가 없는 객체들이 상호 작용을 가능하게 함`
+* 추상 클래스는 다중 상속 불가능, 인터페이스는 여러번 상속 가능
+* 추상 클래스는 상속을 통해 기능을 확장하는 것이 목적
+* 인터페이스는 추상 클래스와 달리 구현을 강제함으로써 `구현 객체의 같은 동작`을 보장하여 인터페이스를 이용하여 `표준화를 확립할 수 있으므로 서로 관계가 없는 객체들이 상호 작용을 가능하게 함`
 
 ## Collection
+* 데이터를 효율적으로 관리할 수 있는 자료구조와 알고리즘을 구조화하여 클래스로 구현한 것
+* List, Set, Map 인터페이스가 존재
 ### (1) List
 * 순서가 있는 데이터 집합, 데이터의 중복 허용
-* `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `Linked List`
+* `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `LinkedList`
 * * Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
 ### (2) Map
 * 키와 값의 쌍으로 이루어진 데이터 집합
@@ -157,9 +170,17 @@ public interface Interface {
 * 데이터의 중복을 허용하지 않음
 * `Hash Set`: `value에 대해서 중복된 값을 저장하지 않음`
 
+## Vector와 ArrayList 차이
+* Vector: Thread-Safe
+* ArrayList: Thread-SafeX
+
 ## Hash Map과 Hash Table의 차이
 * Hash Map: 메소드 동기화X, Thread Safe 아님, 성능 빠름
 * Hash Table: 메소드 동기화 지원, Thread Safe, 성능 느림
+
+## Hash Map과 Tree Map의 차이
+* Hash Map: 해싱 구현, 랜덤 정렬(순서 유지X), Null 키 가능, 훨씬 빠름
+* Tree Map: 레드-블랙 트리로 구현, key로 자동 정렬, Null 키 불가능
 
 ## Hash Set과 Tree Set의 차이
 * Hash Set: 해싱으로 구현, 삽입된 요소는 랜덤 정렬, Null 저장 가능, 성능 빠름, 값 비교에 equals 사용
@@ -169,20 +190,21 @@ public interface Interface {
 * 어노테이션이란 본래 주석이란 뜻이지만, 자바에서는 인터페이스를 기반으로 한 문법으로 주석과 다른 점은 주석처럼 `코드에 달아 클래스에 특별한 의미를 부여하거나 기능을 주입함`
 
 ## Generic
-* 제네릭은 다양한 타입의 객체들을 다루는 메서드나 컬렉션 클래스에서 사용하는 것으로, `컴파일 과정에서 타입체크`를 해주는 기능
+* 제네릭은 다양한 타입의 객체들을 다루는 메서드나 컬렉션 클래스에서 사용하는 것으로, `컴파일 과정에서 타입을 체크`하는 기능
 * 클래스 내부에서 사용할 데이터 타입을 외부에서 지정하는 기법
 * 사용 이유: 잘못된 타입이 사용될 문제를 컴파일 과정에서 제거 가능
 
 ## Access Modifier(접근 제한자)
-* public: 어떤 클래스든 접근할 수 있다는 것을 의미(패키지가 달라도 허용)
+* public: 모든 클래스에서 접근할 수 있다는 것을 의미(패키지가 달라도 허용)
 * protected: `같은 클래스` 내에서 접근 허용, `같은 패키지`의 다른 클래스에서 접근 허용, `다른 패키지의 상속`받은 클래스에서 접근 허용, 다른 패키지의 다른 클래스에서 접근 불가
 * default: `같은 패키지` 내에서만 접근 허용
 * private: 동일 패키지라도 접근 불가, `같은 클래스` 내에서만 접근 허용
+* 사용 이유: 정보은닉(민감 정보 유출 안하기), 외부에서 알 필요 없는 값은 노출X, 응집도 높이고 결합도 낮추기
 
 ## final 키워드
 * final 키워드는 `상수`로 정의하는 키워드
 * final class: 다른 클래스에서 상속하지 못함
-* final method: 다른 메소드에서 오버라이딩하지 못함
+* final method: 다른 메소드에서 오버라이딩하지 못함 (오버로딩 가능)
 * final variable: 변하지 않는 상수값이 되어 새로 할당할 수 없는 변수가 됨
 * 생성자: final이 될 수 없음
 
@@ -210,11 +232,11 @@ int n = num.intValue();
 ## ==와 equals()의 차이
 * == 연산자는 참조형을 비교할 때 `레퍼런스를 비교`하고 eqals()는 참조형을 비교할 때 `값을 비교`
 ```java
-String a = "string"; // 리터럴 선언: String Constant Pool
+String a = "string"; // 리터럴 선언: String Constant Pool (힙)
 String b = "string";
 String c = new String("string"); // new 선언: 힙
 
-System.out.println(a == b); // true
+System.out.println(a == b); // true // 주소 비교인데 같은 객체를 가리킴
 System.out.println(a == c); // false
 
 System.out.println(a.equals(b)); // true
@@ -267,7 +289,7 @@ List<Integer> ii; //가능
   * 객체가 생성되기 전에 사용 가능, 객체가 사라져도 멤버는 사라지지 않음 -> 프로그램 종료 시 사라짐
 * 동일한 클래스의 모든 객체들에 의해 공유
 
-## 람다식
+## 람다 표현식
 * 식별자 없이 실행이 가능한 함수
 * 함수를 따로 만들지 않고 코드 한 줄에 함수를 써서 그것을 호출
 * 자바8부터 지원, 코드가 간결하고 가독성이 높음
@@ -277,18 +299,18 @@ List<Integer> ii; //가능
 ## reflection
 * JVM에서 실행되는 애플리케이션의 런타임 동작을 검사하거나 수정할 수 있는 기능이 필요한 프로그램에서 사용
 
-## Java Thread 생성방법 
+## Java Thread 생성방법
 * `Thread 클래스 상속`
 * `Runnable 인터페이스 구현`
-
-## 고유 락
-* 자바의 모든 객체는 lock을 가짐
-* Synchronized 블록은 고유 락을 이용해서, Thread의 접근을 제어
 
 ## Synchronized
 * 공유 자원에 두개 이상의 쓰레드가 동시에 접근하지 못하도록 lock
 * 자바에서는 메소드 앞에 `synchronized`를 붙여 동기화
 * 객체에도 사용 가능
+
+## 고유 락
+* 자바의 모든 객체는 lock을 가짐
+* Synchronized 블록은 고유 락을 이용해서, Thread의 접근을 제어
 
 ## ThreadLocal
 * 오직 한 쓰레드에 의해 읽고 쓰여질 수 있는 변수를 생성
@@ -337,10 +359,15 @@ SubClass sub = (SubClass)super;
 * 핸들링 불가능
 ### (2) Exception
 * Checked Exception: 실행하기 전에 예측 가능 -> SQLException, FileNotFoundException 
-* Unchecked Exception: 실행하고 난 후에 알 수 있음 -> ArrayIndexOutOfBoundException, NullPointerException
+* Unchecked Exception: 실행하고 난 후에 알 수 있음 -> ArrayIndexOutOfBoundException, NullPointerException(Null인 객체에 접근하면 발생)
 * 핸들링 가능, 예외 처리 가능(try ~ catch)
 
 ## Java7에서 Java8로 올라오면서 달라진 점
 * 람다 표현식 추가: 함수형 프로그래밍
+* Permanent Generation: Java7버전까지는 Heap에 존재, 8부터는 Native Method Stack에 Meta Space로 변경
+* 인터페이스에 default 메소드, static 메소드 추가
 * stream API: 데이터의 추상화
 * java.time 패키지: Joda-Time을 이용한 새로운 날짜와 시간 API
+
+## Serialize
+
