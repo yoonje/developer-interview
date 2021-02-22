@@ -1,6 +1,37 @@
 # Spring
 
-## 스프링의 버전별 차이 *
+## Table of Contents
+* [MSA](#msa)
+* [스프링의 버전별 차이](#스프링의-버전별-차이)
+* [스프링과 스프링 부트 차이](#스프링과-스프링-부트-차이)
+* [IoC](#ioc)
+* [DI](#di)
+* [AOP](#aop)
+* [스프링 MVC 구조](#스프링-mvc-구조)
+* [스프링 MVC 처리 과정](#스프링-mvc-처리-과정)
+* [MVC 1과 MVC 2의 차이](#mvc-1과-mvc-2의-차이) *
+* [Servlet](#servlet) *
+* [디스패처 서블릿](#디스패처-서블릿)
+* [디스패처 서블릿으로 인한 web.xml 역할 축소](#디스패처-서블릿으로-인한-webxml-역할-축소)
+* [필터와 인터셉트 차이](#필터와-인터셉트-차이)
+* [스프링 어노테이션](#스프링-어노테이션) *
+* [DAO](#dao)
+* [DTO](#dtp)
+* [ORM](#orm)
+* [JPA](#jpa)
+* [Hibernate](#hibernate)
+* [ORM, JPA, Hybernate 장단점](#orm-jpa-hybernate-장단점) *
+* [Mybatis](#mybatis)
+* [Mybatis, JPA 차이](#mybatis-jpa-차이) *
+* [Spring JDBC](#spring-jdbc)
+
+## MSA
+* Microservice Architecture
+* 모든 시스템의 구성요소가 한 프로젝트에 통합되어 있는 Monolithic Architecture(모놀리식 아키텍쳐)의 한계점을 극복하고자 등장
+* 1개의 시스템을 독립적으로 배포 가능한 각각의 서비스로 분할한 것
+* 각각의 서비스는 RESTful API를 통해 데이터를 주고받으며 1개의 큰 서비스를 구성
+
+## 스프링의 버전별 차이
 
 ## 스프링과 스프링 부트 차이
 * 스프링: 자바 플랫폼을 위한 오픈소스 애플리케이션 프레임워크
@@ -8,18 +39,21 @@
   * 스프링 부트는 `Embeded Tomcat` 사용(스프링 부트는 Tomcat이 내부에 포함)
   * 자동 설정: starter를 통한 Dependency 자동화 -> `@SpringBootApplication`
 
-## IoC(Inversion of Control)
+## IoC
+* Inversion of Control
 * 제어의 역전: 객체 간의 결합도를 줄임, 유연한 코드 작성, 유지보수 향상
 * 메소드나 객체의 호출을 개발자가 결정하는 것이 아니라, 외부에서 결정
 * 객체의 생성부터 소멸까지 개발자가 아닌 컨테이너가 관리하는 것
 
-## DI(Dependency Injection)
+## DI
+* Dependency Injection
 * 객체들의 `의존성(결합도)을 줄이기 위해` 사용되는 스프링의 IOC 컨테이너의 구체적인 구현 방식
 * 개발 코드에서 객체를 생성하는 것이 아니라, 데이터 주입만 담당하는 별도의 공간에서 객체를 생성하고 데이터간의 의존성을 주입해 개발 코드에서 가져다 씀
 * 재사용성 향상, 팩토리 패턴과 유사 
 * 방법 3가지: 생성자에 `@Autowired` 추가, 필드 주입, setter 주입(setter에 `@Autowired` 추가)
 
-## AOP(Aspect Oriented Programming, 관점 지향 프로그래밍)
+## AOP
+* Aspect Oriented Programming, 관점 지향 프로그래밍
 * `공통 관심 사항(Cross-Cutting Concern)`과 핵심 관심 사항(Core Concern)을 분리하는 것
 * 특정 로직(로그, 성능테스트 등)을 모든 메소드에 적용하고 싶을 때, 모든 메소드에 일일이 로직을 추가하는 것이 아니라, 로직을 만들어서 모든 메소드에 적용
 * 비지니스 로직의 앞/뒤에 공통 관심 사항을 수행해 `중복 코드를 줄이는 것`
@@ -43,7 +77,6 @@
 ### MVC 1
 * `JSP` 페이지 안에서 로직 처리를 위해 자바 코드가 함께 사용
 * 구조가 단순하다는 장점이 있지만, JSP 내에서 html과 자바 코드가 함께 사용되어 복잡하고 유지보수가 어려움
-
 ### MVC 2
 * `JSP와 서블릿`이 역할을 분담
 * JSP: 요청 결과를 출력하는 VIEW 처리 + 서블릿: 흐름제어, 컨트롤러 역할
@@ -68,25 +101,25 @@
 
 ## 스프링 어노테이션
 
-## DAO(Data Access `Object)
+## DAO
+* Data Access Object
 * `DB의 데이터에 접근`하기 위한 객체
 * 단일 데이터의 접근 및 갱신을 의미 -> Service: 하나 이상의 DAO를 이용해 비지니스 로직을 처리, 트랜잭션의 단위
 * 데이터베이스에 접근하는 로직과 비지니스 로직을 분리하기 위해 사용
 * 데이터 조회 및 조작을 담당
 
-## DTO(Data Transfer Object)
+## DTO
+* Data Transfer Object
 * 다른 말로 VO(Value Object)
 * 계층(컨트롤러, 뷰, 비즈니스 계층 등)간 `데이터 교환(전송)`을 위한 자바 빈
 * 로직을 가지지 않음: 속성과 속성에 접근하기 위한 getter, setter가 있고 추가적으로 toString(), equals() 가능
 
-## 커넥션 풀
-* DB와 미리 연결한 객체들을 pool에 저장하고, 클라이언트의 요청이 오면 connection을 빌려주고, 처리가 끝나면 다시 pool에 저장하는 방식
-* 요청마다 커넥션 객체를 생성하고 종료하는 것은 비효율적이라 사용 -> 부하 감소, 연결 시간 감소
-
-## ORM(Object Relational Mapping)
+## ORM
+* Object Relational Mapping
 * 객체는 객체대로 설계하고, 관계형 데이터베이스는 관계형 데이터베이스대로 설계
 
-## JPA(Java Persistence API)
+## JPA
+* Java Persistence API
 * 자바 ORM 기술에 다한 API 표준 명세
 * 자바 애플리케이션에서 `관계형 DB`를 사용하는 방식을 정의한 `인터페이스`
 * `EntityManager를` 통해 `CRUD` 처리
@@ -109,17 +142,3 @@
 ## Spring JDBC
 * 자바에서 데이터베이스에 접속할 수 있도록 해주는 자바 API
 * DB에서 자료를 쿼리하거나 업데이트에 사용
-
-## MSA
-* Microservice Architecture
-* 모든 시스템의 구성요소가 한 프로젝트에 통합되어 있는 Monolithic Architecture(모놀리식 아키텍쳐)의 한계점을 극복하고자 등장
-* 1개의 시스템을 독립적으로 배포 가능한 각각의 서비스로 분할한 것
-* 각각의 서비스는 RESTful API를 통해 데이터를 주고받으며 1개의 큰 서비스를 구성
-
-## 프레임워크와 플랫폼의 차이
-
-## Jquery 사용 이유
-
-## DES128/256 차이
-
-## HTML5와 HTML 차이

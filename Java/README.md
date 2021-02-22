@@ -10,7 +10,9 @@
 * [Java Garbage Collection 동작 방식](#java-garbage-collection-동작-방식)
 * [추상 클래스와 인터페이스](#추상-클래스와-인터페이스)
 * [Collection](#collection)
+* [Vector와 ArrayList 차이](#vector와-arraylist-차이)
 * [Hash Map과 Hash Table의 차이](#hash-map과-hash-table의-차이)
+* [Hash Map과 Tree Map의 차이](#hash-map과-tree-map의-차이)
 * [Hash Set과 Tree Set의 차이](#hash-set과-tree-set의-차이)
 * [Annotation](#annotation)
 * [Generic](#generic)
@@ -26,13 +28,14 @@
 * [람다식](#람다식)
 * [reflection](#reflection)
 * [Java Thread 생성방법](#java-thread-생성방법)
-* [고유 락](#고유-락)
 * [Synchronized](#synchronized)
-* [ThreadLocal](#threadLocal)
-* [Casting(업케스팅, 다운케스팅)](#casting업케스팅-다운케스팅)
+* [고유 락](#고유-락)
+* [ThreadLocal](#threadlocal)
+* [Casting(업케스팅, 다운케스팅)](#casting업캐스팅-다운캐스팅)
 * [Promotion & Casting](#promotion--casting)
 * [Error & Exception](#error--exception)
 * [Java7에서 Java8로 올라오면서 달라진 점](#java7에서-java8로-올라오면서-달라진-점)
+* [Serialize](#serialize)
 
 ## Java 특징
 * 미국의 Sun마이크로시스템이 개발
@@ -296,11 +299,11 @@ List<Integer> ii; //가능
 ## reflection
 * JVM에서 실행되는 애플리케이션의 런타임 동작을 검사하거나 수정할 수 있는 기능이 필요한 프로그램에서 사용
 
-## Java Thread 생성방법  *
+## Java Thread 생성방법
 * `Thread 클래스 상속`
 * `Runnable 인터페이스 구현`
 
-## Synchronized *
+## Synchronized
 * 공유 자원에 두개 이상의 쓰레드가 동시에 접근하지 못하도록 lock
 * 자바에서는 메소드 앞에 `synchronized`를 붙여 동기화
 * 객체에도 사용 가능
@@ -359,10 +362,10 @@ SubClass sub = (SubClass)super;
 * Unchecked Exception: 실행하고 난 후에 알 수 있음 -> ArrayIndexOutOfBoundException, NullPointerException(Null인 객체에 접근하면 발생)
 * 핸들링 가능, 예외 처리 가능(try ~ catch)
 
-## Java7에서 Java8로 올라오면서 달라진 점 *
+## Java7에서 Java8로 올라오면서 달라진 점
 * 람다 표현식 추가: 함수형 프로그래밍
 * Permanent Generation: Java7버전까지는 Heap에 존재, 8부터는 Native Method Stack에 Meta Space로 변경
-* 
+* 인터페이스에 default 메소드, static 메소드 추가
 * stream API: 데이터의 추상화
 * java.time 패키지: Joda-Time을 이용한 새로운 날짜와 시간 API
 

@@ -4,34 +4,34 @@
 * [TCP와 UDP의 차이](#tcp와-udp의-차이)
 * [TCP 흐름제어](#tcp-흐름제어)
 * [TCP 혼잡제어](#tcp-혼잡제어)
-* [TCP 3-way handshake가 언제 일어나고 어떤 과정인지]()
-* [TCP 4-way handshake가 언제 일어나고 어떤 과정인지]()
-* [OSI 7계층와 각 계층 역할]()
-* [CDN과 사용 시의 이점]()
-* [로드 밸런싱]()
-* [CIDR]()
-* [HTTP 특징]()
-* [HTTP 1, 2, 3의 차이]()
-* [HTTP 상태코드]()
-* [HTTP와 HTTPS(HTTP Secure)의 차이]()
-* [SSL(Secure Sockets Layer) 동작방식]()
-* [TLS(Transport Layer Security) 동작방식 *]()
-* [HSTS(HTTP Strict Transport Security)]()
-* [쿠키와 세션]()
-* [캐시]()
-* [JWT *]()
-* [웹 브라우저에 URL을 입력했을 때의 수행 과정]()
-* [기타 네트워크 프로토콜과 기본 네트워크 주소들]()
-* [웹 캐시]()
-* [URI, URL, URN]()
-* [REST]()
-* [REST API]()
-* [REST API 장단점]()
-* [RESTful]()
-* [HTTP GET 방식과 POST 방식의 차이]()
-* [HTTP POST 방식과 PUT 방식의 차이]()
-* [HTTP 멱등성]()
-* [웹 브라우저에 http 응답이 랜더링되는 과정 *]()
+* [TCP 3-way handshake가 언제 일어나고 어떤 과정인지](#tcp-3-way-handshake가-언제-일어나고-어떤-과정인지)
+* [TCP 4-way handshake가 언제 일어나고 어떤 과정인지](#tcp-4-way-handshake가-언제-일어나고-어떤-과정인지)
+* [OSI 7계층과 각 계층의 역할](#osi-7계층과-각-계층의-역할)
+* [CDN과 사용 시의 이점](#cdn과-사용-시의-이점)
+* [로드 밸런싱](#로드-밸런싱)
+* [CIDR](#cidr)
+* [HTTP 특징](#http-특징)
+* [HTTP 1, 2, 3의 차이](#http-1-2-3의-차이) *
+* [HTTP 상태코드](#http-상태코드)
+* [HTTP와 HTTPS(HTTP Secure)의 차이](#http와-httpshttp-secure의-차이)
+* [SSL(Secure Sockets Layer) 동작방식](#sslsecure-sockets-layer-동작방식)
+* [TLS(Transport Layer Security) 동작방식](#tlstransport-layer-security-동작방식) *
+* [HSTS(HTTP Strict Transport Security)](#hstshttp-strict-transport-security)
+* [쿠키와 세션](#쿠키와-세션)
+* [캐시](#캐시)
+* [JWT](#jwt)
+* [웹 브라우저에 URL을 입력했을 때의 수행 과정](#웹-브라우저에-url을-입력했을-때의-수행-과정)
+* [기타 네트워크 프로토콜과 기본 네트워크 주소들](#기타-네트워크-프로토콜과-기본-네트워크-주소들)
+* [웹 캐시](#웹-캐시)
+* [URI, URL, URN](#uro-url-urn)
+* [REST](#rest)
+* [REST API](#rest-api)
+* [REST API 장단점](#rest-api-장단점)
+* [RESTful](#restful)
+* [HTTP GET 방식과 POST 방식의 차이](#http-get-방식과-post-방식의-차이)
+* [HTTP POST 방식과 PUT 방식의 차이](#http-post-방식과-put-방식의-차이)
+* [HTTP 멱등성](#http-멱등성)
+* [웹 브라우저에 HTTP 응답이 랜더링되는 과정](#웹-브라우저에-http-응답이-랜더링되는-과정) *
 
 ## TCP와 UDP의 차이
   * TCP는 `신뢰성을 보장하는 연결형 프로토콜`로 `흐름제어, 혼잡제어`를 제공
@@ -78,7 +78,7 @@
 * 클라이언트가 일방적으로 끊으면 서버는 '연결은 되어 있으나 요청이 없는 상태'로 오해할 수 있어 4 way 사용
 * 클라이언트는 데이터 전송을 끝냈다고 하더라도 서버는 전송할 것이 남아있을 수 있어 4 way 사용
 
-## OSI 7계층와 각 계층 역할
+## OSI 7계층과 각 계층의 역할
 ### (1) 정의
 * 네트워크의 통신 과정을 7단계로 나눈 것
 ### (2) 사용 이유
@@ -286,14 +286,5 @@
 * 멱등한 메소드(PUT, DELETE, GET)는 서버의 상태를 변경시킬 수도 있고 아닐 수도 있음
 * POST는 멱등이 아니면서 안전하지도 않음
 
-## 웹 브라우저에 http 응답이 랜더링되는 과정 *
+## 웹 브라우저에 HTTP 응답이 랜더링되는 과정 *
   *
-
-## 검색엔진
-
-## OAuth
-## CORS란?
-## CORS 해결방법
-
-## JSON, XML의 차이
-* JSON 종료 태그를 사용하지 않음, 데이터를 더 빨리 읽고 쓸수 있음
