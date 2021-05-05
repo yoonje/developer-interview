@@ -59,7 +59,6 @@
 * 로딩된 Class 파일을 `Excution Engine을 사용해 해석`
 * 해석된 바이트 코드는 `Runtime Data Area`에 배치되어 `실행`
 
-
 ## JVM 메모리(Runtime Data Area) 구조 
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
 ### (1) 메소드(Static) 영역
@@ -370,4 +369,3 @@ SubClass sub = (SubClass)super;
 * java.time 패키지: Joda-Time을 이용한 새로운 날짜와 시간 API
 
 ## Serialize
-

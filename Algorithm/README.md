@@ -136,6 +136,7 @@ private static int partition(int low, int high) {
 
 ## Insertion Sort
 * 최선: O(n) / 평균, 최악: O(n^2)
+* 2번째 원소부터 시작하여 그 앞의 원소들과 비교하여 삽입할 위치를 지정한 후, 원소를 뒤로 옮기고 지정된 자리에 자료를 삽입하여 정렬
 ```java
 private static void insertionSort() {
     int j;
