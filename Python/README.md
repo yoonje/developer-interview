@@ -1,11 +1,11 @@
 # Python
 
 ## Table of Content
-*[Generator와 사용 시의 장점](#generator와-사용-시의-장점)
-*[Decorator와 사용 시의 장점](#decorator와-사용-시의-장점)
-*[Python Garbage Collection 동작 방식](#python-garbage-collection-동작-방식)
-*[GIL과 GIL을 보완하는 방법](#gil과-gil을-보완하는-방법)
-*[Duck Typing](#duck-typing)
+- [Generator와 사용 시의 장점](#generator와-사용-시의-장점)
+- [Decorator와 사용 시의 장점](#decorator와-사용-시의-장점)
+- [Python Garbage Collection 동작 방식](#python-garbage-collection-동작-방식)
+- [GIL과 GIL을 보완하는 방법](#gil과-gil을-보완하는-방법)
+- [Duck Typing](#duck-typing)
 
 ## Generator와 사용 시의 장점
 * `Iterator를 생성해주는 루틴`으로 `yield` 키워드를 통해서 만드는데, Generator는 한번에 모든 데이터를 메모리에 적재할 필요가 없어서 메모리 효율이 높고 계산 결과가 필요할 때 수행되므로 수행 시간을 꼭 필요한 시간까지 늦츨 수 있음
