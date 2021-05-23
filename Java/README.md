@@ -161,7 +161,7 @@ public interface Interface {
 ### (1) List
 * 순서가 있는 데이터 집합, 데이터의 중복 허용
 * `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `LinkedList`
-* * Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
+* Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
 ### (2) Map
 * 키와 값의 쌍으로 이루어진 데이터 집합
 * 키는 중복을 허용하지 않고 값의 중복은 허용

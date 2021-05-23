@@ -33,7 +33,6 @@
 * [PostgresSQL과 ElasticSearch의 차이점](#postgressql과-elasticsearch의-차이점)
 * [[추가] NoSQL(Not Only SQL)](#추가-nosqlnot-only-sql)
 
-
 ## DBMS
 * 데이터베이스 관리 시스템(DataBase Management System)
 * 응용 프로그램들이 데이터베이스를 공유하며 사용할 수 있는 환경을 제공
@@ -83,13 +82,13 @@
 
 ## ACID
 * 데이터의 유효성을 보장하기 위한 트랜잭션의 특징
-* `Atomicity(원자성)`: `모든 작업이 반영되거나 모두 롤백되는 특성`입니다.
-* `Consistency(일관성)`: 데이터는 `미리 정의된 규칙에서만 수정이 가능한 특성`을 의미합니다.
-* `Isolation(고립성)`: A와 B 두개의 트랜젝션이 실행되고 있을 때, A의 작업들이 B에게 보여지는 정도를 의미합니다.
-* `Durability(영구성)`: 한번 반영(커밋)된 트랜젝션의 내용은 `영원히 적용`되는 특성을 의미합니다.
+* `Atomicity(원자성)`: `모든 작업이 반영되거나 모두 롤백되는 특성`
+* `Consistency(일관성)`: 데이터는 `미리 정의된 규칙에서만 수정이 가능한 특성`
+* `Isolation(고립성)`: 두개 이상의 트랜젝션이 실행될 때, 서로의 결과에 영향을 미치지 않음
+* `Durability(영구성)`: 한번 반영(커밋)된 트랜젝션의 내용은 `영원히 적용`되는 특성
 
 ## 무결성 제약조건
-* 개체 무결성: 주키는 null, 중복 값을 가질 수 없음
+* 개체 무결성: 주키는 null과 중복 값을 가질 수 없음
 * 참조 무결성: 외래키는 null이거나 참조 릴레이션의 기본키 값과 동일해야 함
 
 ## 조인
@@ -176,15 +175,15 @@
   * BCNF: 함수 종속성 X->Y일 때, 모든 결정자 X가 후보키
 
 ## DB 클러스터링과 리플리케이션의 차이
-  ||DB 클러스터링|리플리케이션|
-  |:---:|:----------:|:---------:|
-  |대상|DB 서버를 다중화|DB 서버와 데이터를 같이 다중화|
-  |구조|수평적 구조<br>(Fail Over)|수직적 구조<br>(Master-Slave)|
-  |방식|동기 방식으로 동기화|비동기 방식으로 동기화|
-  |종류|Active - Active, Active - Standby|단순 백업, 부하 분산|
-  |장점|일관성,<br>1개의 서버가 고장나도 시스템은 계속 사용 가능|시간 지연 거의 없음|
-  |단점|동기화 시간 소요|일관성 없음,<br>Master 오류시 복구 어려움|
-  |구조|![clustering](https://user-images.githubusercontent.com/38900338/105463364-4b882300-5cd3-11eb-9837-195b872852e2.JPG)|![replication](https://user-images.githubusercontent.com/38900338/105463420-5f338980-5cd3-11eb-8ea4-fe1bdc962385.JPG)|
+||DB 클러스터링|리플리케이션|
+|:---:|:----------:|:---------:|
+|대상|DB 서버를 다중화|DB 서버와 데이터를 같이 다중화|
+|구조|수평적 구조<br>(Fail Over)|수직적 구조<br>(Master-Slave)|
+|방식|동기 방식으로 동기화|비동기 방식으로 동기화|
+|종류|Active - Active, Active - Standby|단순 백업, 부하 분산|
+|장점|일관성,<br>1개의 서버가 고장나도 시스템은 계속 사용 가능|시간 지연 거의 없음|
+|단점|동기화 시간 소요|일관성 없음,<br>Master 오류시 복구 어려움|
+|구조|![clustering](https://user-images.githubusercontent.com/38900338/105463364-4b882300-5cd3-11eb-9837-195b872852e2.JPG)|![replication](https://user-images.githubusercontent.com/38900338/105463420-5f338980-5cd3-11eb-8ea4-fe1bdc962385.JPG)|
 
 ## 커넥션 풀
 * 사용자의 요청에 따라 Connection 을 생성하다 보면 많은 수의 연결이 발생했을 때 서버에 과부하가 걸리게 되므로 이러한 상황을 방지하기 위해 `미리 일정 수의 Connection을 만들어 pool에 담아 뒀다가 사용자의 요청이 발생하면 연결을 해주고 연결 종료 시 pool에 다시 반환하여 보관하는 것`
