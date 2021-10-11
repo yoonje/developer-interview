@@ -1,5 +1,5 @@
 # Algorithm
-* 추가할 사항: 각 정렬이 언제 사용되는 가, 트리를 순회하는 방법
+* 추가할 사항: 각 정렬이 언제 사용되는 가
 
 ## Table of Contents
 * [빅오 표기법](#빅오-표기법)
@@ -23,7 +23,7 @@
 * 정렬 기준으로 봤을 때, `값이 동일한 Element가 있어도 정렬 전의 순서와 정렬 후의 순서가 동일함을 보장`하는 것
 
 ## 정렬 알고리즘의 가짓수가 많은 이유
-* `공간 복잡도`에 따라 사용해야할 알고리즘이 다름 -> Merge Sort는 공간 복잡도는 Selection Sort와 Insertion Sort에 비해 큼
+* `공간 복잡도`에 따라 사용해야할 알고리즘이 다름 -> Merge Sort의 공간 복잡도는 Selection Sort와 Insertion Sort에 비해 큼
 * `안정 정렬`이냐 `불안정 정렬`이냐에 따라 사용해야 할 때가 다름
 
 ## Selection Sort
@@ -66,9 +66,13 @@ public static void bubbleSort() {
 
 ## Merge Sort
 * 최선, 평균, 최악: O(NlogN)
-* `안정 정렬 알고리즘`
+* `안정 정렬 알고리즘`, `분할 정복`
 * 배열을 반으로 쪼개 가면서 하나의 원소를 가진 배열로 만든 이후에 쪼개진 각 배열을 정렬하면서 병합하여 최종 정렬된 배열을 완성
+
 ```java
+static int[] array = new int[N]; // 원본 배열
+static int[] sorted = new int[N]; // 합치는 과정에서 정렬된 원소를 저장하는 임시 배열
+
 mergeSort(0, array.length-1);
 
 public static void mergeSort(int left, int right) {
@@ -90,7 +94,8 @@ public static void merge(int left, int mid, int right) {
         for (int i = m; i <= right; ++i) sorted[k++] = array[i];
     } else {
         for (int i = l; i <= mid; ++i) sorted[k++] = array[i];
-    
+    }
+
     for (int i = left; i <= right; ++i) array[i] = sorted[i];
 }
 ```
@@ -141,7 +146,7 @@ private static int partition(int low, int high) {
 private static void insertionSort() {
     int j;
     for (int i = 1; i < array.length; ++i) {
-        int key = array[i]
+        int key = array[i];
         for (j=i-1; j>=0 && array[j]> key; --j) {
             array[j+1] = array[j];
         }
