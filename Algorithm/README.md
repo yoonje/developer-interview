@@ -1,5 +1,5 @@
 # Algorithm
-* 추가할 사항: 각 정렬이 언제 사용되는 가, 트리를 순회하는 방법
+* 추가할 사항: 각 정렬이 언제 사용되는 가
 
 ## Table of Contents
 * [빅오 표기법](#빅오-표기법)
@@ -24,7 +24,7 @@
 * 정렬 기준으로 봤을 때, `값이 동일한 Element가 있어도 정렬 전의 순서와 정렬 후의 순서가 동일함을 보장`하는 것
 
 ## 정렬 알고리즘의 가짓수가 많은 이유
-* `공간 복잡도`에 따라 사용해야할 알고리즘이 다름 -> Merge Sort는 공간 복잡도는 Selection Sort와 Insertion Sort에 비해 큼
+* `공간 복잡도`에 따라 사용해야할 알고리즘이 다름 -> Merge Sort의 공간 복잡도는 Selection Sort와 Insertion Sort에 비해 큼
 * `안정 정렬`이냐 `불안정 정렬`이냐에 따라 사용해야 할 때가 다름
 
 ## Selection Sort
@@ -68,10 +68,13 @@ public static void bubbleSort() {
 
 ## Merge Sort
 * 최선, 평균, 최악: O(NlogN)
-* `안정 정렬 알고리즘`
+* `안정 정렬 알고리즘`, `분할 정복`
 * 배열을 반으로 쪼개 가면서 하나의 원소를 가진 배열로 만든 이후에 쪼개진 각 배열을 정렬하면서 병합하여 최종 정렬된 배열을 완성
-* 추가적인 메모리가 필요함 -> 데이터가 최악일 때, 추가 메모리를 사용할 수 있으면 사용
+
 ```java
+static int[] array = new int[N]; // 원본 배열
+static int[] sorted = new int[N]; // 합치는 과정에서 정렬된 원소를 저장하는 임시 배열
+
 mergeSort(0, array.length-1);
 
 public static void mergeSort(int left, int right) {
@@ -93,7 +96,8 @@ public static void merge(int left, int mid, int right) {
         for (int i = m; i <= right; ++i) sorted[k++] = array[i];
     } else {
         for (int i = l; i <= mid; ++i) sorted[k++] = array[i];
-    
+    }
+
     for (int i = left; i <= right; ++i) array[i] = sorted[i];
 }
 ```
@@ -103,6 +107,12 @@ public static void merge(int left, int mid, int right) {
 * `불안정 정렬 알고리즘`
 * 분할 정복 알고리즘으로 `파티셔닝` 아이디어를 재귀적으로 활용
 * `파티셔닝`이란 pivot 원소를 기준으로 왼쪽은 pivot보다 작은 원소들로 모으고 오른쪽은 pivot보다 큰 원소로 모으는 것을 의미하는데 pivot을 기준으로 파티셔닝이 완료되면 pivot을 고정하고 같은 과정을 `재귀호출` 하여 반복하며 정렬
+* pivot 선정 방법 (오름차순 정렬)
+    - 가장 기본적인 퀵 정렬은 첫 번째 데이터를 pivot 으로 설정
+    - pivot을 제외한 왼쪽에서부터 pivot 보다 큰 데이터를 선택, 오른쪽에서부터 pivot 보다 작은 데이터를 선택
+    - 위 두 데이터의 위치가 엇갈리는 경우, `pivot`과 두 데이터 중 `작은 데이터`의 위치를 서로 변경 (**작은 데이터가 pivot이 된다**)
+    - 이제 pivot을 기준으로 왼쪽은 모두 pivot보다 작고, 오른쪽은 모두 pivot보다 크다. (파티셔닝)
+    - 재귀적으로, 왼쪽과 오른쪽 모두 위의 방법을 순서대로 진행
 * Quick Sort가 통상적으로 가장 빠른 정렬을 지원하지만 `Worst Case에서 O(n^2)`이므로 Tim Sort나 Heap Sort를 사용하기도 함
 * 최악: 정렬된 배열에서 피봇을 최대/최소 값으로 선택
 ```java
@@ -133,11 +143,12 @@ private static int partition(int low, int high) {
 
 ## Insertion Sort
 * 최선: O(n) / 평균, 최악: O(n^2)
+* 2번째 원소부터 시작하여 그 앞의 원소들과 비교하여 삽입할 위치를 지정한 후, 원소를 뒤로 옮기고 지정된 자리에 자료를 삽입하여 정렬
 ```java
 private static void insertionSort() {
     int j;
     for (int i = 1; i < array.length; ++i) {
-        int key = array[i]
+        int key = array[i];
         for (j=i-1; j>=0 && array[j]> key; --j) {
             array[j+1] = array[j];
         }
@@ -150,6 +161,11 @@ private static void insertionSort() {
 * 최선, 평균, 최악: O(NlogN)
 * `불안정 정렬 알고리즘`
 * 완전 이진 트리를 기본으로 하는 힙에 데이터를 삽입하고 꺼내서 힙을 통해 정렬
+
+## Counting Sort
+* 특정한 조건이 부합할 때만 사용할 수 있지만 **매우 빠르게 동작하는** 정렬 알고리즘
+    * 계수 정렬은 **데이터의 크기 범위가 제한되어 정수 형태로 표현할 수 있을 때** 사용 가능
+* 데이터의 갯수가 N, 데이터(양수) 중 최댓값이 K일 때 최악의 경우에도 수행 시간 `O(N+K)` 보장
 
 ## 이분 탐색
 * 이분 탐색은 `이미 정렬되어 있는 자료구조`에서 특정 값을 탐색할 때 탐색 범위를 반으로 쪼개서 값을 찾아가는 알고리즘
