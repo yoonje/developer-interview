@@ -169,7 +169,11 @@ public interface Interface {
 * 순서가 있는 데이터 집합, 데이터의 중복 허용
 * `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `LinkedList`
 * Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
+<<<<<<< HEAD
+### (2) Map
+=======
 ### 👉 Map
+>>>>>>> 399f6a146c30437a6a5399462815cc7336f97ea0
 * 키와 값의 쌍으로 이루어진 데이터 집합
 * 키는 중복을 허용하지 않고 값의 중복은 허용
 * `Hash Map`: 해시테이블처럼 `key-value`의 구조로 이루어져 있으며 key를 기준으로 중복된 값을 저장하지 않으며 순서를 보장하지 않음 
