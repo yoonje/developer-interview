@@ -1,5 +1,7 @@
 # Java
 
+<br>
+
 ## Table of Contents
 * [Java 특징](#java-특징)
 * [JVM(Java Virtual Machine)](#jvmjava-virtual-machine)
@@ -37,12 +39,16 @@
 * [Java7에서 Java8로 올라오면서 달라진 점](#java7에서-java8로-올라오면서-달라진-점)
 * [Serialize](#serialize)
 
+<br>
+
 ## Java 특징
 * 미국의 Sun마이크로시스템이 개발
 * `객체 지향` 프로그래밍 언어, `컴파일` 언어
 * JVM만 있으면 OS와 상관없이 동작 가능(운영체제에 독립적)
 * 고성능(High Performance): 바이트 코드로 변환되어 실행
 * 멀티 스레딩 지원
+
+<br>
 
 ## JVM(Java Virtual Machine)
 * `자바 프로그램을 실행`하는 역할
@@ -56,9 +62,8 @@
 ## Java 프로그램 실행 과정
 * JVM은 OS로부터 메모리(Runtime Data Area)를 할당받음
 * `컴파일러(javac)`가 `소스코드(.java)`를 읽어들여 `바이트 코드(.class)`로 변환
-* `Class Loader`를 통해 Class 파일을 `JVM으로 로딩`
-* 로딩된 Class 파일을 `Excution Engine을 사용해 해석`
-* 해석된 바이트 코드는 `Runtime Data Area`에 배치되어 `실행`
+* `Class Loader`를 통해 Class 파일을 `JVM 내의 Runtime Data Area에 로딩`
+* 로딩된 Class 파일을 `Excution Engine을 사용해 해석 및 실행`
 
 ## JVM 메모리(Runtime Data Area) 구조 
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
@@ -170,11 +175,7 @@ public interface Interface {
 * 순서가 있는 데이터 집합, 데이터의 중복 허용
 * `ArrayList`(`Vector`를 개선), `Vector`, `Stack`, `LinkedList`
 * Stack과 Queue: Stack은 직접 new 키워드로 사용할 수 있으며, Queue는 LinkedList에 new 키워드를 적용하여 사용
-<<<<<<< HEAD
-### (2) Map
-=======
 ### 👉 Map
->>>>>>> 399f6a146c30437a6a5399462815cc7336f97ea0
 * 키와 값의 쌍으로 이루어진 데이터 집합
 * 키는 중복을 허용하지 않고 값의 중복은 허용
 * `Hash Map`: 해시테이블처럼 `key-value`의 구조로 이루어져 있으며 key를 기준으로 중복된 값을 저장하지 않으며 순서를 보장하지 않음 
