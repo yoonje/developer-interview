@@ -1,79 +1,72 @@
 # Spring
 
-## Table of Contents
-* [MSA](#msa)
-* [스프링의 버전별 차이](#스프링의-버전별-차이)
-* [스프링과 스프링 부트 차이](#스프링과-스프링-부트-차이)
-* [IoC](#ioc)
-* [DI](#di)
-* [AOP](#aop)
-* [스프링 MVC 구조](#스프링-mvc-구조)
-* [스프링 MVC 처리 과정](#스프링-mvc-처리-과정)
-* [MVC 1과 MVC 2의 차이](#mvc-1과-mvc-2의-차이) *
-* [Servlet](#servlet) *
-* [디스패처 서블릿](#디스패처-서블릿)
-* [디스패처 서블릿으로 인한 web.xml 역할 축소](#디스패처-서블릿으로-인한-webxml-역할-축소)
-* [필터와 인터셉트 차이](#필터와-인터셉트-차이)
-* [스프링 어노테이션](#스프링-어노테이션) *
-* [DAO](#dao)
-* [DTO](#dtp)
-* [ORM](#orm)
-* [JPA](#jpa)
-* [Hibernate](#hibernate)
-* [ORM, JPA, Hybernate 장단점](#orm-jpa-hybernate-장단점) *
-* [Mybatis](#mybatis)
-* [Mybatis, JPA 차이](#mybatis-jpa-차이) *
-* [Spring JDBC](#spring-jdbc)
+<details>
+<summary style="font-size:20px">스프링과 스프링 부트</summary>
+<div markdown="1">
+
+#### 스프링
+* 자바의 `오픈 소스 애플리케이션 프레임워크`
+* 객체를 관리할 수 있는 컨테이너 제공
+
+#### 스프링 부트
+* 스프링 기반의 애플리케이션을 간편하게 설정할 수 있는 도구
+* * 내장 서버: `Embeded Tomcat`이 포함되어 있음
+
+</div>
+</details>
 
 
-## 웹 서비스 동작 원리
-* 헬로 월드가 출력하는 방법
-* 클라이언트와 서버의 요청과 응답
-* 브라우저가 클라이언트, 스프링 부트가 서버
-* 로컬호스트의 8080포트에 톰캣이 수행
+<details>
+<summary style="font-size:20px">스프링의 버전별 차이 (내용 추가 필요)</summary>
+<div markdown="1">
 
-## 스프링의 버전별 차이
+</div>
+</details>
 
-## 스프링과 스프링 부트 차이
-* 스프링: 자바의 오픈 소스 애플리케이션 프레임워크
- 엔터프라이즈 애플리케이션을 보다 쉽게 만들 수 있다
-  * 객체를 관리할 수 있는 컨테이너를 제공
-  * DI, IOC를 이용해서 객체간의 결합도를 낮게
-  * 엔터프라이즈 애플리케이션 : 트랜잭션 처리, 대규모 데이터 처리 -> 스프링에서 제공해주는 모듈을 이용해서 개발자는 비지니스 로직에 집중
-  * 배포
-    * 프로젝트를 WAR 파일로 빌드
-    * Web 서버(Tomcat, Weblogic, Apache) 설치
-    * Web 서버에 WAR 파일 배포
-* 스프링 부트: 스프링 기반의 애플리케이션을 쉽게 만들 수 있게 해줌. 최소한의 설정으로 스프링 플랫폼과 서드파티 라이브러리들을 사용.
-  * 내장 서버: 스프링 부트는 `Embeded Tomcat` 사용(스프링 부트는 Tomcat이 내부에 포함)
-    * 내장 서버는 애플리케이션 배포시 복잡함을 피할 수 있게 함
-    * 스프링은 톰캣에 대한 설정을 다 해줘야함
-  * 자동 설정: starter를 통한 Dependency 자동화 -> `@SpringBootApplication`
-    * `@Component`를 통해 필요한 빈 객체들을 자동으로 만들어줌 -> spring.factories에서 확인 가능
-  * 쉬운 의존성 관리
-    * 호환성에 맞게 버전관리
-  * 배포
-    * 프로젝트를 JAR 파일로 빌드
-    * JAR 파일 실행
 
-## IoC
-* Inversion of Control
-* 제어의 역전: 객체 간의 결합도를 줄임, 유연한 코드 작성, 유지보수 향상
-* 메소드나 객체의 호출을 개발자가 결정하는 것이 아니라, 외부에서 결정
-* 객체의 생성부터 소멸까지 개발자가 아닌 컨테이너가 관리하는 것
+<details>
+<summary style="font-size:20px">DI</summary>
+<div markdown="1">
 
-## DI
-* Dependency Injection
+* Dependency Injection, 의존 관계 주입
+* 객체 간의 의존 관계를 미리 설정해 두면 스프링 컨테이너가 의존관계를 자동으로 연결
+* 의존하는 객체를 직접 생성하거나 검색해서 가져올 필요가 없어 `결합도`가 낮아짐
+
+#### 참고
 * 객체들의 `의존성(결합도)을 줄이기 위해` 사용되는 스프링의 IOC 컨테이너의 구체적인 구현 방식
 * 개발 코드에서 객체를 생성하는 것이 아니라, 데이터 주입만 담당하는 별도의 공간에서 객체를 생성하고 데이터간의 의존성을 주입해 개발 코드에서 가져다 씀
 * 재사용성 향상, 팩토리 패턴과 유사 
 * 방법 3가지: 생성자에 `@Autowired` 추가, 필드 주입, setter 주입(setter에 `@Autowired` 추가)
 
-## AOP
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">IoC</summary>
+<div markdown="1">
+
+* Inversion of Control, 제어의 역전
+* 제어권이 사용자에게 있지 않고 프레임워크에 있는 것
+* 메소드나 객체의 호출을 개발자가 결정하는 것이 아니라, 외부에서 결정
+* 객체의 생성부터 소멸까지 개발자가 아닌 컨테이너가 관리하는 것
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">AOP</summary>
+<div markdown="1">
+
 * Aspect Oriented Programming, 관점 지향 프로그래밍
 * `공통 관심 사항(Cross-Cutting Concern)`과 핵심 관심 사항(Core Concern)을 분리하는 것
 * 특정 로직(로그, 성능테스트 등)을 모든 메소드에 적용하고 싶을 때, 모든 메소드에 일일이 로직을 추가하는 것이 아니라, 로직을 만들어서 모든 메소드에 적용
 * 비지니스 로직의 앞/뒤에 공통 관심 사항을 수행해 `중복 코드를 줄이는 것`
+
+</div>
+</details>
+
 
 ## 스프링 MVC 구조
 * Model: 핵심적인 비지니스 로직 담당, 데이터베이스 관리
