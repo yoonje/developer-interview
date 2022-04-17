@@ -322,24 +322,6 @@
 
 
 <details>
-<summary style="font-size:20px">MSA (Microservice Architecture)</summary>
-<div markdown="1">
-
-#### 정의
-* 모든 시스템의 구성요소가 한 프로젝트에 통합되어 있는 Monolithic Architecture(모놀리식 아키텍쳐)의 한계점을 극복하고자 등장
-* 1개의 시스템을 독립적으로 배포 가능한 각각의 서비스로 분할한 것
-* 각각의 서비스는 RESTful API를 통해 데이터를 주고받으며 1개의 큰 서비스를 구성
-
-#### 장단점
-* 확장성이 좋고 일부 서비스에서 장애가 발생해도 전체 서비스에서 장애가 발생하지 않음 
-* 서비스가 분리되어 있어 테스트, 트랜잭션 처리, 디버깅이 어려움
-* REST API로 통신하는 비용 발생
-
-</div>
-</details>
-
-
-<details>
 <summary style="font-size:20px">REST (Representational State Transfer)</summary>
 <div markdown="1">
 
