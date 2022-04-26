@@ -207,7 +207,33 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 
 
 <details>
-<summary style="font-size:20px">JPA에서 Entity를 설계할 때 주의점</summary>
+<summary style="font-size:20px">ORM (Object Relational Mapping)</summary>
+<div markdown="1">
+
+* 관계형 DB를 OOP 언어로 변환하는 기술
+* `객체` 클래스를 `RDB 테이블`에 자동으로 연결하는 것 -> SQL 없이 간접적으로 DB 조작 가능 
+* 비지니스 로직에 집중할 수 있음, DBMS 종속성 하락
+* 프로그램의 복잡성이 커지만 난이도 증가, 잘못될 경우 문제 발생할 가능성 있음
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">[JPA] Java Persistence API 정의</summary>
+<div markdown="1">
+
+* ORM을 위해 자바에서 제공하는 API
+* 자바 ORM 기술에 대한 API 표준 명세
+* 자바 애플리케이션에서 `관계형 DB`를 사용하는 방식을 정의한 `인터페이스`
+* `EntityManager를` 통해 `CRUD` 처리
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">[JPA] Entity를 설계할 때 주의점</summary>
 <div markdown="1">
 
 * `Setter`를 사용하지 않음
@@ -226,26 +252,50 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 
 
 <details>
-<summary style="font-size:20px">ORM (Object Relational Mapping)</summary>
+<summary style="font-size:20px">[JPA] Fetch 종류</summary>
 <div markdown="1">
 
-* 관계형 DB를 OOP 언어로 변환하는 기술
-* `객체` 클래스를 `RDB 테이블`에 자동으로 연결하는 것 -> SQL 없이 간접적으로 DB 조작 가능 
-* 비지니스 로직에 집중할 수 있음, DBMS 종속성 하락
-* 프로그램의 복잡성이 커지만 난이도 증가, 잘못될 경우 문제 발생할 가능성 있음
+* 즉시 로딩: 엔티티를 조회할 때, 연관된 엔티티도 `함께` DB를 조회
+* 지연 로딩: 엔티티를 조회할 때, 연관된 엔티티는 조회하지 않고 `프록시 객체`로 넣어두었다가 엔티티가 실제로 `사용`될 때 조회
 
 </div>
 </details>
 
 
 <details>
-<summary style="font-size:20px">JPA (Java Persistence API)</summary>
+<summary style="font-size:20px">[JPA] 1차 캐시와 2차 캐시의 차이</summary>
 <div markdown="1">
 
-* ORM을 위해 자바에서 제공하는 API
-* 자바 ORM 기술에 다한 API 표준 명세
-* 자바 애플리케이션에서 `관계형 DB`를 사용하는 방식을 정의한 `인터페이스`
-* `EntityManager를` 통해 `CRUD` 처리
+#### 1차 캐시
+* 영속성 컨텍스트에서 엔티티를 저장하는 장소
+* 같은 엔티티가 있으면 동일한 객체임을 보장
+
+#### 2차 캐시
+* 애플리케이션 범위의 캐시, 공유 캐시
+* 애플리케이션이 종료될때까지 캐시 유지
+* `동시성`을 극대화 하기 위해 캐시한 객체가 아닌 `복사본`을 반환
+* 영속성 컨텍스트가 다르면 동일한 객체임을 보장하지 않음
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">[JPA] N+1 문제</summary>
+<div markdown="1">
+
+* 조회 시, 1개의 쿼리를 생각하고 설계했으나 예상하지 못했던 쿼리 N개 더 발생하는 문제
+* `연관 관계`에 의해 다른 객체가 함께 조회되어 N+1 문제가 발생함
+
+#### 원인
+* 즉시 로딩 시에, 전체 데이터를 조회하고 Eager가 감지되어 N개의 쿼리가 추가로 발생
+* 지연 로딩 시에, 전체 데이터를 조회한 후, 연관된 객체가 사용될 때 N개 쿼리가 발생
+
+#### 해결 방법
+* Fetch Join 사용: 연관된 엔티티나 컬렉션을 한 번에 함께 조회하는 역할
+* @EntityGraph 사용
+* @BatchSize 사용: where 절의 in 조건으로 미리 지정된 사이즈 만큼만 조회하여 1개 쿼리로 처리 가능
+* @Fetch 사용: where 절의 in 조건으로 조회해 1개 쿼리로 처리 가능
 
 </div>
 </details>
@@ -308,6 +358,15 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 
 * 자바에서 데이터베이스에 접속할 수 있도록 해주는 자바 API
 * DB에서 자료를 쿼리하거나 업데이트에 사용
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">Application Context</summary>
+<div markdown="1">
+
 
 </div>
 </details>
