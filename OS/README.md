@@ -286,9 +286,12 @@
 * 함수를 호출하는 곳에서 결과를 기다리지 않고 `Callback 함수`가 결과 처리 -> 작업 완료 여부를 확인하지 않음
 * 멀티태스킹이 가능하나 복잡도가 증가 (부하 컨트롤, 데이터 일관성 유지 등)
 
+#### [참고] 콜백 함수
+* OS가 실행하는 함수
+* 특정 이벤트가 발생하면 실행되는 함수
+
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">블락킹과 논블락킹</summary>
@@ -300,11 +303,10 @@
 
 #### 논블락킹
 * `제어권이 호출한 함수에 있음` -> 작업의 완료 여부와 관계없이 새로운 작업 수행 가능
-* 논블락킹은 요청한 작업을 즉시 마칠 수 없다면 즉시 리턴함
+* 요청한 작업을 즉시 마칠 수 없다면 즉시 리턴함
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">동기/비동기와 블락킹/논블락킹</summary>
@@ -322,19 +324,29 @@
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">CPU 스케줄링</summary>
+<summary style="font-size:20px">CPU 스케줄링: SRT(Shortest Remaining Time)</summary>
 <div markdown="1">
 
-#### SRT (Shortest Remaining Time)
 * `남은 시간이 가장 적은` 프로세스를 실행
 
-#### Round Robin
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CPU 스케줄링: Round Robin</summary>
+<div markdown="1">
+
 * `Time Slice` 단위로 공평하게 프로세스 실행
 * 할당된 시간 내에 끝나지 않으면 다음 프로세스에게 CPU를 양보하고 준비 상태 큐의 가장 뒤로 배치
 
-#### MLFQ (Multi Level Feedback Queue)
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CPU 스케줄링: MLFQ (Multi Level Feedback Queue)</summary>
+<div markdown="1">
+
 * 우선 순위 개수만큼 Queue가 있으며 최상위 단계의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
 * 처음 시작은 모든 프로세스가 가장 높은 우선 순위 Queue에 존재하나 할당된 Time Slice를 소진하면 우선 순위를 감소시켜서 우선 순위 결정
 * `Aging`: 일정 주기마다 모든 작업을 가장 높은 우선 순위 큐로 이동시켜서 Starvation 방지
@@ -342,9 +354,8 @@
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">프로세스 메모리</summary>
+<summary style="font-size:20px">프로세스 메모리 구성</summary>
 <div markdown="1">
 
 * 코드: 프로그램의 코드 저장
@@ -354,7 +365,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">힙과 스택의 차이</summary>
@@ -366,7 +376,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">스택의 장점과 단점</summary>
 <div markdown="1">
@@ -377,7 +386,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">힙의 장점과 단점</summary>
 <div markdown="1">
@@ -387,7 +395,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">가상 메모리와 장점</summary>
@@ -405,7 +412,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">페이징</summary>
 <div markdown="1">
@@ -413,12 +419,11 @@
 * 프로세스를 `일정 크기인 페이지`로 잘라서 가상 메모리에 적재하고 `페이지 테이블`을 이용하여 프레임으로 변환하여 가상 메모리를 관리하는 기법
 * 페이지: `가상 메모리`를 최소 단위로 쪼개어 만든 `일정한` 크기의 블럭
 * 프레임: `물리 메모리`에 페이지 크기와 같은 블럭으로 나눈 블럭
-* CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`를 접근해서 물리주소 가져 옴
-* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비
+* CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`에 접근해서 물리주소 가져 옴
+* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비1
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
@@ -437,7 +442,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">페이지 교체 알고리즘</summary>
 <div markdown="1">
@@ -455,7 +459,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">세그멘테이션</summary>
 <div markdown="1">
@@ -467,17 +470,15 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">캐시의 지역성</summary>
 <div markdown="1">
 
-* 시간 지역성: `최근`에 참조된 주소의 내용은 곧 다음에 다시 참조되는 특성 (순환, 재귀)
-* 공간 지역성: 대부분의 실제 프로그램이 참조된 주소와 `인접한` 주소가 다시 참조되는 특성 (배열)
+* 시간 지역성: `최근`에 참조된 주소가 다시 참조되는 특성 (순환, 재귀)
+* 공간 지역성: 참조된 주소와 `인접한` 주소가 다시 참조되는 특성 (배열)
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">컴퓨터가 부팅되는 과정</summary>
@@ -490,7 +491,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">심볼릭 링크와 하드 링크의 차이</summary>
 <div markdown="1">
@@ -500,7 +500,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">컴파일러와 인터프리터의 차이</summary>
@@ -522,7 +521,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">CPU와 GPU의 차이</summary>
