@@ -9,6 +9,7 @@
 #### 스프링
 * 자바의 `오픈 소스 애플리케이션 프레임워크`
 * 객체를 관리할 수 있는 컨테이너 제공 
+* IOC, DI, AOP를 지원
 
 #### 스프링 부트
 * 스프링 기반의 애플리케이션을 간편하게 설정할 수 있는 도구
@@ -30,23 +31,24 @@
 <summary style="font-size:20px">Maven과 Gradle</summary>
 <div markdown="1"> 
 
-* 빌드 관리 도구: 라이브러리, 종속성 정보 등을 설정파일을 통해 자동으로 다운로드해 간편히 관리해주는 도구 
+* 빌드 관리 도구: 라이브러리, 종속성 정보 등을 설정 파일을 통해 자동으로 다운로드해 간편히 관리해주는 도구 
 
 #### Maven
 * Java용 프로젝트 관리 도구
+* Apache Ant의 단점을 해소하기 위해 사용
 * 빌드 중인 프로젝트, 라이브러리 등 종속 관계를 `pom.xml`에 명시 
 
 #### Gradle
 * Java, C/C++, Python 등을 지원
 * Apache Maven과 Apache Ant의 장점을 합친 빌드 관리 도구 (완전한 오픈 소스)
-* `Build.gradle` 사용: `Groovy` 언어를 사용한 `Domain Specific Language`를 사용 (XML보다 간결) 
+* `Build.gradle` 사용: JVM 위에서 동작하는 `Groovy` 언어를 사용한 `Domain Specific Language`를 사용 (XML보다 간결) 
 
 #### 차이점
 * 빌드 접근 방식 차이: Gradle은 `작업 의존성 그래프`에 기반, Maven은 `고정적이고 선형적인 단계의 모델`에 기반
 * Gradle은 `Incremental Build`를 허용해 `빌드 시간이 단축`
-  * 이미 업데이트된 Task는 빌드가 진행되지 않아 시간 단축 가능
+  * 이미 업데이트된 Task는 빌드가 진행되지 않아 시간 단축 가능
 * Gradle은 `Concurrent에 안전한 캐시`를 허용
-  * 2개 이상의 프로젝트에서 동일한 캐시를 사용하는 경우, 서로 겹치지 않도록 Checksum 기반의 캐시를 사용, 캐시와 Repository 동기화 가능 
+  * 2개 이상의 프로젝트에서 동일한 캐시를 사용하는 경우, 서로 겹치지 않도록 Checksum 기반의 캐시를 사용, 캐시와 Repository 동기화 가능 
 
 </div>
 </details>
@@ -102,12 +104,60 @@
 <div markdown="1"> 
 
 * 자바 객체의 생명 주기(생성 ~ 소멸)를 관리하는 컨테이너
-* 스프링 컨테이너에는 `BeanFactory`, `ApplicationContext` 클래스가 있음
+* 스프링 컨테이너에는 `BeanFactory`, `ApplicationContext` 인터페이스가 있음
 * 자바 객체를 스프링 빈이라고 함 
 
 #### 참고 
 * `AppConfig` 클래스 같은 것이 스프링 컨테이너 -> `@Configuration` 사용
 * `AppConfig` 내에서 `@Bean`이 붙은 것이 스프링 빈 
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">스프링 빈 주입 방법</summary>
+<div markdown="1"> 
+
+* 필드 주입: `@Autowired` 어노테이션 사용
+* 생성자 주입: 생성자가 2개 이상인 경우 `@Autowired` 어노테이션 필요
+* Setter 주입: `@Autowired` 어노테이션 사용
+
+#### 생성자 주입을 사용하는 것이 좋음
+* 순환 참조 방지 가능  
+  * 생성자 주입: 생성자로 객체를 생성하는 시점에 필요한 빈을 주입
+    * 생성자의 인자에 사용되는 빈을 찾거나 생성 -> 빈의 생성자를 호출
+  * 그 외: 빈을 먼저 생성 -> 어노테이션이 붙은 필드에 해당하는 빈을 찾아서 주입 / Setter의 객체를 호출해 주입 -> 객체가 실제로 사용되기 전까지는 에러가 발생하지 않음
+* `final` 키워드로 불변하는 객체를 생성할 수 있다.
+  * 실행 중에 객체가 변하는 것을 막아 오류를 사전에 방지할 수 있음
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">스프링 빈 스코프</summary>
+<div markdown="1"> 
+
+* 빈이 관리되는 범위
+
+```java
+@Scope("singletone")
+```
+
+#### Singleton
+* Default Scope
+* 스프링 컨테이너의 시작과 종료까지 1개의 객체로 유지됨
+
+#### Prototype
+* Bean 객체를 요청할 때마다 새로운 객체 생성
+* 프로토타입을 받은 클라이언트가 객체를 관리
+
+#### Web (MVC Wep 앱에서만 사용)
+* Request: HTTP 요청별로 객체화, 요청이 끝나면 소멸
+* Session: HTTP 세션별로 객체화, 세션이 끝나면 소멸
+* Application: Web의 `Servlet Context`와 동일한 생명주기를 가짐
+* Websocket: web socket과 동일한 생명주기를 가짐
 
 </div>
 </details>
@@ -130,11 +180,11 @@
 <div markdown="1"> 
 
 1. 클라이언트가 서버에 요청을 보내면 `DispatcherServlet`에 요청이 전달<br>
-  *  DispatcherServlet: Front Controller
+  * DispatcherServlet: Front Controller
 2. `DispatcherServlet`은 요청된 `URL`을 `HandlerMapping`에게 전달, ` HandlerMapping`은 호출해야 할 `Controller` 객체를 리턴<br>
 3. DispatcherServlet이 `HandlerAdapter` 객체에게 요청을 위임하고 `HandlerAdapter`는 `컨트롤러의 메소드를 실행(호출)`하여 `ModelAndView` 객체로 반환<br>
 4. DispatcherServlet은 `ViewResolver`를 이용해 `View` 객체를 얻음<br>
-  * `ModelAndView` 객체의 View이름으로 객체를 찾음, 없다면 생성하여 반환
+  * `ModelAndView` 객체의 View이름으로 객체를 찾음, 없다면 생성하여 반환
 5. DispatcherServlet은 ViewResolver가 리턴한 View객체를 이용해 사용자에게 화면 표시(응답 결과 표시) 
 
 #### 참고
@@ -193,7 +243,7 @@
 
 
 <details>
-<summary style="font-size:20px">Application Context</summary>
+<summary style="font-size:20px">ApplicationContext</summary>
 <div markdown="1"> 
 
 * 스프링 컨테이너
@@ -205,16 +255,18 @@
 
 
 <details>
-<summary style="font-size:20px">필터와 인터셉터 차이 (추가 예정)</summary>
+<summary style="font-size:20px">필터와 인터셉터 차이</summary>
 <div markdown="1"> 
 
-* 실행되는 시점의 차이
-* 필터: 웹 애플리케이션에 등록
-* 인터셉터: 스프링 Context에 등록 
+* `실행되는 시점`의 차이
 
-Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원의 앞단에서 요청 내용을 변경하거나 여러가지 검증을 수행합니다. Intercepter 필터는 스프링의 컨텍스트 외부에 존재하여 요청에 대한 작업 전/후로 가로채 동작한다. 
+#### 필터
+* 웹 애플리케이션에 등록 (스프링 Context 외부에 존재)
+* 서블릿 필터: `DispatcherServlet` `이전`에 실행 -> 자원의 앞단에서 요청 내용 변경/검증 수행
 
-인터셉터 DistpatcherServlet이 컨트롤러를 호출하기 전, 후로 끼어들기 때문에 스프링 컨텍스트내부에서 Controller에 관한 요청과 응답에 대해 처리합니다. 
+#### 인터셉터
+* 스프링 Context에 등록 
+* `DistpatcherServlet`이 `컨트롤러`를 호출하기 전(요청), 후(응답)에 동작 -> Controller에 관한 요청과 응답 처리
 
 </div>
 </details>
@@ -275,7 +327,7 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 
 * `Setter`를 사용하지 않음
 * 모든 연관 관계는 `지연로딩(LAZY)`으로 설정
-  * 즉시로딩(EAGER)를 사용 할 경우, 어떤 SQL이 나갈지 추적하기 어려움
+  * 즉시로딩(EAGER)를 사용 할 경우, 어떤 SQL이 나갈지 추적하기 어려움
 * 컬렉션은 필드에서 바로 초기화 
 
 #### 참고
@@ -344,8 +396,8 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 #### 해결 방법
 * Fetch Join 사용: 연관된 엔티티나 컬렉션을 한 번에 함께 조회하는 역할
 * @EntityGraph 사용
-* @BatchSize 사용: where 절의 in 조건으로 미리 지정된 사이즈 만큼만 조회하여 1개 쿼리로 처리 가능
-* @Fetch 사용: where 절의 in 조건으로 조회해 1개 쿼리로 처리 가능 
+* @BatchSize 사용:` where 절의 in 조건`으로 미리 지정된 사이즈 만큼만 조회하여 1개 쿼리로 처리 가능
+* @Fetch 사용: `where 절의 in 조건`으로 조회해 1개 쿼리로 처리 가능 (BatchSize 무한대와 동일) 
 
 </div>
 </details>
@@ -356,7 +408,7 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 <summary style="font-size:20px">[JPA] Entity Id에 Long을 사용해야 되는 이유</summary>
 <div markdown="1"> 
 
-* Wrapper type인 Long을 사용해야 Null을 사용할 수 있음
+* Wrapper Type인 Long을 사용해야 Null을 사용할 수 있음
 * 하이버네이트 공식 문서에도 Nullable한 값을 사용하라고 권장 
 
 </div>
@@ -380,11 +432,31 @@ Filter 서블릿필터는 DispatcherServlet 이전에 실행이 되는데 자원
 
 
 <details>
+<summary style="font-size:20px">[JPA] 스프링에서 다대다 관계가 좋지 않은 이유</summary>
+<div markdown="1"> 
+
+* 다대다의 경우, 정규화를 통해 `중간 테이블`을 생성해야 함
+  * 중간 테이블로 `일대다` + `다대일` 형태로 변형해야 함
+* JPA에서 `@ManyToMany` 연관 관계를 사용할 경우, 하이버네이트가 중간 테이블을 알아서 만들어서 처리
+  * 관계 설정에 필수적으로 필요한 정보만 담기고 비지니스 로직에 필요한 정보는 담기지 않음
+  * 실무에서는 사용하지 않는 것을 권장
+* 다대다 관계를 사용하고 싶은 경우라면 중간 테이블에 대한 클래스를 직접 만들어서 `@OneToMany`, `@ManyToOne`의 조합을 만들어 사용해야 함
+
+#### 정리
+* 중간 테이블에는 매핑정보만 들어가고 추가 데이터를 넣는 것이 불가능
+* 중간 테이블이 숨겨져 있기 때문에 쿼리가 예상하지 못하는 형태로 발생 가능
+* 실무 비즈니스는 복잡해서 ManyToMany로 풀 수있는게 거의 없음
+
+</div>
+</details>
+
+
+<details>
 <summary style="font-size:20px">Hibernate</summary>
 <div markdown="1"> 
 
 * `JPA의 구현체`, 인터페이스를 직접 구현한 `라이브러리`
-* SQL문을 직접 작성하지 않고 메소드 호출만으로 쿼리 수행이 가능해 생산성 향상
+* SQL문을 직접 작성하지 않고 `메소드 호출`만으로 쿼리 수행이 가능해 생산성 향상
 * 생산성, 유지보수, 비종속성 
 
 </div>

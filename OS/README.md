@@ -60,7 +60,7 @@
 <div markdown="1">
 
 * 프로세스는 `실행중인 프로그램`으로 OS로부터 자원을 할당받아 실행, `코드/데이터/스택/힙` 메모리 영역을 가짐
-* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 코드/데이터/힙 메모리 영역을 공유하고 `개별적인 스택`을 가짐
+* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 `코드/데이터/힙` 메모리 영역을 공유하고 `개별적인 스택`을 가짐
 
 </div>
 </details>
@@ -103,7 +103,7 @@
 <summary style="font-size:20px">멀티 프로세싱</summary>
 <div markdown="1">
 
-* 멀티 프로세싱은 여러 CPU(`프로세서`)가 여러 작업을 동시에 처리하는 것 (병렬 처리)
+* 여러 CPU(`프로세서`)가 여러 작업을 동시에 처리하는 것 (병렬 처리)
 * `안전성`: 하나의 프로세스가 죽더라도 다른 프로세스에는 영향을 끼치지 않고 정상적으로 수행
 * 통신 비용/문맥 교환 `비용이 큼`
 * `많은 메모리 공간`을 차지
@@ -118,7 +118,7 @@
 <summary style="font-size:20px">멀티 스레딩</summary>
 <div markdown="1">
 
-* 멀티 스레딩은 하나의 프로세스에 여러 스레드가 자원을 공유하며 작업을 나누어 하는 것
+* 하나의 프로세스에 여러 스레드가 자원을 공유하며 작업을 나누어 하는 것
 * `안전성 낮음`: 하나의 스레드의 비정상적인 활동은 전체 스레드에 영향을 끼칠 수 있음
 * 통신 비용/문맥 교환 `비용이 적음`
 * `코드/데이터/힙 영역을 공유`해 `메모리를 적게 차지`하고 공유 메모리가 없어도 통신 가능
@@ -173,13 +173,15 @@
 <summary style="font-size:20px">뮤텍스와 세마포어</summary>
 <div markdown="1">
 
-* 둘 다 `상호 배제`를 달성하는 기법
+* `상호 배제`를 달성하는 기법
   * 상호 배제: 둘 이상의 프로세스/스레드가 동시에 임계 영역에 진입하는 것을 방지하기 위해 사용하는 알고리즘
 
 #### 뮤텍스
-* `스레드 기반`으로 공유 자원의 활용을 제어하는 방법
-* 바이너리 세마포어와 비슷한 방식으로 `동기화 대상이 1개`일 때 사용 -> 1개 스레드만 접근 가능
-* 소유 가능: `락`을 소유한 프로세스/스레드만이 락을 반환할 수 있음
+* `스레드 기반`으로 여러 스레드가 공유자원에 동시에 접근하지 못하게 하는 것
+* `바이너리 세마포어`와 비슷한 방식으로 `동기화 대상이 1개`일 때 사용 -> 1개 스레드만 접근 가능
+* 소유 가능: `락`을 소유한 스레드만이 락을 반환할 수 있음
+* 프로세스 범위
+* `Deadlock`이 발생할 수 있음
 
 #### 세마포어
 * `프로세스 기반`으로 공유 자원의 활용을 제어하는 방법
@@ -188,7 +190,24 @@
   * 2 이상: 카운팅 세마포어
   * wait(): 세마포어 변수 1감소 -> Critical Section -> signal(): 세마포어 변수 1증가 
 * 소유할 수 없음: 세마포어를 소유하지 않은 프로세스/스레드가 세마포어 해제 가능
+* 시스템 범위에 걸쳐 있음
 * `Deadlock`이 발생할 수 있음
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">뮤텍스와 모니터</summary>
+<div markdown="1">
+
+#### 뮤텍스
+* 다른 프로세스간 동기화에 사용 가능
+
+#### 모니터
+* 하나의 프로세스 내에서 `스레드 간의 동기화`
+* 프레임워크나 라이브러리 자체에서 제공
+* C언어는 없고 Java는 있음
 
 </div>
 </details>
@@ -267,9 +286,12 @@
 * 함수를 호출하는 곳에서 결과를 기다리지 않고 `Callback 함수`가 결과 처리 -> 작업 완료 여부를 확인하지 않음
 * 멀티태스킹이 가능하나 복잡도가 증가 (부하 컨트롤, 데이터 일관성 유지 등)
 
+#### [참고] 콜백 함수
+* OS가 실행하는 함수
+* 특정 이벤트가 발생하면 실행되는 함수
+
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">블락킹과 논블락킹</summary>
@@ -281,11 +303,10 @@
 
 #### 논블락킹
 * `제어권이 호출한 함수에 있음` -> 작업의 완료 여부와 관계없이 새로운 작업 수행 가능
-* 논블락킹은 요청한 작업을 즉시 마칠 수 없다면 즉시 리턴함
+* 요청한 작업을 즉시 마칠 수 없다면 즉시 리턴함
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">동기/비동기와 블락킹/논블락킹</summary>
@@ -303,19 +324,29 @@
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">CPU 스케줄링</summary>
+<summary style="font-size:20px">CPU 스케줄링: SRT(Shortest Remaining Time)</summary>
 <div markdown="1">
 
-#### SRT (Shortest Remaining Time)
 * `남은 시간이 가장 적은` 프로세스를 실행
 
-#### Round Robin
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CPU 스케줄링: Round Robin</summary>
+<div markdown="1">
+
 * `Time Slice` 단위로 공평하게 프로세스 실행
 * 할당된 시간 내에 끝나지 않으면 다음 프로세스에게 CPU를 양보하고 준비 상태 큐의 가장 뒤로 배치
 
-#### MLFQ (Multi Level Feedback Queue)
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CPU 스케줄링: MLFQ (Multi Level Feedback Queue)</summary>
+<div markdown="1">
+
 * 우선 순위 개수만큼 Queue가 있으며 최상위 단계의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
 * 처음 시작은 모든 프로세스가 가장 높은 우선 순위 Queue에 존재하나 할당된 Time Slice를 소진하면 우선 순위를 감소시켜서 우선 순위 결정
 * `Aging`: 일정 주기마다 모든 작업을 가장 높은 우선 순위 큐로 이동시켜서 Starvation 방지
@@ -323,9 +354,8 @@
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">프로세스 메모리</summary>
+<summary style="font-size:20px">프로세스 메모리 구성</summary>
 <div markdown="1">
 
 * 코드: 프로그램의 코드 저장
@@ -335,7 +365,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">힙과 스택의 차이</summary>
@@ -347,7 +376,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">스택의 장점과 단점</summary>
 <div markdown="1">
@@ -358,7 +386,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">힙의 장점과 단점</summary>
 <div markdown="1">
@@ -368,7 +395,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">가상 메모리와 장점</summary>
@@ -386,7 +412,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">페이징</summary>
 <div markdown="1">
@@ -394,12 +419,11 @@
 * 프로세스를 `일정 크기인 페이지`로 잘라서 가상 메모리에 적재하고 `페이지 테이블`을 이용하여 프레임으로 변환하여 가상 메모리를 관리하는 기법
 * 페이지: `가상 메모리`를 최소 단위로 쪼개어 만든 `일정한` 크기의 블럭
 * 프레임: `물리 메모리`에 페이지 크기와 같은 블럭으로 나눈 블럭
-* CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`를 접근해서 물리주소 가져 옴
-* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비
+* CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`에 접근해서 물리주소 가져 옴
+* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비1
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
@@ -418,7 +442,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">페이지 교체 알고리즘</summary>
 <div markdown="1">
@@ -436,7 +459,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">세그멘테이션</summary>
 <div markdown="1">
@@ -448,17 +470,15 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">캐시의 지역성</summary>
 <div markdown="1">
 
-* 시간 지역성: `최근`에 참조된 주소의 내용은 곧 다음에 다시 참조되는 특성 (순환, 재귀)
-* 공간 지역성: 대부분의 실제 프로그램이 참조된 주소와 `인접한` 주소가 다시 참조되는 특성 (배열)
+* 시간 지역성: `최근`에 참조된 주소가 다시 참조되는 특성 (순환, 재귀)
+* 공간 지역성: 참조된 주소와 `인접한` 주소가 다시 참조되는 특성 (배열)
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">컴퓨터가 부팅되는 과정</summary>
@@ -471,7 +491,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">심볼릭 링크와 하드 링크의 차이</summary>
 <div markdown="1">
@@ -481,7 +500,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">컴파일러와 인터프리터의 차이</summary>
@@ -503,7 +521,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">CPU와 GPU의 차이</summary>
