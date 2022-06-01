@@ -16,6 +16,82 @@
 
 
 <details>
+<summary style="font-size:20px">프로세스와 스레드의 차이</summary>
+<div markdown="1">
+
+* 프로세스는 `실행중인 프로그램`으로 OS로부터 자원을 할당받아 실행, `코드/데이터/스택/힙` 메모리 영역을 가짐
+* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 `코드/데이터/힙` 메모리 영역을 공유하고 `개별적인 스택`을 가짐
+
+</div>
+</details>
+
+
+<details>
+<summary> [추가] 스레드가 개별적인 스택을 가지는 이유</summary>
+<div markdown="1">
+
+* 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
+* 독립적인 스택을 갖는 것은 독립적인 함수 호출이 가능하고 독립적인 실행 흐름을 추가할 수 있다는 것을 의미
+
+</div>
+</details>
+
+
+<details>
+<summary> [추가] 스레드가 PC 레지스터를 가지는 이유</summary>
+<div markdown="1">
+
+* 스레드는 CPU를 할당/반납하고를 반복
+* 이전까지의 수행 내역을 기억하기 위해 독립적인 PC 사용
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">프로세스 메모리 구성</summary>
+<div markdown="1">
+
+* 코드: 프로그램의 코드 저장
+* 데이터: 전역 변수, 정적 변수 저장
+* 스택: 지역 변수, 매개 변수, 함수의 호출과 할당, `컴파일`에 크기 결정
+* 힙: 동적으로 할당 및 해제, `런 타임`에 크기 결정
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">힙과 스택의 차이</summary>
+<div markdown="1">
+
+* 힙: 프로그램 코드에서 `동적으로 할당`하여 사용되는 메모리 영역
+* 스택: `함수를 호출`할 때나 `지역변수`를 지정할 때 `자동`으로 할당되는 메모리 영역
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">스택의 장점과 단점</summary>
+<div markdown="1">
+
+* 장점: 자동으로 처리되기 때문에 `낭비되는 공간이 없고` 사용하기가 편리
+* 단점: 한계가 있어 한계를 초과하도록 삽입할 수 없고 `유연성이 부족`
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">힙의 장점과 단점</summary>
+<div markdown="1">
+
+* 장점: 프로그램에 필요한 개체의 개수나 크기를 미리 알 수 없는 경우 사용하고 개체가 너무 커서 스택 할당자에 맞지 않는 경우 사용 가능
+* 단점: `할당/해제 작업`으로 인한 속도 저하
+
+</div>
+</details>
+
+
+<details>
 <summary style="font-size:20px">프로세스 생성과정</summary>
 <div markdown="1">
 
@@ -23,6 +99,18 @@
 * 초기화된 전역 변수 및 static 변수인 `데이터 영역`을 메모리에 할당
 * `힙과 스택의 초기 메모리 주소를 초기화`
 * `Queue에서 프로세스가 등록`되고 운영체제가 CPU를 할당하기를 대기
+
+</div>
+</details>
+
+
+<details>
+<summary> [추가] PCB (Process Control Block)</summary>
+<div markdown="1">
+
+* `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
+* Process 상태, PC(다음에 수행할 명령어의 주소), CPU 레지스터, CPU 스케줄링 정보, 메모리 관리 정보 등을 저장
+* `문맥 교환` 시에 진행 사항을 PCB에 저장하고 CPU 반환 -> CPU를 할당받으면 PCB에 저장되어 있는 내용을 불러와 이전에 종료되었던 시점부터 다시 수행
 
 </div>
 </details>
@@ -50,50 +138,6 @@
 
 * 프로그램을 실행하는 도중에 예기치 않은 상황이 발생할 경우 `현재 실행 중인 작업을 즉시 중단`하고, `발생된 상황을 우선 처리`한 후 `실행 중이던 작업으로 복귀`하여 계속 처리하는 것
 * 문맥 교환을 구현할 때 `Timer Interrupt`를 통해서 제어권을 커널이 가져올 수 있도록 활용
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">프로세스와 스레드의 차이</summary>
-<div markdown="1">
-
-* 프로세스는 `실행중인 프로그램`으로 OS로부터 자원을 할당받아 실행, `코드/데이터/스택/힙` 메모리 영역을 가짐
-* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 `코드/데이터/힙` 메모리 영역을 공유하고 `개별적인 스택`을 가짐
-
-</div>
-</details>
-
-<details>
-<summary> > PCB (Process Control Block)</summary>
-<div markdown="1">
-
-* `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
-* Process 상태, PC(다음에 수행할 명령어의 주소), CPU 레지스터, CPU 스케줄링 정보, 메모리 관리 정보 등을 저장
-* `문맥 교환` 시에 진행 사항을 PCB에 저장하고 CPU 반환 -> CPU를 할당받으면 PCB에 저장되어 있는 내용을 불러와 이전에 종료되었던 시점부터 다시 수행
-
-</div>
-</details>
-
-
-<details>
-<summary> > 스레드가 개별적인 스택을 가지는 이유</summary>
-<div markdown="1">
-
-* 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
-* 독립적인 스택을 갖는 것은 독립적인 함수 호출이 가능하고 독립적인 실행 흐름을 추가할 수 있다는 것을 의미
-
-</div>
-</details>
-
-
-<details>
-<summary> > 스레드가 PC 레지스터를 가지는 이유</summary>
-<div markdown="1">
-
-* 스레드는 CPU를 할당/반납하고를 반복
-* 이전까지의 수행 내역을 기억하기 위해 독립적인 PC 사용
 
 </div>
 </details>
@@ -354,47 +398,6 @@
 </div>
 </details>
 
-<details>
-<summary style="font-size:20px">프로세스 메모리 구성</summary>
-<div markdown="1">
-
-* 코드: 프로그램의 코드 저장
-* 데이터: 전역 변수, 정적 변수 저장
-* 스택: 지역 변수, 매개 변수, 함수의 호출과 할당, `컴파일`에 크기 결정
-* 힙: 동적으로 할당 및 해제, `런 타임`에 크기 결정
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">힙과 스택의 차이</summary>
-<div markdown="1">
-
-* 힙: 프로그램 코드에서 `동적으로 할당`하여 사용되는 메모리 영역
-* 스택: `함수를 호출`할 때나 `지역변수`를 지정할 때 `자동`으로 할당되는 메모리 영역
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">스택의 장점과 단점</summary>
-<div markdown="1">
-
-* 장점: 자동으로 처리되기 때문에 `낭비되는 공간이 없고` 사용하기가 편리
-* 단점: 한계가 있어 한계를 초과하도록 삽입할 수 없고 `유연성이 부족`
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">힙의 장점과 단점</summary>
-<div markdown="1">
-
-* 장점: 프로그램에 필요한 개체의 개수나 크기를 미리 알 수 없는 경우 사용하고 개체가 너무 커서 스택 할당자에 맞지 않는 경우 사용 가능
-* 단점: `할당/해제 작업`으로 인한 속도 저하
-
-</div>
-</details>
 
 <details>
 <summary style="font-size:20px">가상 메모리와 장점</summary>
