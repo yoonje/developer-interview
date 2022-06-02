@@ -27,7 +27,7 @@
 
 
 <details>
-<summary> [추가] 스레드가 개별적인 스택을 가지는 이유</summary>
+<summary>[추가] 스레드가 개별적인 스택을 가지는 이유</summary>
 <div markdown="1">
 
 * 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
@@ -38,7 +38,7 @@
 
 
 <details>
-<summary> [추가] 스레드가 PC 레지스터를 가지는 이유</summary>
+<summary>[추가] 스레드가 PC 레지스터를 가지는 이유</summary>
 <div markdown="1">
 
 * 스레드는 CPU를 할당/반납하고를 반복
@@ -105,7 +105,7 @@
 
 
 <details>
-<summary> [추가] PCB (Process Control Block)</summary>
+<summary>[추가] PCB (Process Control Block)</summary>
 <div markdown="1">
 
 * `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
@@ -196,17 +196,23 @@
 
 
 <details>
-<summary style="font-size:20px">프로세스 동기화</summary>
+<summary style="font-size:20px">[추가] Critical Section(공유 자원, 임계 영역)</summary>
 <div markdown="1">
 
-* 다중 프로세스 환경에서 자원에 한 프로세스만이 접근 가능하도록 하는 것
-* 데이터 일관성이 깨지거나 결과가 잘못될 가능성이 있어 필요함
-
-#### Critical Section(공유 자원, 임계 영역)
 * 동일한 자원에 동시에 접근하는 경우가 발생하는 코드 영역
 * 접근 순서에 따라 실행 결과가 달라지는 구역
 
 #### Race Condition
+* 공유 자원에 여러 프로세스/스레드가 접근할 경우 `접근 순서에 따라 결과가 달라지는 현상`
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">[추가] Race Condition</summary>
+<div markdown="1">
+
 * 공유 자원에 여러 프로세스/스레드가 접근할 경우 `접근 순서에 따라 결과가 달라지는 현상`
 
 </div>
@@ -258,7 +264,7 @@
 
 
 <details>
-<summary style="font-size:20px">교착 상태 (Deadlock)</summary>
+<summary style="font-size:20px">교착 상태(Deadlock) 정의와 발생 조건, 해결 방법</summary>
 <div markdown="1">
 
 * 둘 이상의 프로세스/스레드가 자원을 점유한 상태에서 서로 다른 프로세스/스레드가 점유하고 있는 자원을 요구하며 `무한정 기다리는` 현상
@@ -289,7 +295,7 @@
 
 
 <details>
-<summary style="font-size:20px">기아 상태 (Starvation)</summary>
+<summary style="font-size:20px">기아 상태(Starvation) 정의와 해결방법</summary>
 <div markdown="1">
 
 * 여러 프로세스가 부족한 자원을 점유하기 위해 경쟁할 때, `특정 프로세스에 영원히 자원 할당이 되지 않는 경우`
@@ -331,7 +337,7 @@
 * 멀티태스킹이 가능하나 복잡도가 증가 (부하 컨트롤, 데이터 일관성 유지 등)
 
 #### [참고] 콜백 함수
-* OS가 실행하는 함수
+* OS가 실행하는 함수  
 * 특정 이벤트가 발생하면 실행되는 함수
 
 </div>
@@ -391,7 +397,7 @@
 <summary style="font-size:20px">CPU 스케줄링: MLFQ (Multi Level Feedback Queue)</summary>
 <div markdown="1">
 
-* 우선 순위 개수만큼 Queue가 있으며 최상위 단계의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
+* 우선 순위 개수만큼 Queue가 있으며 최상위 순위의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
 * 처음 시작은 모든 프로세스가 가장 높은 우선 순위 Queue에 존재하나 할당된 Time Slice를 소진하면 우선 순위를 감소시켜서 우선 순위 결정
 * `Aging`: 일정 주기마다 모든 작업을 가장 높은 우선 순위 큐로 이동시켜서 Starvation 방지
 
@@ -423,13 +429,13 @@
 * 페이지: `가상 메모리`를 최소 단위로 쪼개어 만든 `일정한` 크기의 블럭
 * 프레임: `물리 메모리`에 페이지 크기와 같은 블럭으로 나눈 블럭
 * CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`에 접근해서 물리주소 가져 옴
-* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비1
+* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비
 
 </div>
 </details>
 
 <details>
-<summary style="font-size:20px">페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
+<summary style="font-size:20px">[추가] 페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
 <div markdown="1">
 
 #### 요약
