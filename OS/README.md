@@ -16,6 +16,82 @@
 
 
 <details>
+<summary style="font-size:20px">프로세스와 스레드의 차이</summary>
+<div markdown="1">
+
+* 프로세스는 `실행중인 프로그램`으로 OS로부터 자원을 할당받아 실행, `코드/데이터/스택/힙` 메모리 영역을 가짐
+* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 `코드/데이터/힙` 메모리 영역을 공유하고 `개별적인 스택`을 가짐
+
+</div>
+</details>
+
+
+<details>
+<summary>[추가] 스레드가 개별적인 스택을 가지는 이유</summary>
+<div markdown="1">
+
+* 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
+* 독립적인 스택을 갖는 것은 독립적인 함수 호출이 가능하고 독립적인 실행 흐름을 추가할 수 있다는 것을 의미
+
+</div>
+</details>
+
+
+<details>
+<summary>[추가] 스레드가 PC 레지스터를 가지는 이유</summary>
+<div markdown="1">
+
+* 스레드는 CPU를 할당/반납하고를 반복
+* 이전까지의 수행 내역을 기억하기 위해 독립적인 PC 사용
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">프로세스 메모리 구성</summary>
+<div markdown="1">
+
+* 코드: 프로그램의 코드 저장
+* 데이터: 전역 변수, 정적 변수 저장
+* 스택: 지역 변수, 매개 변수, 함수의 호출과 할당, `컴파일`에 크기 결정
+* 힙: 동적으로 할당 및 해제, `런 타임`에 크기 결정
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">힙과 스택의 차이</summary>
+<div markdown="1">
+
+* 힙: 프로그램 코드에서 `동적으로 할당`하여 사용되는 메모리 영역
+* 스택: `함수를 호출`할 때나 `지역변수`를 지정할 때 `자동`으로 할당되는 메모리 영역
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">스택의 장점과 단점</summary>
+<div markdown="1">
+
+* 장점: 자동으로 처리되기 때문에 `낭비되는 공간이 없고` 사용하기가 편리
+* 단점: 한계가 있어 한계를 초과하도록 삽입할 수 없고 `유연성이 부족`
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">힙의 장점과 단점</summary>
+<div markdown="1">
+
+* 장점: 프로그램에 필요한 개체의 개수나 크기를 미리 알 수 없는 경우 사용하고 개체가 너무 커서 스택 할당자에 맞지 않는 경우 사용 가능
+* 단점: `할당/해제 작업`으로 인한 속도 저하
+
+</div>
+</details>
+
+
+<details>
 <summary style="font-size:20px">프로세스 생성과정</summary>
 <div markdown="1">
 
@@ -23,6 +99,18 @@
 * 초기화된 전역 변수 및 static 변수인 `데이터 영역`을 메모리에 할당
 * `힙과 스택의 초기 메모리 주소를 초기화`
 * `Queue에서 프로세스가 등록`되고 운영체제가 CPU를 할당하기를 대기
+
+</div>
+</details>
+
+
+<details>
+<summary>[추가] PCB (Process Control Block)</summary>
+<div markdown="1">
+
+* `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
+* Process 상태, PC(다음에 수행할 명령어의 주소), CPU 레지스터, CPU 스케줄링 정보, 메모리 관리 정보 등을 저장
+* `문맥 교환` 시에 진행 사항을 PCB에 저장하고 CPU 반환 -> CPU를 할당받으면 PCB에 저장되어 있는 내용을 불러와 이전에 종료되었던 시점부터 다시 수행
 
 </div>
 </details>
@@ -50,50 +138,6 @@
 
 * 프로그램을 실행하는 도중에 예기치 않은 상황이 발생할 경우 `현재 실행 중인 작업을 즉시 중단`하고, `발생된 상황을 우선 처리`한 후 `실행 중이던 작업으로 복귀`하여 계속 처리하는 것
 * 문맥 교환을 구현할 때 `Timer Interrupt`를 통해서 제어권을 커널이 가져올 수 있도록 활용
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">프로세스와 스레드의 차이</summary>
-<div markdown="1">
-
-* 프로세스는 `실행중인 프로그램`으로 OS로부터 자원을 할당받아 실행, `코드/데이터/스택/힙` 메모리 영역을 가짐
-* `프로세스의 독립적인 실행 단위`로 프로세스로부터 자원을 할당받아 실행, 프로세스의 `코드/데이터/힙` 메모리 영역을 공유하고 `개별적인 스택`을 가짐
-
-</div>
-</details>
-
-<details>
-<summary> > PCB (Process Control Block)</summary>
-<div markdown="1">
-
-* `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
-* Process 상태, PC(다음에 수행할 명령어의 주소), CPU 레지스터, CPU 스케줄링 정보, 메모리 관리 정보 등을 저장
-* `문맥 교환` 시에 진행 사항을 PCB에 저장하고 CPU 반환 -> CPU를 할당받으면 PCB에 저장되어 있는 내용을 불러와 이전에 종료되었던 시점부터 다시 수행
-
-</div>
-</details>
-
-
-<details>
-<summary> > 스레드가 개별적인 스택을 가지는 이유</summary>
-<div markdown="1">
-
-* 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
-* 독립적인 스택을 갖는 것은 독립적인 함수 호출이 가능하고 독립적인 실행 흐름을 추가할 수 있다는 것을 의미
-
-</div>
-</details>
-
-
-<details>
-<summary> > 스레드가 PC 레지스터를 가지는 이유</summary>
-<div markdown="1">
-
-* 스레드는 CPU를 할당/반납하고를 반복
-* 이전까지의 수행 내역을 기억하기 위해 독립적인 PC 사용
 
 </div>
 </details>
@@ -152,17 +196,23 @@
 
 
 <details>
-<summary style="font-size:20px">프로세스 동기화</summary>
+<summary style="font-size:20px">[추가] Critical Section(공유 자원, 임계 영역)</summary>
 <div markdown="1">
 
-* 다중 프로세스 환경에서 자원에 한 프로세스만이 접근 가능하도록 하는 것
-* 데이터 일관성이 깨지거나 결과가 잘못될 가능성이 있어 필요함
-
-#### Critical Section(공유 자원, 임계 영역)
 * 동일한 자원에 동시에 접근하는 경우가 발생하는 코드 영역
 * 접근 순서에 따라 실행 결과가 달라지는 구역
 
 #### Race Condition
+* 공유 자원에 여러 프로세스/스레드가 접근할 경우 `접근 순서에 따라 결과가 달라지는 현상`
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">[추가] Race Condition</summary>
+<div markdown="1">
+
 * 공유 자원에 여러 프로세스/스레드가 접근할 경우 `접근 순서에 따라 결과가 달라지는 현상`
 
 </div>
@@ -214,7 +264,7 @@
 
 
 <details>
-<summary style="font-size:20px">교착 상태 (Deadlock)</summary>
+<summary style="font-size:20px">교착 상태(Deadlock) 정의와 발생 조건, 해결 방법</summary>
 <div markdown="1">
 
 * 둘 이상의 프로세스/스레드가 자원을 점유한 상태에서 서로 다른 프로세스/스레드가 점유하고 있는 자원을 요구하며 `무한정 기다리는` 현상
@@ -245,7 +295,7 @@
 
 
 <details>
-<summary style="font-size:20px">기아 상태 (Starvation)</summary>
+<summary style="font-size:20px">기아 상태(Starvation) 정의와 해결방법</summary>
 <div markdown="1">
 
 * 여러 프로세스가 부족한 자원을 점유하기 위해 경쟁할 때, `특정 프로세스에 영원히 자원 할당이 되지 않는 경우`
@@ -287,7 +337,7 @@
 * 멀티태스킹이 가능하나 복잡도가 증가 (부하 컨트롤, 데이터 일관성 유지 등)
 
 #### [참고] 콜백 함수
-* OS가 실행하는 함수
+* OS가 실행하는 함수  
 * 특정 이벤트가 발생하면 실행되는 함수
 
 </div>
@@ -347,54 +397,13 @@
 <summary style="font-size:20px">CPU 스케줄링: MLFQ (Multi Level Feedback Queue)</summary>
 <div markdown="1">
 
-* 우선 순위 개수만큼 Queue가 있으며 최상위 단계의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
+* 우선 순위 개수만큼 Queue가 있으며 최상위 순위의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
 * 처음 시작은 모든 프로세스가 가장 높은 우선 순위 Queue에 존재하나 할당된 Time Slice를 소진하면 우선 순위를 감소시켜서 우선 순위 결정
 * `Aging`: 일정 주기마다 모든 작업을 가장 높은 우선 순위 큐로 이동시켜서 Starvation 방지
 
 </div>
 </details>
 
-<details>
-<summary style="font-size:20px">프로세스 메모리 구성</summary>
-<div markdown="1">
-
-* 코드: 프로그램의 코드 저장
-* 데이터: 전역 변수, 정적 변수 저장
-* 스택: 지역 변수, 매개 변수, 함수의 호출과 할당, `컴파일`에 크기 결정
-* 힙: 동적으로 할당 및 해제, `런 타임`에 크기 결정
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">힙과 스택의 차이</summary>
-<div markdown="1">
-
-* 힙: 프로그램 코드에서 `동적으로 할당`하여 사용되는 메모리 영역
-* 스택: `함수를 호출`할 때나 `지역변수`를 지정할 때 `자동`으로 할당되는 메모리 영역
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">스택의 장점과 단점</summary>
-<div markdown="1">
-
-* 장점: 자동으로 처리되기 때문에 `낭비되는 공간이 없고` 사용하기가 편리
-* 단점: 한계가 있어 한계를 초과하도록 삽입할 수 없고 `유연성이 부족`
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">힙의 장점과 단점</summary>
-<div markdown="1">
-
-* 장점: 프로그램에 필요한 개체의 개수나 크기를 미리 알 수 없는 경우 사용하고 개체가 너무 커서 스택 할당자에 맞지 않는 경우 사용 가능
-* 단점: `할당/해제 작업`으로 인한 속도 저하
-
-</div>
-</details>
 
 <details>
 <summary style="font-size:20px">가상 메모리와 장점</summary>
@@ -420,13 +429,13 @@
 * 페이지: `가상 메모리`를 최소 단위로 쪼개어 만든 `일정한` 크기의 블럭
 * 프레임: `물리 메모리`에 페이지 크기와 같은 블럭으로 나눈 블럭
 * CPU가 가상 주소 접근 시 MMU가 페이지 테이블의 `시작(base) 주소`에 접근해서 물리주소 가져 옴
-* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비1
+* `내부 단편화` 발생: 페이지가 다 채워지지 않아 발생하는 공간 낭비
 
 </div>
 </details>
 
 <details>
-<summary style="font-size:20px">페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
+<summary style="font-size:20px">[추가] 페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
 <div markdown="1">
 
 #### 요약

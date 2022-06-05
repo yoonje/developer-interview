@@ -173,8 +173,10 @@
 <summary style="font-size:20px">무결성 제약조건</summary>
 <div markdown="1">
 
+* 무결성: 데이터의 정확성, 일관성
+  * 데이터에 중복/누락이 없음
 * 개체 무결성: 주키는 null, 중복 값을 가질 수 없음
-* 참조 무결성: 외래키는 null이거나 참조 릴레이션의 기본키 값과 동일해야 함9
+* 참조 무결성: 외래키는 null이거나 참조 릴레이션의 기본키 값과 동일해야 함
 
 </div>
 </details>
@@ -435,6 +437,7 @@
 </div>
 </details>
 
+
 <details>
 <summary style="font-size:20px">힌트(Hint)</summary>
 <div markdown="1">
@@ -443,6 +446,19 @@
 
 </div>
 </details>
+
+
+<details>
+<summary style="font-size:20px">트리거</summary>
+<div markdown="1">
+
+* DML이 수행되었을 때, 자동으로 실행되게 정의한 프로시저
+* DML(INSERT, UPDATE, DELETE)에 의한 데이터 상태관리 자동화
+* 데이터 무결성 강화, 업무 처리 자동화
+
+</div>
+</details>
+
 
 
 <details>
