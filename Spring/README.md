@@ -13,7 +13,8 @@
 
 #### 스프링 부트
 * 스프링 기반의 애플리케이션을 간편하게 설정할 수 있는 도구
-* 내장 서버: `Embeded Tomcat`이 포함되어 있음 
+* 내장 서버: `Embeded Tomcat`이 포함되어 있어 Tomcat을 따로 설치/관리할 필요가 없음
+* Starter를 이용한 의존성 자동화
 
 </div>
 </details>
