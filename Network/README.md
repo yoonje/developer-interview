@@ -102,9 +102,6 @@
 * Server -> Client : 연결을 종료하는 `FIN(m) 전송`
 * Client -> Server : 요청을 수락하는 `ACK(m+1) 전송` 
 
-#### 타임아웃은 언제, 왜 일어나는가
-* 서버의 지연된 패킷을 수신하기 위해 클라이언트에 `Timeout` 존재 (클라이언트가 서버의 FIN을 수신한 이후) 
-
 #### 필요성
 * 클라이언트가 일방적으로 끊으면 서버는 `연결은 되어 있으나 요청이 없는 상태`로 오해할 수 있음
 * 클라이언트는 데이터 전송을 끝냈다고 하더라도 서버는 전송할 것이 남아있을 수 있음 
@@ -122,7 +119,7 @@
 </div>
 </details>
 
-<details>
+
 <details>
 <summary style="font-size:20px">OSI 7계층이란</summary>
 <div markdown="1">
