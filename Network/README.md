@@ -119,7 +119,7 @@
 </div>
 </details>
 
-<details>
+
 <details>
 <summary style="font-size:20px">OSI 7계층이란</summary>
 <div markdown="1">
