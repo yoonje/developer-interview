@@ -58,18 +58,16 @@
 ##### TCP Reno
 * Slow Start -> ssthresh 도달 -> Congestion Avoidance까지는 동일
 * Congestion Avoidance 상황에서 3개의 duplicate ACK 발생 -> Fast Recovery
-  * TCP Tahoe는 Slow Start로 진입
+  * TCP Tahoe는 Slow Start로 진입
 * Congestion Avoidance 상황에서 Timeout 발생 -> Slow Start 
 
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">TCP 3-way Handshake</summary>
+<summary style="font-size:20px">TCP 3-way Handshake 란</summary>
 <div markdown="1"> 
 
-#### 언제 일어나고 어떤 과정인지
 * 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
 * Client -> Server: 연결을 요청하는 `SYN(n) 전송`
 * Server -> Client: 요청을 수락하는 ` ACK(n+1) 전송` + 연결을 요청하는 `SYN(m) 전송`
@@ -86,20 +84,23 @@
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">TCP 3-way Handshake 진행 시 서버의 포트가 닫혀있다면 어떻게 되는가 (추가 예정)</summary>
+<div markdown="1"> 
+ 
+
+</div>
+</details>
 
 <details>
-<summary style="font-size:20px">TCP 4-way Handshake</summary>
+<summary style="font-size:20px">TCP 4-way Handshake란</summary>
 <div markdown="1"> 
 
-#### 언제 일어나고 어떤 과정인지
 * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
 * Client -> Server : 연결을 종료하는 `FIN(n) 전송`
 * Server -> Client : 요청을 수락하는 `ACK(n+1) 전송`
 * Server -> Client : 연결을 종료하는 `FIN(m) 전송`
 * Client -> Server : 요청을 수락하는 `ACK(m+1) 전송` 
-
-#### 타임아웃은 언제, 왜 일어나는가
-* 서버의 지연된 패킷을 수신하기 위해 클라이언트에 `Timeout` 존재 (클라이언트가 서버의 FIN을 수신한 이후) 
 
 #### 필요성
 * 클라이언트가 일방적으로 끊으면 서버는 `연결은 되어 있으나 요청이 없는 상태`로 오해할 수 있음
@@ -108,13 +109,21 @@
 </div>
 </details>
 
-
 <details>
-<summary style="font-size:20px">OSI 7계층</summary>
+<summary style="font-size:20px">TCP 4-way Handshake에서 타임아웃은 언제, 왜 일어나는가</summary>
 <div markdown="1"> 
 
-###
- 정의
+* 클라이언트가 서버의 FIN을 수신한 이후에 발생
+* 서버의 지연된 패킷을 수신하기 위해 클라이언트에 `Timeout` 존재
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">OSI 7계층이란</summary>
+<div markdown="1">
+
 * 네트워크의 통신 과정을 7단계로 나눠 표준화한 것
 * ISO(국제표준기구)에서 만듦 
 
@@ -151,7 +160,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">CDN (Contents Delivery Network)</summary>
 <div markdown="1"> 
@@ -175,7 +183,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">로드 밸런싱</summary>
 <div markdown="1"> 
@@ -186,7 +193,6 @@
 </div>
 </details>
 
-
 <details>
 <summary style="font-size:20px">CIDR (Classless Inter-Domain Routing)</summary>
 <div markdown="1"> 
@@ -196,7 +202,6 @@
 
 </div>
 </details>
-
 
 <details>
 <summary style="font-size:20px">NAT (Network Address Translation)</summary>

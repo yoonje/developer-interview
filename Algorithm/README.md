@@ -1,10 +1,16 @@
 # Algorithm
 
 <details>
-<summary style="font-size:20px">빅오 표기법</summary>
+<summary style="font-size:20px">시간 복잡도와 공간 복잡도</summary>
 <div markdown="1">
 
-* 컴퓨터 공학에서 알고리즘의 `시간복잡도`(실행시간)이나, `공간 복잡도`(사용 메모리)에 대한 `최악`의 경우를 표현하는 표기 방법
+* 주로 `빅오 표기법`으로 표현
+
+#### 시간 복잡도
+* 알고리즘의 `수행 시간`을 분석하는 방법
+
+#### 공간 복잡도
+* 알고리즘 수행에 필요한 `메모리 양`을 분석하는 방법
 
 </div>
 </details>
