@@ -41,50 +41,56 @@
 
 #### HTTP 0.9
 * HTTP 헤더가 없음, 상태 코드 없음
-* HTML파일만 전송 가능
-* GET만 가능
+* `GET`만 가능
+* `HTML 파일`만 전송 가능
 * 하나의 연결당 1요청 1응답 -> 성능 저하, 서버 부하
 
 #### HTTP 1.0
 * HTTP 헤더가 생김, 상태 코드 생김
-* 응답에서 `content-type`을 통해 HTML 파일 외의 다른 정보 전달 가능
-* Short Connection: 하나의 연결에 1요청 1응답 -> 성능 저하, 서버 부하
+* `content-type`을 통해 HTML이 아닌 데이터도 전달 가능
+* `Short Connection`: 하나의 연결에 1요청 1응답 -> 성능 저하, 서버 부하
   * 매 요청마다 TCP 세션을 설정(3-way)하고 종료(4-way)하는 과정 진행
 
 #### HTTP 1.1
-* Persistent Connection: 지정한 Timeout 동안 커넥션을 닫지 않는 방식
+* `Persistent Connection`: 지정한 Timeout 동안 커넥션을 닫지 않음
   * TCP 세션을 설정(3-way) -> N요청/응답 -> 종료(4-way)
   * `connection : keep-alive` 헤더를 응답으로 전송
-* 파이프라이닝
+* `파이프라이닝`
   * 1.0: 1요청 -> 1응답, 2요청 -> 2응답, 3요청 -> 3응답
   * 1.1: 1, 2, 3요청 -> 1, 2, 3응답
   * 하나의 커넥션에서 응답을 기다리지 않고 순차적인 여러 요청을 연속으로 전송, 요청 순서에 맞춰 응답을 받음 -> RTT(Round Trip TIme) 감소
 * HOL(Head of Line) Blocking: 파이프라이닝의 문제점 -> 먼저 받은 요청이 Block되면 다음 요청도 처리 불가
-* 무거운 헤더 구조: 파이프라이닝에서 전송되는 요청들의 헤더/쿠키는 많은 부분이 중복 -> 자원 낭비
+* 헤더의 중복: 파이프라이닝에서 전송되는 요청들의 헤더/쿠키는 많은 부분이 중복 -> 자원 낭비
 
 #### HTTP 2.0
 * 메시지 전송 방식 변화
-  * 바이너리 프레이밍 계층 사용: Application 계층에서 요청/응답을 `프레임`으로 전환
+  * 바이너리 프레이밍 계층 사용: Application 계층에서 요청/응답을 `프레임`으로 분할해 `바이너리`로 인코딩
+    * 전송속도 향상, 오류 발생 가능성 하락
+* `멀티플렉싱`을 통해 HOL(Head of Line) Blocking 해결 -> 레이턴시 감소
+  * 하나의 커넥션에서 여러 스트림 교환 가능
+  * 순서를 상관하지 않고 전송, 순서는 스트림 우선순위로 수신측에서 재조합
+* `HTTP 헤더 압축`: 헤더 크기 감축 (Huffman Coding) -> 오버헤드 감소
+* Server Push: 클라이언트가 요청 하지 않은 JavaScript, CSS, Font, 이미지 파일 등과 같이 필요하게 될 특정 파일들을 서버에서 HTTP 응답에 함께 전송
+
+#### HTTP 3 (QUIC) 
+* `UDP 기반` 으로 변화
+ * TCP는 신뢰성을 확보하지만 지연을 줄이기 힘듦
+ * UDP는 공간이 많아 TCP의 지연을 줄이면서 TCP만큼 신뢰성을 보장하도록 개발
+* `HTTPS` 필수
+
+#### 참고
+* HTTP 2.0
   * 스트림 > 메시지 > 프레임
     * 프레임: 통신의 최소 단위
       * 헤더 프레임: HTTP 헤더 저장, Data 프레임: HTTP 응답 저장
     * 메시지: 다수의 프레임, 요청/응답의 단위
     * 스트림: 양방향 통신을 통해 전달되는 한 개 이상의 메시지
-* `멀티플렉싱`을 통해 HOL(Head of Line) Blocking 해결 -> 레이턴시 감소
-  * 하나의 커넥션에서 여러 스트림 교환 가능
-  * 순서를 상관하지 않고 전송, 순서는 스트림 우선순위로 수신측에서 재조합
-* HTTP 헤더 압축: 헤더 크기 감축 (Huffman Coding) -> 오버헤드 감소
-* Server Push: 클라이언트가 요청 하지 않은 JavaScript, CSS, Font, 이미지 파일 등과 같이 필요하게 될 특정 파일들을 서버에서 HTTP 응답에 함께 전송
-
-#### HTTP 3(QUIC) 
-* 헤더 압축(QPACK)
-* 전송 계층 프로토콜
-* 현재 구글 관련 제품 대부분의 기본 프로토콜: UDP기반
-* TCP는 신뢰성을 확보하지만 지연을 줄이기 힘듦. UDP는 공간이 많아 TCP의 지연을 줄이면서 TCP만큼 신뢰성을 보장하도록 개발
-* 전송 속도 향상: 첫 연결 설정에서 필요한 정보와 함께 데이터 전송 -> 연결 성공시 설정을 캐싱하여 다음 연결 때 바로 성립 가능
-* Connection UUID: 고유한 식별자로 서버와 연결 -> 커넥션 재수립 필요X
-* 독립 스트림 -> 향상된 멀티플렉싱
-
+* HTTP 3.0
+  * 전송 속도 향상: 첫 연결 설정에서 필요한 정보와 함께 데이터 전송 -> 연결 성공시 설정을 캐싱하여 다음 연결 때 바로 성립 가능
+  * Connection UUID: 고유한 식별자로 서버와 연결 -> 커넥션 재수립 필요X
+  * 독립 스트림 -> 향상된 멀티플렉싱
+  * 헤더 압축(QPACK)
+  
 </div>
 </details>
 
@@ -349,17 +355,12 @@
 * 행위(Verb): HTTP Method
 * 표현(Representation): JSON, XML
 
-#### REST 특징
-* 서버-클라이언트 구조
-* Stateless (무상태): HTTP는 Stateless해 서버가 클라이언트의 상태를 저장하지 않음
-* Cacheable (캐시 처리 가능): HTTP 프로토콜의 기존 인프라를 활용해 캐싱 가능
-
 </div>
 </details>
 
 
 <details>
-<summary style="font-size:20px">REST API</summary>
+<summary style="font-size:20px">REST API 설계원칙 및 특징</summary>
 <div markdown="1">
 
 * `REST API`는 `REST 기반의 규칙들을 지켜서 설계된 API`
@@ -372,6 +373,41 @@
   * 대소문자에 따라 다른 자원으로 인식될 수 있음
   * 밑줄(_)은 사용하지 않음
 * 브라우저는 form-data 형식의 submit 으로 보내고 서버에서는 json 형태로 보내는 식의 분리보다는 둘 다 form-data 형식으로 보내든 하나로 통일
+
+#### REST 특징
+* 서버-클라이언트 구조
+  * 클라이언트는 서버 내부 작업을 몰라도 됨
+  * 각각 독립적으로 개발 가능
+* Stateless (무상태)
+  * HTTP는 Stateless해 서버가 클라이언트의 상태를 저장하지 않음
+  * 요청에는 필요한 모든 정보가 포함되어야 함
+* Cacheable (캐시 처리 가능)
+  * HTTP 프로토콜의 기존 인프라를 활용해 캐싱 가능
+  * 응답에 캐시 가능한지 불가능한지 명시 필요
+* Self-Descriptive Message
+* HATEOAS
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">REST API: HATEOAS</summary>
+<div markdown="1">
+
+* Hypermedia As The Engine Of Application State
+* 가능한 작업의 링크를 응답에 추가적으로 제공, 클라이언트가 어떤 작업을 할 수 있는지 알 수 있음
+  * `_links`
+
+#### 장점
+* 서버에서 URL을 바꿔도 클라이언트에 영향 없음
+* API 응답에서 자동으로 Document 제공
+
+#### 단점
+* 전달 데이터 양 증가 및 복잡도 증가
+
+#### HATEOAS가 좋은지 의문점은 여전히 있음
+* https://soobindeveloper8.tistory.com/646
+`
 </div>
 </details>
 
