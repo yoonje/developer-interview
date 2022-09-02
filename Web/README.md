@@ -64,7 +64,7 @@
 
 #### HTTP 2.0
 * 메시지 전송 방식 변화
-  * 바이너리 프레이밍 계층 사용: Application 계층에서 요청/응답을 `프레임`으로 분할해 `바이너리`로 인코딩
+  * 바이너리 프레이밍 계층 사용: 데이터는 `바이너리`로 인코딩해서 전송, 데이터를 `프레임` 단위로 나눔
     * 전송속도 향상, 오류 발생 가능성 하락
 * `멀티플렉싱`을 통해 HOL(Head of Line) Blocking 해결 -> 레이턴시 감소
   * 하나의 커넥션에서 여러 스트림 교환 가능
@@ -178,17 +178,19 @@
 * Server Hello: 사용할 암호화 알고리즘(`Ciper Suite`) 선택 및 전달
 * Certificate: 웹 서버는 `인증서`를 웹 브라우저에게 전송
   * 인증서: 인증기관의 `개인키`로 암호화된 `사이트의 정보`와 웹 서버의 `공개키`가 있음
+* Server Key Exchange: 파라미터를 서버의 개인키로 암호화해서 전송, Ciper Suite의 알고리즘이 DH인 경우에만 수행
 * Server Hello Done: 웹 서버가 전송
 * Client Key Exchange
   * 웹 브라우저는 이미 가지고 있는 인증기관의 `공개키`로 웹 서버에서 받은 인증서를 `복호화` 해서 확인
   * 웹 브라우저는 실제 데이터의 암호화에 사용될 `대칭키`를 생성, 인증서에서 꺼낸 웹 서버의 `공개키`로 `암호화` 해서 웹 서버로 전송
   * 웹 서버는 자신의 `개인키`로 웹 브라우저가 보내온 `대칭키`를 `복호화` 해서 얻음 (비대칭키 암호화)
+  * DH) 파라미터를 공개키로 암호화해서 전송
 * ChangeCipherSpec + Finish: 통신 준비 완료, 클라이언트가 전송
 * ChangeCipherSpec + Finish: 통신 준비 완료, 서버가 전송
 * 웹 브라우저가 전송했던 `대칭키`로 데이터를 암호화해서 주고 받음
   * 서버와 클라이언트는 일련의 과정을 거쳐 대칭키로 `Session Key`를 만들어 사용
-  * `Pre Master Secret`(대칭키) -> `Master Secret` -> `Session Key`
- 
+  * `Pre Master Secret`(대칭키) -> `Master Secret` -> `Session Key` (클라이언트와 서버 각자가 진행)
+
 #### 참고 1
 ##### 인증기관 (Certification Authority, CA)
 * 인증기관으로부터 공인인증서를 발급받아 서버에 설치해야 HTTPS 통신 가능
@@ -281,7 +283,7 @@
 * 응답 헤더의 Last-Modified, Etag, Expires, Cache-Control 항목 등과 같은 여러 부분의 여러 개의 태그를 통해서 캐싱
 
 #### Cache-Control: HTTP 헤더를 통해 캐싱 정책을 정의
-* `no-cache`: 캐시를 사용하기 전에 서버에 캐시를 사용해도 되는지 재검증 요청
+* `no-cache`: 캐시가 유효한지 매번 서버에 재검증 요청
 * `no-store`: 캐싱하지 않음
 
 #### Last-Modified, If-Modified-Since
@@ -321,7 +323,7 @@
 <div markdown="1">
 
 #### URI(Uniform Resource Identifier)
-* 자원을 고유하게` 식별`하고 `위치`를 지정하는 통합 자원 식별자
+* 자원을 고유하게 `식별`하고 `위치`를 지정하는 통합 자원 식별자
 * URL, URN 두 가지 형태 존재
 * 인터넷 프로토콜을 명시함
 * 예시: http://www.naver.com
@@ -349,6 +351,7 @@
 
 #### REST가 필요한 이유
 * 다양한 클라이언트(다양한 브라우저, AOS, IOS)의 등장으로 멀티 플랫폼에 대한 지원
+* 클라이언트와 서버 간의 역할 분리, 분산 애플리케이션 구현에 적합
 
 #### REST 구성 요소
 * 자원(Resource): URI
@@ -375,6 +378,8 @@
 * 브라우저는 form-data 형식의 submit 으로 보내고 서버에서는 json 형태로 보내는 식의 분리보다는 둘 다 form-data 형식으로 보내든 하나로 통일
 
 #### REST 특징
+* 일관성
+  * 동일 API로 일관된 처리
 * 서버-클라이언트 구조
   * 클라이언트는 서버 내부 작업을 몰라도 됨
   * 각각 독립적으로 개발 가능
@@ -385,6 +390,7 @@
   * HTTP 프로토콜의 기존 인프라를 활용해 캐싱 가능
   * 응답에 캐시 가능한지 불가능한지 명시 필요
 * Self-Descriptive Message
+  * API의 메시지만 보고도 이해 가능하도록 설계
 * HATEOAS
 </div>
 </details>
@@ -400,14 +406,13 @@
 
 #### 장점
 * 서버에서 URL을 바꿔도 클라이언트에 영향 없음
-* API 응답에서 자동으로 Document 제공
 
 #### 단점
 * 전달 데이터 양 증가 및 복잡도 증가
 
 #### HATEOAS가 좋은지 의문점은 여전히 있음
 * https://soobindeveloper8.tistory.com/646
-`
+
 </div>
 </details>
 
