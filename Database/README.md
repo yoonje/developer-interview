@@ -453,7 +453,7 @@
 
 
 <details>
-<summary style="font-size:20px">리플리케이션의 차이</summary>
+<summary style="font-size:20px">클러스터링과 리플리케이션의 차이</summary>
 <div markdown="1">
 
 #### 클러스터링
