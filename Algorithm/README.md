@@ -1,5 +1,7 @@
 # Algorithm
 
+<br>
+
 <details>
 <summary style="font-size:20px">시간 복잡도와 공간 복잡도</summary>
 <div markdown="1">
@@ -110,7 +112,8 @@
 <summary style="font-size:20px">Merge Sort</summary>
 <div markdown="1">
 
-* 최선, 평균, 최악: O(NlogN)
+* 최선, 평균, 최악 시간 복잡도: O(NlogN)
+  * 이유: 배열을 반씩 나눠서 1개 원소로 나누는 것은 `logN`, 합치는 것도 `logN`번 수행, 합치면서 `N`개 원소들을 읽으면서 비교 
 * `안정 정렬 알고리즘`, `분할 정복`
 * 배열을 반으로 쪼개 가면서 하나의 원소를 가진 배열로 만든 이후에 쪼개진 각 배열을 정렬하면서 병합하여 최종 정렬된 배열을 완성
 
@@ -131,7 +134,8 @@
             mergeSort(mid+1, right);
             merge(left, mid, right);
         }
-    
+    }
+
     public static void merge(int left, int mid, int right) {
         int l = left, m = mid+1, k = left;
         while (l <= mid && m <= right) {
@@ -270,7 +274,7 @@
 <summary style="font-size:20px">이분 탐색</summary>
 <div markdown="1">
 
-* 이분 탐색은 `이미 정렬되어 있는 자료구조`에서 특정 값을 탐색할 때 탐색 범위를 반으로 쪼개서 값을 찾아가는 알고리즘
+* `이미 정렬되어 있는 자료구조`에서 특정 값을 탐색할 때 탐색 범위를 반으로 쪼개서 값을 찾아가는 알고리즘
 * `O(logN)`으로 순차 탐색보다 빠르지만 탐색을 위해 정렬을 하면 순차 탐색보다 더 높은 시간복잡도를 갖게 됨
 
 </div>
@@ -324,9 +328,6 @@
 <summary style="font-size:20px">각 정렬이 언제 사용되는 가 (추가 예정)</summary>
 <div markdown="1">
 
-* 전위 순회(Pre-order): root 방문 -> 왼쪽 서브트리 방문 -> 오른쪽 서브트리 방문
-* 중위 순회(In-order): 왼쪽 서브트리 방문 -> root 방문 -> 오른쪽 서브트리 방문
-* 후위 순회(Post-order): 왼쪽 서브트리 방문 -> 오른쪽 서브트리 방문 -> root 방문
 
 </div>
 </details>
