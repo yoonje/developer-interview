@@ -381,6 +381,7 @@
 #### BCNF (Boyce and Codd Normal Form)
 * 모든 결정자가 `후보키`가 되도록 분해
 * 함수 종속성 X->Y일 때, 모든 결정자 X가 후보키
+* 일반 튜플이 후보키를 결정지으면 안됨
 
 </div>
 </details>
