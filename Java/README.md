@@ -25,6 +25,8 @@
 * Garbage Collection 수행 (메모리 관리)
 * `Class Loader`: JVM 내(Runtime Data Area)로 Class 파일을 로드하고 링크
 * `Excution Engine`: 메모리(Runtime Data Area)에 적재된 클래스들을 기계어로 변경해 실행
+  * 인터프리터: 바이트 코드를 한줄씩 읽어 기계어로 변환
+  * JIT 컴파일러: 반복되는 코드를 기계어로 변환해 캐싱 (-> 캐싱한 것을 바로 실행해 속도 향상)
 * `Garbage Collecter`: 힙 메모리에서 참조되지 않는 객체를 제거
 * `Runtime Data Area`: 자바 프로그램을 실행할 때, OS로부터 할당받는 `메모리`
 
@@ -78,7 +80,7 @@
 
 #### PC 레지스터
 * 스레드마다 존재
-* 현재  수행 중인 JVM 명령어의 주소를 가짐
+* 현재 수행 중인 JVM 명령어의 주소를 가짐
 
 </div>
 </details>
@@ -172,7 +174,7 @@ public abstract class AbstractClass {
 }
 ```
 
-### 👉 인터페이스
+#### 인터페이스
 * 어떤 메소드를 제공하는지 알려주는 명세(Specification)
 * 추상 클래스의 일종으로 default 메소드와 static 메소드를 제외하면 `추상 메소드와 상수만` 가짐
 * 상속 관계가 없는 클래스에서 공통되는 로직을 구현하여 사용
@@ -192,14 +194,17 @@ public interface Interface {
 }
 ```
 
-### 👉 공통점
+#### 공통점
 * 두 가지 개념 모두 독립적으로 객체 생성 불가, 상속을 목적으로 사용
 * 추상 메소드는 오버라이딩이 필요
 
-### 👉 차이점
-* 추상 클래스는 다중 상속 불가능, 인터페이스는 여러번 상속 가능
+#### 차이점
+* 추상 클래스는 다중 상속 불가능, 인터페이스는 다중 상속 가능
 * 추상 클래스는 상속을 통해 기능을 확장하는 것이 목적
 * 인터페이스는 추상 클래스와 달리 구현을 강제함으로써 `구현 객체의 같은 동작`을 보장하여 인터페이스를 이용하여 `표준화를 확립할 수 있으므로 서로 관계가 없는 객체들이 상호 작용을 가능하게 함`
+ 
+#### 참고
+* https://wildeveloperetrain.tistory.com/112
 
 </div>
 </details>
@@ -306,7 +311,7 @@ public interface Interface {
 <div markdown="1">
 
 * public: 모든 클래스에서 접근할 수 있다는 것을 의미(패키지가 달라도 허용)
-* protected: `같은 클래스` 내에서 접근 허용, `같은 패키지`의 다른 클래스에서 접근 허용, `다른 패키지의 상속`받은 클래스에서 접근 허용, 다른 패키지의 다른 클래스에서 접근 불가
+* protected: `같은 패키지`에서 접근 허용, `다른 패키지의 상속`받은 클래스에서 접근 허용, 다른 패키지의 다른 클래스에서 접근 불가
 * default: `같은 패키지` 내에서만 접근 허용
 * private: 동일 패키지라도 접근 불가, `같은 클래스` 내에서만 접근 허용
 * 사용 이유
@@ -355,7 +360,9 @@ public interface Interface {
 <summary style="font-size:20px">Wrapper Class</summary>
 <div markdown="1">
 
+* 기본 타입 데이터를 객체로 포장해주는 클래스
 * 기본 타입 데이터를 객체로 만들어야 할 경우 사용
+* Byte, Integer, Long, Double, Boolean, Character 등
 
 #### Boxing
 * 기본 타입 -> 래퍼 클래스
@@ -396,8 +403,8 @@ List<int> i; //불가능
 List<Integer> ii; //가능
 ```
 
-  * 참조형은 할당연산자 사용 시에 값의 주소가 전달되고 기본형은 값 자체가 전달 -> 기본형은 `스택`에 값이 존재, 참조형은 값은 `힙`에 존재하고 `스택`에 참조 값이 존재해 언박싱 필요
-  * 참조형은 기본형보다 차지하는 메모리가 크고 접근 속도가 느림
+* 참조형은 할당연산자 사용 시에 값의 주소가 전달되고 기본형은 값 자체가 전달 -> 기본형은 `스택`에 값이 존재, 참조형은 값은 `힙`에 존재하고 `스택`에 참조 값이 존재해 언박싱 필요
+* 참조형은 기본형보다 차지하는 메모리가 크고 접근 속도가 느림
 
 </div>
 </details>
@@ -436,7 +443,7 @@ List<Integer> ii; //가능
 <summary style="font-size:20px">String, StringBuilder, StringBuffer</summary>
 <div markdown="1">
 
-* String은 `불변성`, StringBuilder/StringBuffer: `가변성`
+* String: `불변성`, StringBuilder/StringBuffer: `가변성`
 
 #### String
 * 값을 변화시킬 때, Heap에 새로운 메모리를 사용, 스택에서 참조되는 메모리 주소 변경
@@ -484,7 +491,7 @@ System.out.println(a.equals(c)); // true
 <summary style="font-size:20px">람다 표현식</summary>
 <div markdown="1">
 
-* 식별자 없이 실행이 가능한 함수
+* `익명 함수`(Anonymous Function)의 한 종류
 * 함수를 따로 만들지 않고 코드 한 줄에 함수를 써서 그것을 호출
 * 자바8부터 지원, 코드가 간결하고 가독성이 높음
 * 재사용이 불가능하고 디버깅이 어려움
@@ -509,20 +516,9 @@ System.out.println(a.equals(c)); // true
 <summary style="font-size:20px">Synchronized</summary>
 <div markdown="1">
 
-* 공유 자원에 두개 이상의 쓰레드가 동시에 접근하지 못하도록 Lock
+* 공유 자원에 두개 이상의 쓰레드가 동시에 접근하지 못하도록 `Lock`
 * 자바에서는 메소드 앞에 `synchronized`를 붙여 동기화
 * 객체에도 사용 가능
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">고유 락</summary>
-<div markdown="1">
-
-* 자바의 모든 객체는 lock을 가짐
-* Synchronized 블록은 고유 락을 이용해서, Thread의 접근을 제어
 
 </div>
 </details>
@@ -533,7 +529,7 @@ System.out.println(a.equals(c)); // true
 <div markdown="1">
 
 * 오직 한 쓰레드에 의해 읽고 쓰여질 수 있는 변수를 생성
-* 오직 한 쓰레드 당 한 번의 실행을 허용
+* 다른 쓰레드가 같은 ThreadLocal을 호출해도 서로 다른 값을 가짐
 
 </div>
 </details>
@@ -601,7 +597,9 @@ SubClass sub = (SubClass)super;
 <summary style="font-size:20px">reflection</summary>
 <div markdown="1">
 
-* JVM에서 실행되는 애플리케이션의 런타임 동작을 검사하거나 수정할 수 있는 기능이 필요한 프로그램에서 사용
+* 런타임에 클래스를 사용해야 할 때 필요
+* 동적으로 객체를 생성하고 메서드를 호출하는 방법
+* Class, Constructor, Method, Field : 객체 생성, 메서드 호출, 변수 값 변경 등 가능
 
 </div>
 </details>

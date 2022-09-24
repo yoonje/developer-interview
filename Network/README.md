@@ -2,6 +2,7 @@
 
 <br> 
 
+
 <details>
 <summary style="font-size:20px">TCP와 UDP의 차이</summary>
 <div markdown="1"> 
@@ -25,7 +26,6 @@
 <div markdown="1"> 
 
 * `수신자와 송신자`의 메시지 처리속도 차이를 해결하기 위한 방법
-* 수신자와 송신자 세그먼트 간의 TCP Header에 `remain window data`를 통해 남은 버퍼를 알고 흐름을 파악할 수 있음 
 
 #### 종류
 ##### Stop and Wait
@@ -85,9 +85,15 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 3-way Handshake 진행 시 서버의 포트가 닫혀있다면 어떻게 되는가 (추가 예정)</summary>
+<summary style="font-size:20px">TCP 3-way Handshake 진행 시 서버의 포트가 닫혀있다면 어떻게 되는가?</summary>
 <div markdown="1"> 
- 
+
+* ACK RST 전송 
+* 서버는 RST(Reset) Flag bit를 1로 하여 응답
+* 서버는 연결을 허용할 수 없다는 것을 알림
+
+* 클라이언트 노드가 연결하려고 하는 port가 listening 하지 않고 있는 경우
+* 어떠한 이유로 서버 노드가 해당 port로 연결을 완료하지 못한 경우. 예를 들어, 서버의 리소스 부족으로 connection을 허용하는데 필요한 리소스를 할당하지 못하는 경우
 
 </div>
 </details>
@@ -135,13 +141,13 @@
 * Application - Application(7), Presentation(6), Session(5) 계층으로 분리
 #### Application(7, Data)
 * 사용자에게 `실제 애플리케이션 서비스를 제공`하는 계층
-* HTTP, FTP, DNS
+* HTTP, FTP, DNS, DHCP
 #### Presentation(6, Data)
 * 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
 * 코드 간의 번역을 담당 -> 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어줌
 #### Session(5, Data)
 * 양 끝단의 응용 프로세스가 `통신을 관리하기 위한 방법`을 제공
-  * 동시 송수신 방식(duplex), 반이중 방식(half-duplex), 전이중 방식(Full Duplex)의 통신 등
+  * 동시 송수신 방식(duplex)- 반이중 방식(half-duplex), 전이중 방식(Full Duplex)의 통신 등
 * 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
 * API, Socket
 #### Transport(4, Segment)
@@ -176,7 +182,7 @@
 * 트래픽 집중 방지 가능 
 
 #### 과정
-* 웹 브라우저를 실행하는 디바이스인 사용자 에이전트는 HTML, 이미지, CSS, JavaScript 파일을 렌더링하는데 필요한 콘텐츠를 요청
+* 클라이언트는 HTML, 이미지, CSS, JavaScript 파일 등 필요한 콘텐츠를 요청
 * `콘텐츠에 대한 각 요청이 발생하면 최적으로 배치된 CDN 서버에 엔드유저가 매핑`
 * CDN 서버는 요청된 파일의 `캐싱`된(사전 저장된) 버전으로 응답 
 
@@ -188,7 +194,7 @@
 <div markdown="1"> 
 
 * 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
-* 로드 밸런서는 물리 장비를 이중화해서 구현하거나 nginx(엔진X)와 같은 웹서버를 이용하여 구현 
+* Scale out 시에 사용
 
 </div>
 </details>
@@ -199,7 +205,12 @@
 
 * 클래스 없는 도메인 간 라우팅 기법
 * 최신의 IP 주소 할당 방법으로 정적이였던 클래스 방식에 비해 IP 주소의 영역을 여러 네트워크 영역으로 나눌 수 있기 때문에 기존방식에 비해 유연 
-
+* 서브넷의 최대 호수트 수를 유추할 수 있음
+* 10.0.2.23/xx 형식
+  * xx 자리수까지는 고정 IP
+* 서브넷의 사용 가능 IP 수: 2^(32-xx) - 2
+  * 첫번째: 네트워크 주소, 마지막: 브로드캐스팅 주소
+  
 </div>
 </details>
 
@@ -216,7 +227,7 @@
 * 한정적인 IP를 다수가 공유해 IP 절약 가능
 ##### 보안성
 * 사설망을 외부로부터 보호할 수 있음
-* 외부에서 사설 IP를 알 방법이 없어 내부 네트워크와 호스트를 보호 가능 
+  * 외부에서 사설 IP를 알 방법이 없어 내부 네트워크와 호스트를 보호 가능 
 
 #### 동작 원리
 #### 외부로 요청 패킷 전송

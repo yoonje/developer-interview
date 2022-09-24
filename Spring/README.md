@@ -21,14 +21,6 @@
 
 
 <details>
-<summary style="font-size:20px">스프링의 버전별 차이 (추가 예정)</summary>
-<div markdown="1"> 
-
-</div>
-</details>
-
-
-<details>
 <summary style="font-size:20px">Maven과 Gradle</summary>
 <div markdown="1"> 
 
@@ -38,18 +30,20 @@
 * Java용 프로젝트 관리 도구
 * Apache Ant의 단점을 해소하기 위해 사용
 * 빌드 중인 프로젝트, 라이브러리 등 종속 관계를 `pom.xml`에 명시 
+  * Project Object Model
 
 #### Gradle
 * Java, C/C++, Python 등을 지원
 * Apache Maven과 Apache Ant의 장점을 합친 빌드 관리 도구 (완전한 오픈 소스)
-* `Build.gradle` 사용: JVM 위에서 동작하는 `Groovy` 언어를 사용한 `Domain Specific Language`를 사용 (XML보다 간결) 
+* `Build.gradle` 사용: JVM 위에서 동작하는 `Groovy` 언어를 사용 (XML보다 간결) 
 
 #### 차이점
-* 빌드 접근 방식 차이: Gradle은 `작업 의존성 그래프`에 기반, Maven은 `고정적이고 선형적인 단계의 모델`에 기반
 * Gradle은 `Incremental Build`를 허용해 `빌드 시간이 단축`
   * 이미 업데이트된 Task는 빌드가 진행되지 않아 시간 단축 가능
-* Gradle은 `Concurrent에 안전한 캐시`를 허용
-  * 2개 이상의 프로젝트에서 동일한 캐시를 사용하는 경우, 서로 겹치지 않도록 Checksum 기반의 캐시를 사용, 캐시와 Repository 동기화 가능 
+  * Maven 보다 빠름
+* 빌드 접근 방식 차이: Gradle은 `작업 의존성 그래프`에 기반, Maven은 `고정적이고 선형적인 단계의 모델`에 기반
+* Gradle은 `Build Cache` 사용
+  * 2개 이상의 빌드가 있을 경우, 하나의 빌드에서 사용된 파일이 다른 빌드에서 사용되면, 빌드 캐시를 이용해 이전 결과물을 다른 빌드에 사용 가능
 
 </div>
 </details>
@@ -117,6 +111,18 @@
 
 
 <details>
+<summary style="font-size:20px">ApplicationContext</summary>
+<div markdown="1"> 
+
+* 스프링 컨테이너
+* `BeanFactory` 인터페이스의 하위 인터페이스
+* `BeanFactory`는 스프링 컨테이너의 최상위 인터페이스로 `ApplicationContext`는 `BeanFactory`에 부가 기능을 추가한 것 
+
+</div>
+</details> 
+
+
+<details>
 <summary style="font-size:20px">스프링 빈 주입 방법</summary>
 <div markdown="1"> 
 
@@ -137,6 +143,23 @@
 
 
 <details>
+<summary style="font-size:20px">@Bean 과 @Component의 차이</summary>
+<div markdown="1"> 
+
+#### @Bean
+* 메소드 레벨에서 선언
+* 반환되는 객체(인스턴스)를 개발자가 수동으로 등록
+
+#### @Component
+* 클래스 레벨에서 선언
+* 스프링이 런타임시에 컴포넌트스캔을 하여 자동으로 빈을 등록
+
+</div>
+</details>
+
+
+
+<details>
 <summary style="font-size:20px">스프링 빈 스코프</summary>
 <div markdown="1"> 
 
@@ -148,7 +171,9 @@
 
 #### Singleton
 * Default Scope
+  * 이유: 대규모 트래픽을 처리할 수 있도록 하기 위해서, 성능을 위해서
 * 스프링 컨테이너의 시작과 종료까지 1개의 객체로 유지됨
+
 
 #### Prototype
 * Bean 객체를 요청할 때마다 새로운 객체 생성
@@ -244,18 +269,6 @@
 
 
 <details>
-<summary style="font-size:20px">ApplicationContext</summary>
-<div markdown="1"> 
-
-* 스프링 컨테이너
-* `BeanFactory` 인터페이스의 하위 인터페이스
-* `BeanFactory`는 스프링 컨테이너의 최상위 인터페이스로 `ApplicationContext`는 `BeanFactory`에 부가 기능을 추가한 것 
-
-</div>
-</details> 
-
-
-<details>
 <summary style="font-size:20px">필터와 인터셉터 차이</summary>
 <div markdown="1"> 
 
@@ -303,7 +316,7 @@
 * 관계형 DB를 OOP 언어로 변환하는 기술
 * `객체` 클래스를 `RDB 테이블`에 자동으로 연결하는 것 -> SQL 없이 간접적으로 DB 조작 가능 
 * 비지니스 로직에 집중할 수 있음, DBMS 종속성 하락
-* 프로그램의 복잡성이 커지만 난이도 증가, 잘못될 경우 문제 발생할 가능성 있음 
+* 프로그램의 복잡성이 커지면 난이도 증가, 잘못될 경우 문제 발생할 가능성 있음 
 
 </div>
 </details>
@@ -424,7 +437,7 @@
 * @Table
 * @Column
 * @ColumnDefault
-* @DynamicInsert
+* @DynamicInsert: DB에 디폴트로 설정된 값을 저장 (기본: null 저장)
 * @Id
 * @GeneratedValue
 
