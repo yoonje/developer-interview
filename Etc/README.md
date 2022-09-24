@@ -1,4 +1,4 @@
-# Etc 
+# 기타 
 
 <details>
 <summary style="font-size:20px">컴파일 언어와 스크립트 언어의 차이</summary>
@@ -197,7 +197,7 @@
 <div markdown="1">
 
 * git merge를 하면 브랜치의 커밋 로그는 사라지고 `병합하는 커밋 로그가 master에 head에 추가`
-* git rebase를 하면 브랜치를 base로 master를 `커밋을 재정렬하여 브랜치의 커밋 하나 하나가 master에 정리되어 추가`
+* git rebase를 하면 브랜치를 base로 master `커밋을 재정렬하여 브랜치의 커밋 하나 하나가 master에 정리되어 추가`
 
 </div>
 </details>
