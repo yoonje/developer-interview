@@ -180,10 +180,3 @@ super.function(); // SubClass의 함수 실행
 </div>
 </details>
 
-
-<details>
-<summary style="font-size:20px">MVC 패턴을 강화시키는 방법 (추가 예정)</summary>
-<div markdown="1">
-
-</div>
-</details>

@@ -59,7 +59,7 @@
 
 
 <details>
-<summary style="font-size:20px">(추가) NoSQL(Not Only SQL)</summary>
+<summary style="font-size:20px">NoSQL(Not Only SQL)</summary>
 <div markdown="1">
 
 * 관계형 데이터베이스가 아닌 다른 형태

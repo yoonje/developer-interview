@@ -323,11 +323,3 @@
 
 </div>
 </details>
-
-<details>
-<summary style="font-size:20px">각 정렬이 언제 사용되는 가 (추가 예정)</summary>
-<div markdown="1">
-
-
-</div>
-</details>

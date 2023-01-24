@@ -550,33 +550,12 @@ PUT /new/3
 
 
 <details>
-<summary style="font-size:20px">JWT (JSON Web Token) (추가 예정)</summary>
+<summary style="font-size:20px">JWT (JSON Web Token)</summary>
 <div markdown="1">
 
 * `Json` 포맷을 이용하여 사용자에 대한 속성을 저장하는 Claim 기반의 Web Token
 * Header, Payload, Signature로 구성
 * 세션은 사용자의 수 만큼 서버 메모리를 차지하기 때문에, 최근에는 세션의 문제를 보완한 토큰 기반의 인증방식을 사용하는 추세
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">웹 브라우저에 HTTP 응답이 랜더링되는 과정 (추가 예정)</summary>
-<div markdown="1">
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">웹 서비스 동작 원리 (추가 예정)</summary>
-<div markdown="1">
-
-* 헬로 월드가 출력되는 방법
-* 클라이언트와 서버의 요청과 응답
-* 브라우저가 클라이언트, 스프링 부트가 서버
-* 로컬호스트의 8080포트에 톰캣이 수행
 
 </div>
 </details>

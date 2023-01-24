@@ -27,7 +27,7 @@
 
 
 <details>
-<summary>[추가] 스레드가 개별적인 스택을 가지는 이유</summary>
+<summary style="font-size:20px">스레드가 개별적인 스택을 가지는 이유</summary>
 <div markdown="1">
 
 * 스택에는 함수 호출 시의 전달인자, 지역 변수, 되돌아갈 주소 등을 저장
@@ -38,7 +38,7 @@
 
 
 <details>
-<summary>[추가] 스레드가 PC 레지스터를 가지는 이유</summary>
+<summary style="font-size:20px">스레드가 PC 레지스터를 가지는 이유</summary>
 <div markdown="1">
 
 * 스레드는 CPU를 할당/반납하고를 반복
@@ -105,7 +105,7 @@
 
 
 <details>
-<summary>[추가] PCB (Process Control Block)</summary>
+<summary style="font-size:20px">PCB (Process Control Block)</summary>
 <div markdown="1">
 
 * `프로세스 관리 정보`를 저장하는 커널의 자료구조 (Data 영역에 존재)
@@ -198,7 +198,7 @@
 
 
 <details>
-<summary style="font-size:20px">[추가] Critical Section(공유 자원, 임계 영역)</summary>
+<summary style="font-size:20px">Critical Section(공유 자원, 임계 영역)</summary>
 <div markdown="1">
 
 * 동일한 자원에 동시에 접근하는 경우가 발생하는 코드 영역
@@ -209,7 +209,7 @@
 
 
 <details>
-<summary style="font-size:20px">[추가] Race Condition</summary>
+<summary style="font-size:20px">Race Condition</summary>
 <div markdown="1">
 
 * 공유 자원에 여러 프로세스/스레드가 접근할 경우 `접근 순서에 따라 결과가 달라지는 현상`
@@ -435,7 +435,7 @@
 </details>
 
 <details>
-<summary style="font-size:20px">[추가] 페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
+<summary style="font-size:20px">페이지 테이블, TLB (Translation Lookaside Buffer)</summary>
 <div markdown="1">
 
 #### 요약

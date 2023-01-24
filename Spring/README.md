@@ -506,7 +506,7 @@
 
 
 <details>
-<summary style="font-size:20px">Mybatis (추가 예정)</summary>
+<summary style="font-size:20px">Mybatis</summary>
 <div markdown="1"> 
 
 #### 정의
@@ -514,26 +514,6 @@
 * JDBC를 통해 DB에 접근하는 작업을 캡슐화, SQL 쿼리 매핑
 #### 사용 이유
 * 프로그램의 SQL 쿼리를 한 파일로 구성하여 코드와 SQL을 분리할 수 있어 사용 
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">Mybatis, JPA 차이 (추가 예정)</summary>
-<div markdown="1">
-
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">Spring JDBC (추가 예정)</summary>
-<div markdown="1"> 
-
-* 자바에서 데이터베이스에 접속할 수 있도록 해주는 자바 API
-* DB에서 자료를 쿼리하거나 업데이트에 사용 
 
 </div>
 </details>
