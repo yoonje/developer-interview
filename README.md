@@ -15,6 +15,8 @@
 ##### Medium
 - [코딩 인터뷰 완전 분석](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=115116545)
 - [프로그래밍 면접 이렇게 준비한다](https://www.aladin.co.kr/shop/wproduct.aspx?ISBN=K172635329&start=pnaver_02)
+- [자바 코딩 인터뷰 완벽 거이드](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=299393634)
+- [코딩 인터뷰 완전 분석](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=115116545)
 
 ##### Hard
 - https://github.com/jwasham/coding-interview-university
@@ -37,3 +39,11 @@
 - [Live Coding](./LiveCoding/README.md)
 - [Etc](./Etc/README.md)
 
+## Question Template
+```yml
+<details>
+<summary style="font-size:20px"></summary>
+<div markdown="1">
+</div>
+</details>
+```
