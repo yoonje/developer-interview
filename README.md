@@ -24,7 +24,6 @@
 
 
 ## Table of Content
-- [Basics](./Basics/README.md)
 - [Algorithm](./Algorithm/README.md)
 - [Database](./Database/README.md)
 - [Datastructure](./Datastructure/README.md)
@@ -32,8 +31,7 @@
 - [Network](./Network/README.md)
 - [OOP](./OOP/README.md)
 - [OS](./OS/README.md)
-- [PL:Java](./Java/README.md)
-- [PL:Python](./Python/README.md)
+- [Java](./Java/README.md)
 - [Spring](./Spring/README.md)
 - [Web](./Web/README.md)
 - [Live Coding](./LiveCoding/README.md)
