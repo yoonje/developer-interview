@@ -37,7 +37,7 @@
 - [Live Coding](./LiveCoding/README.md)
 - [Etc](./Etc/README.md)
 
-## Question Template
+## Template
 ```yml
 <details>
 <summary style="font-size:20px">제목</summary>
