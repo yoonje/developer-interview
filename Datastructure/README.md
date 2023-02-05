@@ -1,5 +1,6 @@
 # Data Structure
 
+<br>
 
 <details>
 <summary style="font-size:20px">배열과 연결 리스트</summary>

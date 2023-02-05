@@ -1,5 +1,7 @@
 # Web
 
+<br>
+
 <details>
 <summary style="font-size:20px">웹 브라우저에 URL을 입력했을 때의 수행 과정</summary>
 <div markdown="1">
