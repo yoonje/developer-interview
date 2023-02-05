@@ -25,6 +25,25 @@
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">객체지향 프로그래밍의 특징</summary>
+<div markdown="1">
+
+* `추상화`: 사물의 불필요한 부분을 제거하고 공통된 특징만 추출하여 이해하기 쉽게 만드는 작업
+  * 하위클래스들에 존재하는 공통적인 메소드를 `인터페이스`로 정의
+* `캡슐화`: 속성과 기능을 멤버 변수와 멤버 함수로 만들어 클래스라는 캡슐에 넣음
+  * 목적: 소스 코드의 수정없는 재활용
+  * 외부 사용자는 클래스의 세부 구현에 대해 알 필요X
+  * `정보 은닉`: 접근지정자 `private`으로 멤버 변수 선언, 해당 변수에 접근하는 별도의 함수 정의
+* `상속`: 부모 클래스의 기능을 모두 또는 일부 수정하여 자식 클래스가 사용하는 것
+  * 코드 재사용
+* `다형성`: 같은 메서드가 각각의 객체에서 서로 다른 방법으로 응답, `상속`에서 효과를 발휘, 하나의 변수명/함수명 등이 상황에 따라서 다르게 동작하는 것
+  * 부모 클래스: 추상 클래스, 함수: 추상 함수
+  * 자식 클래스: draw 함수를 자신의 목적에 맞게, 서로 다른 방법으로 구현 / ex) 삼각형, 사각형 그리기
+
+</div>
+</details>
+
 
 <details>
 <summary style="font-size:20px">객체지향과 절차지향</summary>
@@ -41,11 +60,45 @@
 <summary style="font-size:20px">객체</summary>
 <div markdown="1">
 
+#### 객체
 * 데이터(변수)와 데이터의 동작(함수, 절차, 기능)을 모두 포함한 개념
+
+#### 객체의 종류
+- VO(Value Object): 불변 객체, 동일하게 생성된 VO는 항상 동일한 상태여야하며 인스턴스화된 VO는 항상 유효한 값을 리턴해야함
+- DTO(Data Transfer Object): 데이터 전송 객체, 상태를 보호하지 않으며 모든 속성을 노출하는 객체
+- Entity: 유일한 식별자가 있는 객체로 보통 데이터 베이스에 저장
+- DAO(Data Access Object, Repository): 데이터 베이스에 접근할 때 사용하는 추상 객체
+- BO(Business Object, Service): 비지니스 로직이 들어있는 객체
   
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">디미터 법칙</summary>
+<div markdown="1">
+
+* 디미터 법칙: 최소 지식의 법칙, 모듈은 자신이 조작하는 객체의 속사정을 몰라야한다는 원칙
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CQRS</summary>
+<div markdown="1">
+
+* CQRS(Command and Query Responsibility Segregtaion): 하나의 메소드는 명령이나 쿼리여야하며 두 가지 기능을 모두 가져서는 안된다는 이론으로 명령은 객체의 상태를 변경할 수 있지만 값을 반환하지 않고 쿼리는 값을 반환하지만 객체를 변경하지 않음
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">TDA 원칙</summary>
+<div markdown="1">
+
+* TDA 원칙(Tell Dont Ask): 물어보지 말고 그냥 시켜라, 객체와 객체가 협력하는 경우 다른 객체의 정보를 요구하지 말고 그냥 행위하도록 시키라는 의미
+
+</div>
+</details>
 
 <details>
 <summary style="font-size:20px"> Call by Value vs Call by Reference</summary>
@@ -54,26 +107,6 @@
 * `값을 복사`를 하여 처리하는지 `직접 참조`하는지의 차이
 * Call by Value: 인자로 받은 값을 복사하여 처리
 * Call by Reference: 인자로 받은 값의 주소를 참조하여 직접 값에 영향을 줌
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">객체지향 프로그래밍의 특징</summary>
-<div markdown="1">
-
-* `추상화`: 사물의 불필요한 부분을 제거하고 공통된 특징만 추출하여 이해하기 쉽게 만드는 작업
-  * 하위클래스들에 존재하는 공통적인 메소드를 `인터페이스`로 정의
-* `캡슐화`: 속성과 기능을 멤버 변수와 멤버 함수로 만들어 클래스라는 캡슐에 넣음
-  * 목적: 소스 코드의 수정없는 재활용
-  * 외부 사용자는 클래스의 세부 구현에 대해 알 필요X
-  * `정보 은닉`: 접근지정자 `private`으로 멤버 변수 선언, 해당 변수에 접근하는 별도의 함수 정의
-* `상속`: 부모 클래스의 기능을 모두 또는 일부 수정하여 자식 클래스가 사용하는 것
-  * 코드 재사용
-* `다형성`: 같은 메서드가 각각의 객체에서 서로 다른 방법으로 응답, `상속`에서 효과를 발휘, 하나의 변수명/함수명 등이 상황에 따라서 다르게 동작하는 것
-  * 부모 클래스: 추상 클래스, 함수: 추상 함수
-  * 자식 클래스: draw 함수를 자신의 목적에 맞게, 서로 다른 방법으로 구현 / ex) 삼각형, 사각형 그리기
 
 </div>
 </details>
@@ -101,16 +134,34 @@ super.function(); // SubClass의 함수 실행
 
 * `SRP(Single Responsibility Principle)`: 단일 책임 원칙, 클래스는 단 하나의 책임을 가져야 하며 클래스를 변경하는 이유는 단 하나의 이유이어야 한다.
 * `OCP(Open-Closed Principle)`: 개방-폐쇄 원칙, 확장에는 열려 있어야 하고 변경에는 닫혀 있어야 한다.
-  * 인터페이스
+  * 추상화(인터페이스)
 * `LSP(Liskov Substitution Principle)`: 리스코프 치환 원칙, 상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다.
   * 자식 클래스는 언제나 자신의 부모 클래스를 대체할 수 있다는 원칙이다
   * 자식 클래스가 부모 클래스의 기존 메소드의 의미를 해치지는 않는다.
+  * 보통 상속보단 컴포지션을 사용해라.
 * `ISP(Interface Segregation Principle)`: 인터페이스 분리 원칙, 인터페이스는 그 인터페이스를 사용하는 클라이언트를 기준으로 분리해야 한다.
+  * 인터페이스는 public으로 선언된 메서드이다.
   * 자신이 사용하지 않는 인터페이스는 구현하지 말아야 한다는 원칙
   * 일반적인 한 개의 인터페이스보다 구체적인 여러가지의 인터페이스를 구현하는 원칙
 * `DIP(Dependency Inversion Principle)`: 의존 역전 원칙, 고수준 모듈은 저수준 모듈의 구현에 의존해서는 안된다.
+  * 의존성(다른 객체나 함수를 사용하는 것)
   * 변하지 않는 객체에 의존한다.
   * 상위 클래스, 인터페이스, 추상 클래스일수록 변하지 않을 가능성이 높기에 하위 클래스나 구체(concrete) 클래스가 아닌 상위 클래스, 인터페이스, 추상 클래스에 의존한다.
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">의존성 주입</summary>
+<div markdown="1">
+
+#### 의존성 주입
+* 의존성에 필요한 값을 외부에서 파라미터로 받아 넣어주는 것
+
+#### 객체 생성 시의 의존성 주입의 방법
+* 수정자 주입: Setter를 통해서 필드에 의존성을 주입하는 것
+* 생성자 주입: 생성자를 호츨 할 때 의존성을 주입하는 것
+* 필드 주입: DI 프레임워크가 필수적으로 필요한 방법으로 필드에 맞는 프레임워크에 의해 의존성을 주입하는 것
 
 </div>
 </details>
@@ -137,6 +188,14 @@ super.function(); // SubClass의 함수 실행
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">순환 참조</summary>
+<div markdown="1">
+
+* 순환 참조: 각각의 객체가 서로를 참조하고 있는 상태로 객체를 Serializable을 불가능하게 만들고 JPA의 mappedby에서 신경을 추가로 써야함
+
+</div>
+</details>
 
 <details>
 <summary style="font-size:20px">디자인 패턴</summary>
@@ -179,4 +238,13 @@ super.function(); // SubClass의 함수 실행
 
 </div>
 </details>
+
+<details>
+<summary style="font-size:20px">퍼사드 패턴</summary>
+<div markdown="1">
+
+* 
+</div>
+</details>
+
 

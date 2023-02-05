@@ -126,17 +126,17 @@
 <summary style="font-size:20px">스프링 빈 주입 방법</summary>
 <div markdown="1"> 
 
-* 필드 주입: `@Autowired` 어노테이션 사용
-* 생성자 주입: 생성자가 2개 이상인 경우 `@Autowired` 어노테이션 필요
-* Setter 주입: `@Autowired` 어노테이션 사용
+#### 스프링 빈 주입 방법
+
+* 필드 주입: 필드에 `@Autowired` 어노테이션 사용
+* 생성자 주입: 생성자에서 파라미터로 의존성을 주입, 생성자가 1개라면 `@Autowired` 어노테이션이 필수적이지 않음
 
 #### 생성자 주입을 사용하는 것이 좋음
-* 순환 참조 방지 가능  
-  * 생성자 주입: 생성자로 객체를 생성하는 시점에 필요한 빈을 주입
-    * 생성자의 인자에 사용되는 빈을 찾거나 생성 -> 빈의 생성자를 호출
+* `순환 참조` 방지 가능
+  * 생성자 주입: 생성자로 객체를 생성하는 시점에 생성자의 인자에 사용되는 빈을 찾거나 생성 -> 빈의 생성자를 호출
   * 그 외: 빈을 먼저 생성 -> 어노테이션이 붙은 필드에 해당하는 빈을 찾아서 주입 / Setter의 객체를 호출해 주입 -> 객체가 실제로 사용되기 전까지는 에러가 발생하지 않음
-* `final` 키워드로 불변하는 객체를 생성할 수 있다.
-  * 실행 중에 객체가 변하는 것을 막아 오류를 사전에 방지할 수 있음
+* `final` 키워드로 불변하는 객체를 생성할 수 있음
+  * 런타임에 중에 객체가 변하는 것을 막아 불변성을 유지할 수 있어 오류를 사전에 방지할 수 있음
 
 </div>
 </details>
@@ -287,23 +287,11 @@
 
 
 <details>
-<summary style="font-size:20px">DAO (Data Access Object)</summary>
+<summary style="font-size:20px">Self-invocation 문제</summary>
 <div markdown="1"> 
 
-* `DB 접근`에 사용하는 객체
-* DB에 접근하는 로직과 비지니스 로직을 분리하기 위해 사용 
+* 스프링 컴포넌트에 있는 AOP 어노테이션은 `스프링 프록시`를 기반으로 동작하기 때문에 내부 호출을 할 때는 프록시가 적용되지 않음
 
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">DTO (Data Transfer Object)</summary>
-<div markdown="1"> 
-
-* 다른 말로 VO(Value Object)
-* 계층(컨트롤러, 뷰, 비즈니스 계층 등)간 `데이터 교환(전송)`을 위한 자바 빈
-* 로직을 가지지 않음: 속성과 속성에 접근하기 위한 getter, setter가 있고 추가적으로 toString(), equals() 가능 
 
 </div>
 </details>
@@ -323,7 +311,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] Java Persistence API 정의</summary>
+<summary style="font-size:20px">Java Persistence API 정의</summary>
 <div markdown="1"> 
 
 * ORM을 위해 자바에서 제공하는 API
@@ -336,7 +324,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] Entity를 설계할 때 주의점</summary>
+<summary style="font-size:20px">JPA에서 Entity를 설계할 때 주의점</summary>
 <div markdown="1"> 
 
 * `Setter`를 사용하지 않음
@@ -355,7 +343,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] 영속성 컨텍스트</summary>
+<summary style="font-size:20px">JPA 영속성 컨텍스트</summary>
 <div markdown="1"> 
 
 * `엔티티를 영구 저장`하는 환경
@@ -383,7 +371,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] Fetch 종류</summary>
+<summary style="font-size:20px">JPA Fetch 종류</summary>
 <div markdown="1"> 
 
 * 즉시 로딩: 엔티티를 조회할 때, 연관된 엔티티도 `함께` DB를 조회
@@ -397,7 +385,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] N+1 문제</summary>
+<summary style="font-size:20px">JPA N+1 문제</summary>
 <div markdown="1"> 
 
 * 조회 시, 1개의 쿼리를 생각하고 설계했으나 예상하지 못했던 쿼리 N개 더 발생하는 문제
@@ -419,7 +407,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] Entity Id에 Long을 사용해야 되는 이유</summary>
+<summary style="font-size:20px">JPA에서 Entity Id에 Long을 사용해야 되는 이유</summary>
 <div markdown="1"> 
 
 * Wrapper Type인 Long을 사용해야 Null을 사용할 수 있음
@@ -430,23 +418,7 @@
 
 
 <details>
-<summary style="font-size:20px">[JPA] 어노테이션 종류</summary>
-<div markdown="1"> 
-
-* @Entity
-* @Table
-* @Column
-* @ColumnDefault
-* @DynamicInsert: DB에 디폴트로 설정된 값을 저장 (기본: null 저장)
-* @Id
-* @GeneratedValue
-
-</div>
-</details>
-
-
-<details>
-<summary style="font-size:20px">[JPA] 스프링에서 다대다 관계가 좋지 않은 이유</summary>
+<summary style="font-size:20px">JPA에서 스프링에서 다대다 관계가 좋지 않은 이유</summary>
 <div markdown="1"> 
 
 * 다대다의 경우, 정규화를 통해 `중간 테이블`을 생성해야 함

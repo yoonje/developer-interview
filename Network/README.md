@@ -190,11 +190,62 @@
 </details>
 
 <details>
+<summary style="font-size:20px">DNS</summary>
+<div markdown="1"> 
+
+#### 도메인
+* 네트워크 상에서 컴퓨터를 식별하는 호스트명
+
+#### DNS(Domin Name Server)
+* 도메인을 실제 서버와 연결 시켜주는 서버
+
+</div>
+</details>
+
+<details>
 <summary style="font-size:20px">로드 밸런싱</summary>
 <div markdown="1"> 
 
+#### 로드 밸런싱
+
 * 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
 * Scale out 시에 사용
+* Server Load Balancing이라고도 불림
+* 헬스 체크를 통해서 서버가 죽은 경우 해당 서버로 요청이 가지 않도록 할 수 있음
+
+#### L4 로드 밸런싱
+
+* IP와 PORT 기반의 로드 밸런싱
+* DNS, VIP, GSLB 를 통한 로드 밸런싱은 L4 로드밸런싱임
+
+#### L7 로드 밸런싱
+* URI, Payloadm Http Header, Cookie 등 기반의 로드 밸런싱
+
+#### VIP(Virtual IP)
+* 여러 개의 실제 서버를 대표하는 가상의 IP로 DNS와 VIP를 연결하여 다수의 서버에 연결할 때 사용
+* VIP는 IP 기반의 `로드 밸런싱`하는 역할을 겸할 수 있음
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">GSLB</summary>
+<div markdown="1"> 
+
+#### GSLB(Global Server Load Balancing)
+* DNS 기반의 로드 밸런싱으로 IP가 아닌 도메인을 갖음
+* DNS와 VIP를 통해서 구성을 한 경우 한 IDC에 서버들이 몰려 있으면 DR 상황에서 문제가 생길 수 있기 때문에 서버의 위치를 고려할 수 있는 GSLB를 사용
+* VIP와 GLSB를 함께 사용 할 수도 있고 VIP 없이 GSLB만 서버에 묶어서 구성할 수도 있음
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">FQDN</summary>
+<div markdown="1"> 
+
+* Fully Qualified Domain Name의 약자로 전체 `주소 도메인 네임`
+* 도메인 하위에 서브 도메인을 구성할 수 있는데 FQDN은 서브도메인까지 포함한 Full Domain
 
 </div>
 </details>
@@ -239,6 +290,60 @@
 * 패켓 헤더 = `소스 IP: 목적지 IP`, `목적 IP: 게이트웨이의 공인 IP`
 * 게이트웨이에서 `소스 IP: 목적지 IP` 변경 없음, `목적 IP: 사설 IP` 로 변경 (재기록)
 * NAT 테이블을 참조하여 수정 
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">ACL</summary>
+<div markdown="1"> 
+
+* Access Control List의 약자로 네트워크 망에 접근을 허가하는 IP 리스트와 포트
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">Proxy 서버</summary>
+<div markdown="1"> 
+
+#### 프록시
+
+* 다른 서버와 통신하기 전에 반드시 거치도록 되어 있는 서버로 `클라이언트가 프록시를 통해서 다른 네트워크 서비스에 간접적으로 접속하게하는 서버 프로그램` 함
+* Access Control, Cache, 보안 등의 기능을 할 수 있음
+* 포워드 프록시라고 부르기도 함
+
+#### 리버스 프록시
+* 한 대 이상의 서버로부터 자원을 추출하여 클라이언트에 전달하는 프록시 서버
+* 부하 분산이 가능
+* 주로 웹 서버를 통해 리버스 프록시 서버를 구축
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">WS와 WAS</summary>
+<div markdown="1"> 
+
+#### WS
+
+* html이나 css 같은` 정적 컨텐츠`를 내려주거나 부하분산을 위한 프록시 역할을 주로 하는 서버
+* nginx, apache
+
+#### WAS
+* 웹 컨테이너라고도 불리며 DB 조회나 다양한 로직 처리가 필요한 `동적 컨텐츠`를 제공하는 서버
+* tomcat, netty
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CORS</summary>
+<div markdown="1"> 
+
+#### CORS(Cross-origin resource sharing, CORS)
+* 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제
+* 브라우저에서 동작하는 정책
 
 </div>
 </details>

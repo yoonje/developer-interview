@@ -1,5 +1,7 @@
 # 기타 
 
+<br> 
+
 <details>
 <summary style="font-size:20px">컴파일 언어와 스크립트 언어의 차이</summary>
 <div markdown="1">
