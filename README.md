@@ -30,6 +30,7 @@
 - [Database](./Database/README.md)
 - [Datastructure](./Datastructure/README.md)
 - [Design](./Design/README.md)
+- [DesignPattern](./DesignPattern/README.md)
 - [Network](./Network/README.md)
 - [OOP](./OOP/README.md)
 - [OS](./OS/README.md)
