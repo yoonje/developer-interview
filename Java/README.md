@@ -633,3 +633,15 @@ SubClass sub = (SubClass)super;
 
 </div>
 </details>
+
+<details>
+<summary style="font-size:20px"> Call by Value vs Call by Reference</summary>
+<div markdown="1">
+
+* `값을 복사`를 하여 처리하는지 `직접 참조`하는지의 차이
+* Call by Value: 인자로 받은 값을 복사하여 처리
+* Call by Reference: 인자로 받은 값의 주소를 참조하여 직접 값에 영향을 줌
+* JAVA에서는 모든 전달 방식이 Call by value로 Call by reference는 해당 객체의 주소값을 직접 넘기는 게 아닌 객체를 보는 또 다른 주소값을 만들어서 넘김
+
+</div>
+</details>
