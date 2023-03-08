@@ -19,7 +19,6 @@
 ##### 도서
 - [면접을 위한 CS 전공지식 노트](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=292815727)
 - [프로그래밍 면접 이렇게 준비한다](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=195800711)
-- [코딩 인터뷰 퀘스천](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=50250347)
 - [자바 코딩 인터뷰 완벽 거이드](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=299393634)
 - [코딩 인터뷰 완전 분석](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=115116545)
 - [262가지 문제로 정복하는 코딩 인터뷰 in Java](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=279822364)
