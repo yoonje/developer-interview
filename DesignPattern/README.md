@@ -96,6 +96,16 @@
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">빌더 패턴</summary>
+<div markdown="1">
+
+* 생성(construction)과 표기(representation)를 분리해 복잡한 객체를 생성하는 패턴
+* 복잡한 객체의 생성의 경우에 유용
+
+</div>
+</details>
+
 
 <details>
 <summary style="font-size:20px">MVC 패턴</summary>
