@@ -45,6 +45,16 @@
 </details>
 
 <details>
+<summary style="font-size:20px">빌더 패턴</summary>
+<div markdown="1">
+
+* 생성(construction)과 표기(representation)를 분리해 복잡한 객체를 생성하는 패턴(생성 패턴)
+* 복잡한 객체의 생성의 경우에 유용
+
+</div>
+</details>
+
+<details>
 <summary style="font-size:20px">프록시 패턴</summary>
 <div markdown="1">
 
@@ -93,16 +103,6 @@
 <div markdown="1">
 
 * 한 객체의 상태 변화를 관찰하다가 변화가 있을 때마다 옵저버 목록에 있는 옵저버들에게 변화를 알려주는 패턴으로 일대다 객체 의존 관계를 구성하는 패턴(행위 패턴)
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">빌더 패턴</summary>
-<div markdown="1">
-
-* 생성(construction)과 표기(representation)를 분리해 복잡한 객체를 생성하는 패턴
-* 복잡한 객체의 생성의 경우에 유용
-
 </div>
 </details>
 
