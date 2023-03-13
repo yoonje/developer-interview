@@ -2,26 +2,6 @@
 
 <br>
 
-<details>
-<summary style="font-size:20px">웹 브라우저에 URL을 입력했을 때의 수행 과정</summary>
-<div markdown="1">
-
-* 사용자의 PC는 `DHCP 서버`에서 사용자 `자신의 IP 주소`, `가장 가까운 라우터의 IP 주소`, `가장 가까운 DNS서버의 IP 주소`를 받음
-* `DNS` 서버로 쿼리를 전송해 URL의 `IP 주소`를 응답받음
-  * `ARP`를 이용하여 가장 가까운 라우터의 IP 주소로 MAC 주소를 얻어 요청 전송
-* TCP Socket을 통해 웹 서버와 `3-Way Hand Shaking`을 하여 연결
-* `HTTP Request`가 TCP Socket을 통해 보내지고, 응답으로 웹페이지의 정보가 사용자의 PC에 전달
-
-#### 참고
-* DHCP: IP 주소 및 TCP/IP 설정을 클라이언트에 자동으로 제공하는 프로토콜
-* DNS: IP 주소와 도메인의 매핑 정보를 관리하는 프로토콜
-* ARP: IP 주소를 물리 주소로 변환하는 프로토콜
-* IP 주소: 컴퓨터 마다 부여된 고유의 주소, 변할 수 있음
-* MAC 주소: NIC 카드 마다 부여된 네트워크 장비 고유의 주소, 변하지 않음
-
-</div>
-</details>
-
 
 <details>
 <summary style="font-size:20px">HTTP 특징</summary>
@@ -311,10 +291,12 @@
 
 #### 웹 서버
 * Http 프로토콜을 기반으로, 클라이언트의 요청을 처리하는 서버
+* html이나 css 같은` 정적 컨텐츠`를 내려주거나 부하분산을 위한 프록시 역할을 주로 함
 * `정적 컨텐츠`만 처리하는 고성능 서버
 
 #### 웹 애플리케이션 서버
 * 보통 웹서버 뒤에서 DB 조회 및 다양한 로직 처리 요구 시, `동적 컨텐츠`를 처리하는 서버
+* tomcat, netty
 
 </div>
 </details>
