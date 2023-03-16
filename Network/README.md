@@ -1,7 +1,80 @@
 # Network 
 
-<br> 
+<br>
 
+<details>
+<summary style="font-size:20px">OSI 7계층</summary>
+<div markdown="1">
+
+#### OSI 7계층
+* 네트워크의 통신 과정을 7단계로 나눠 표준화한 것
+* ISO(국제표준기구)에서 만듦 
+
+#### Application(7, Message or Data)
+* 사용자에게 `실제 애플리케이션 서비스를 제공`하는 계층
+* HTTP, FTP, DNS, DHCP
+#### Presentation(6, Message or Data)
+* 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
+* 코드 간의 번역을 담당 -> 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어줌
+#### Session(5, Message or Data)
+* 양 끝단의 응용 프로세스가 `통신을 관리하기 위한 방법`을 제공
+  * 동시 송수신 방식(duplex)- 반이중 방식(half-duplex), 전이중 방식(Full Duplex)의 통신 등
+* 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
+* Socket
+#### Transport(4, Segment)
+* 통신 `양단 간의 신뢰성 있는 통신`을 보장하는 계층
+* TCP, UDP
+#### Network(3, Packet)
+* 목적지까지의 경로를 선택하고 `경로에 따라 패킷을 전달(라우팅)`해주는 계층
+* IP / 라우터
+#### Link(2, Frame)
+* 인접한 `피어 간의 신뢰성 있는 통신`을 보장하는 계층
+* ARP, MAC / 브릿지, 스위치
+#### Physical(1, Bit)
+* 전기적, 기계적, 기능적인 특성을 이용해서 `통신 케이블로 데이터를 전송`
+* 리피터, 케이블, 허브, NIC
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">TCP/IP 4계층</summary>
+<div markdown="1">
+
+#### TCP/IP 4계층
+* 네트워크 통신 과정을 4계층으로 나눠 표현한 것
+* TCP/IP 4계층에서 에플리케이션 계층을 3개로 쪼개고 인터넷 계층을 네트워크 계층이라고 부르면서 링크 계층을 데이터 링크 계층과 물리 계층으로 나누면 OSI 7계층이 됨
+
+#### Application(4, Message)
+* HTTP, FTP, DNS, DHCP 같은 응용 프로그램이 사용되는 프로토콜 계층
+#### Transport(3, Segment)
+* 송신자와 수신자를 연결하는 통신 서비스를 제공하며 애플리케이션과 인터넷 계층 사이의 데이터가 전달될 때 중계하는 역할을 하는 계층
+* TCP, UDP
+#### Internet(2, Packet)
+* 장치로부터 받은 네트워크 패킷을 IP 주소로 지정된 목적지로 전송하기 위해 사용되는 계층
+* IP
+#### Link(1,Frame/Bit)
+* 전선, 광섬유, 무선 등 실질적으로 데이터를 전달하며 장치 간에 신호를 주고 받는 규칙을 정하는 계층
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">PDU</summary>
+<div markdown="1">
+
+#### PDU
+* 네트워크 어떠한 계층에서 다른 계층으로 데이터가 전달될 때 한 덩이리의 단위를 PDU(Protocal Data Unit)이라고 함
+* PDU는 메타 정보를 갖고 있는 `헤더`와 데이터를 의미하는 `페이로드`로 구성되며 계층마다 부르는 명칭이 다름
+
+#### 캡슐화와 비캡슐화
+* 캡슐화 과정은 상위 계층의 헤더와 데이터를 하위 계층의 데이터 부분에 포함시키고 해당 계층의 헤더를 삽입하는 과정
+* 비캡슐화 과정은 하위 계층에서 상위 계층으로 가며 각 계층의 헤더 부분을 제거하는 과정
+* 송신자의 애플리케이션 계층에서부터 각 계층에서 캡슐화를 통해 데이터가 생성되고 수신자의 링크 계층에서부터 각 계층에서 비캡슐화를 통해 데이터가 전달된다.
+
+</div>
+</details>
 
 <details>
 <summary style="font-size:20px">TCP와 UDP의 차이</summary>
@@ -125,47 +198,6 @@
 </div>
 </details>
 
-
-<details>
-<summary style="font-size:20px">OSI 7계층이란</summary>
-<div markdown="1">
-
-* 네트워크의 통신 과정을 7단계로 나눠 표준화한 것
-* ISO(국제표준기구)에서 만듦 
-
-### 사용 이유
-* 통신 과정을 이해하기 쉬움
-* 문제 발생 시 해당 단계의 장비와 SW만 수정하면 됨 -> 해결 용이 
-
-### 각 계층의 역할
-* Application - Application(7), Presentation(6), Session(5) 계층으로 분리
-#### Application(7, Data)
-* 사용자에게 `실제 애플리케이션 서비스를 제공`하는 계층
-* HTTP, FTP, DNS, DHCP
-#### Presentation(6, Data)
-* 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
-* 코드 간의 번역을 담당 -> 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어줌
-#### Session(5, Data)
-* 양 끝단의 응용 프로세스가 `통신을 관리하기 위한 방법`을 제공
-  * 동시 송수신 방식(duplex)- 반이중 방식(half-duplex), 전이중 방식(Full Duplex)의 통신 등
-* 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
-* API, Socket
-#### Transport(4, Segment)
-* 통신 `양단 간의 신뢰성 있는 통신`을 보장하는 계층
-* TCP, UDP
-#### Network(3, Packet or Datagram)
-* 목적지까지의 경로를 선택하고 `경로에 따라 패킷을 전달(라우팅)`해주는 계층
-* IP / 라우터
-#### Link(2, Frame)
-* 인접한 `피어 간의 신뢰성 있는 통신`을 보장하는 계층
-* MAC / 브릿지, 스위치
-#### Physical(1, Bit)
-* 전기적, 기계적, 기능적인 특성을 이용해서 `통신 케이블로 데이터를 전송`
-* 리피터, 케이블, 허브 
-
-</div>
-</details>
-
 <details>
 <summary style="font-size:20px">CDN (Contents Delivery Network)</summary>
 <div markdown="1"> 
@@ -204,10 +236,15 @@
 
 <details>
 <summary style="font-size:20px">로드 밸런싱</summary>
-<div markdown="1"> 
+<div markdown="1">
+
+#### 로드 밸런서
+* 로드 밸런싱 작업을 담당하는 장비
+* NAT(Network Address Translation): 사설IP - 공인IP 전환
+* Tunneling: 데이터를 캡슐화하여 연결된 노드만 캡슐을 해제할 수 있게 만듦
+* DSR(동적 소스 라우팅): 요청에 대한 응답을 할 때 로드밸런서가 아닌 클라이언트의 IP로 응답
 
 #### 로드 밸런싱
-
 * 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
 * Scale out 시에 사용
 * Server Load Balancing이라고도 불림
@@ -215,10 +252,13 @@
 #### L4 로드 밸런싱
 
 * IP와 PORT 기반의 로드 밸런싱
-* DNS, VIP, GSLB 를 통한 로드 밸런싱은 L4 로드밸런싱임
+* 보통 L4 스위치 장비로 로드밸런싱하며 가격이 비쌈
+* DNS, VIP, GSLB 를 통한 로드 밸런싱은 L4 로드밸런싱
 
 #### L7 로드 밸런싱
-* URI, Payloadm Http Header, Cookie 등 기반의 로드 밸런싱
+* URI, Payload, Http Header, Cookie 등 기반의 로드 밸런싱
+* 보통 L7 스위치 장비로 로드밸런싱하며 가격이 비쌈
+* nginx나 apache 를 통한 로드 밸런싱은 L7 로드밸런싱이라고 할 수 있음
 
 #### VIP(Virtual IP)
 * 여러 개의 실제 서버를 대표하는 가상의 IP로 DNS와 VIP를 연결하여 다수의 서버에 연결할 때 사용
@@ -252,13 +292,55 @@
 </details>
 
 <details>
-<summary style="font-size:20px">CIDR (Classless Inter-Domain Routing)</summary>
+<summary style="font-size:20px">IP 주소 체계</summary>
+<div markdown="1"> 
+
+#### IPv4
+* 현재 일반적으로 사용되는 주소 체계
+* 32비트를 8비트로 단위로 점을 찍어 표기하는 방식
+* 123.45.67.88 같은 방식으로 표기됨
+
+#### IPv6
+* 64비트를 16비트 단위로 점을 찍어 표기하는 방식
+* 2001:db8::ff00:42:8329 같은 방식으로 표기됨
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">클래스 기반 할당 방식</summary>
+<div markdown="1"> 
+
+#### 클래스 기반 할당 방식
+* 클래스를 구분하여 대역을 설정하여 앞에 있는 부분을 네트워크 주소, 그 뒷 부분을 주소인의 호스트 주소로 IP를 활용하는 방법
+* A 클래스의 12.0.0.0 네트워크를 부여받았다면 12.255.255.255.255는 브로드 캐스트용 주소가 되며 12.0.0.1 ~ 12.255.255.255.254의 호스트 주소로 사용 가능
+
+#### 클래스 A
+* 앞에 첫번째 바이트를 네트워크 주소로 나머지 3개의 바이트를 호스트 주소로 사용
+* 구분 비트가 0 -> 00000000.00000000.00000000.00000000 ~ 01111111.11111111.11111111.11111111
+* 대역 0.0.0.0 ~ 127.255.255.255 사용
+
+#### 클래스 B
+* 앞에서부터 두번째 바이트까지를 네트워크 주소로 나머지 2개의 바이트를 호스트 주소로 사용
+* 구분 비트가 10 -> 10000000.00000000.00000000.00000000 ~ 10111111.11111111.11111111.11111111
+* 대역 128.0.0.0 ~ 191.255.255.255 사용
+
+#### 클래스 C
+* 앞에서부터 세번째 바이트까지를 네트워크 주소로 나머지 1개의 바이트를 호스트 주소로 사용
+* 구분 비트가 110 -> 11000000.00000000.00000000.00000000 ~ 11011111.11111111.11111111.11111111
+* 대역 192.0.0.0 ~ 223.255.255.255 사용
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">CIDR (Classless Inter-Domain Routing) 방식</summary>
 <div markdown="1"> 
 
 * 클래스 없는 도메인 간 라우팅 기법
 * 최신의 IP 주소 할당 방법으로 정적이였던 클래스 방식에 비해 IP 주소의 영역을 여러 네트워크 영역으로 나눌 수 있기 때문에 기존방식에 비해 유연 
-* 서브넷의 최대 호수트 수를 유추할 수 있음
-* 10.0.2.23/xx 형식
+* 서브넷의 최대 호스트 수를 유추할 수 있음
+* 예를 들면 10.0.2.23/xx 같은 형식
   * xx 자리수까지는 고정 IP
 * 서브넷의 사용 가능 IP 수: 2^(32-xx) - 2
   * 첫번째: 네트워크 주소, 마지막: 브로드캐스팅 주소
@@ -272,7 +354,9 @@
 
 #### 정의
 * IP 패킷의 TCP/UDP 포트 숫자와 소스 및 목적지의 IP 주소 등을 `재기록`하면서 `라우터`를 통해 통신하는 기술
-* 외부에 공개된 `공인(Public) IP`와 내부에서 사용하는 `사설(Private) IP`를 `맵핑`하여 원활히 통신할 수 있게 하는 기술 
+* 외부에 공개된 `공인(Public) IP`와 내부에서 사용하는 `사설(Private) IP`를 `맵핑`하여 원활히 통신할 수 있게 하는 기술
+* IPv4 주소 체계로 많은 주소를 표기하지 못했는데 이를 해결해준 기술
+* 사설 IP를 통하기 때문에 내부망 IP들이 노출되지 않으므로 보안적 강점이 있음
 
 #### 목적
 ##### 공인 IP 부족 문제 해결
@@ -323,27 +407,31 @@
 </details>
 
 <details>
-<summary style="font-size:20px">WS와 WAS</summary>
-<div markdown="1"> 
-
-#### WS
-
-* html이나 css 같은` 정적 컨텐츠`를 내려주거나 부하분산을 위한 프록시 역할을 주로 하는 서버
-* nginx, apache
-
-#### WAS
-* 웹 컨테이너라고도 불리며 DB 조회나 다양한 로직 처리가 필요한 `동적 컨텐츠`를 제공하는 서버
-* tomcat, netty
-
-</div>
-</details>
-
-<details>
 <summary style="font-size:20px">CORS</summary>
 <div markdown="1"> 
 
 * 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제
 * 브라우저에서 동작하는 정책
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">웹 브라우저에 URL을 입력했을 때의 수행 과정</summary>
+<div markdown="1">
+
+* 사용자의 PC는 `DHCP 서버`에서 사용자 `자신의 IP 주소`, `가장 가까운 라우터의 IP 주소`, `가장 가까운 DNS서버의 IP 주소`를 받음
+* `DNS` 서버로 쿼리를 전송해 URL의 `IP 주소`를 응답받음
+  * `ARP`를 이용하여 가장 가까운 라우터의 IP 주소로 MAC 주소를 얻어 요청 전송
+* TCP Socket을 통해 웹 서버와 `3-Way Hand Shaking`을 하여 연결
+* `HTTP Request`가 TCP Socket을 통해 보내지고, 응답으로 웹페이지의 정보가 사용자의 PC에 전달
+
+#### 참고
+* DHCP: IP 주소 및 TCP/IP 설정을 클라이언트에 자동으로 제공하는 프로토콜
+* DNS: IP 주소와 도메인의 매핑 정보를 관리하는 프로토콜
+* ARP: IP 주소를 물리 주소로 변환하는 프로토콜
+* IP 주소: 컴퓨터 마다 부여된 고유의 주소, 변할 수 있음
+* MAC 주소: NIC 카드 마다 부여된 네트워크 장비 고유의 주소, 변하지 않음
 
 </div>
 </details>
