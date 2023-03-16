@@ -99,9 +99,8 @@
 <summary style="font-size:20px">HTTP와 HTTPS의 차이</summary>
 <div markdown="1">
 
-* 웹 브라우저와 웹 서버가 통신하기 위한 프로토콜
-
 #### HTTP
+* 웹 브라우저와 웹 서버가 통신하기 위한 프로토콜
 * 평문 통신으로 `도청` 가능
   * 암호화하지 않음
 * 통신 상대를 확인하지 않아 `위장` 가능
@@ -183,7 +182,7 @@
 * 웹 서버와 통신 시, 인증기관의 `개인키`로 서명된 인증서를 클라이언트가 받으면 인증기관의 `공개키`로 복호화 가능
 
 #### 참고 2
-* SSL을 사용하면 `https://` 를 사용하여 웹서버에 접근
+* SSL을 사용하면 `https://` 를 사용하여 웹서버에 접근 가능
 * 대칭키: 실제 데이터 암호화 방식
 * 공개키: 대칭키를 공유하기 위해 사용
 
@@ -247,7 +246,7 @@
 <summary style="font-size:20px">캐시</summary>
 <div markdown="1">
 
-* 리소스 들의 임시 저장소
+* 리소스들의 임시 저장소
 * 이미지나 css, js파일 등을` 브라우저나 서버 앞 단에 저장`해놓고 사용하는 것
 * 같은 자원을 로드(load)해야할 때, 해당 자원을 다시 불러오지 않고 캐시되어 있는 자원을 사용
   * `서버를 거치지 않아 속도 향상`
@@ -260,6 +259,8 @@
 <details>
 <summary style="font-size:20px">웹 캐시</summary>
 <div markdown="1">
+
+#### 웹 캐시
 
 * 대부분의 브라우저에서는 `HTTP 헤더`에 캐시 구현이 포함되어 있어서 웹 캐시를 구현
 * 응답 헤더의 Last-Modified, Etag, Expires, Cache-Control 항목 등과 같은 여러 부분의 여러 개의 태그를 통해서 캐싱
@@ -330,6 +331,8 @@
 <summary style="font-size:20px">REST (Representational State Transfer)</summary>
 <div markdown="1">
 
+#### REST
+
 * 자원을 `이름(표현)`으로 구분하여 자원의 `상태(정보)`를 주고 받는 것
 * `HTTP URI`를 통해 자원을 구분하고 `HTTP Method(POST, GET, PUT, DELETE)`를 통해 해당 자원에 대한 `CRUD` 연산을 적용
 
@@ -378,28 +381,6 @@
 * HATEOAS
 </div>
 </details>
-
-
-<details>
-<summary style="font-size:20px">REST API: HATEOAS</summary>
-<div markdown="1">
-
-* Hypermedia As The Engine Of Application State
-* 가능한 작업의 링크를 응답에 추가적으로 제공, 클라이언트가 어떤 작업을 할 수 있는지 알 수 있음
-  * `_links`
-
-#### 장점
-* 서버에서 URL을 바꿔도 클라이언트에 영향 없음
-
-#### 단점
-* 전달 데이터 양 증가 및 복잡도 증가
-
-#### HATEOAS가 좋은지 의문점은 여전히 있음
-* https://soobindeveloper8.tistory.com/646
-
-</div>
-</details>
-
 
 <details>
 <summary style="font-size:20px">REST (API) 장단점</summary>
