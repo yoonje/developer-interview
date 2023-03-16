@@ -296,6 +296,7 @@
 <summary style="font-size:20px">기아 상태(Starvation) 정의와 해결방법</summary>
 <div markdown="1">
 
+#### Starvation
 * 여러 프로세스가 부족한 자원을 점유하기 위해 경쟁할 때, `특정 프로세스에 영원히 자원 할당이 되지 않는 경우`
 
 #### 해결 방법
@@ -513,8 +514,6 @@
 <details>
 <summary style="font-size:20px">컴파일러와 인터프리터의 차이</summary>
 <div markdown="1">
-
-* 고급 언어로 작성된 프로그램 -> 기계어로 번역
 
 #### 컴파일러
 * 프로그램 `전체`를 한 번에 번역
