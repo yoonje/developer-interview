@@ -6,6 +6,8 @@
 <summary style="font-size:20px">시간 복잡도와 공간 복잡도</summary>
 <div markdown="1">
 
+#### 표기법
+
 * 주로 `빅오 표기법`으로 표현
 
 #### 시간 복잡도
