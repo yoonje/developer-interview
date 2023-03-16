@@ -51,6 +51,8 @@
 <summary style="font-size:20px">JVM 메모리(Runtime Data Area) 구조</summary>
 <div markdown="1">
 
+#### JVM 구조
+
   * 크게 `메소드 영역, JVM 스택, JVM 힙`으로 나뉘며 JVM 힙은 `Young Generation, Old Generation`으로 나뉘고 Young Generation은 `Eden, Survivor0, Survivor1`으로 나뉨
 
 #### Method Area
@@ -123,6 +125,8 @@ public class Test{
 <details>
 <summary style="font-size:20px">Garbage Collection 동작 방식</summary>
 <div markdown="1">
+
+#### GC
 
 * 새롭게 생성된 객체는 `Heap`의 `Young Generation의 Eden 영역`에 저장
 * `Eden 영역이 다 차면 Minor GC`가 발생하여 참조 횟수에 따라 증가하는 `age bit`를 보고 불필요한 객체를 삭제하고 생존한 객체는 `S0`으로 이동
@@ -213,6 +217,7 @@ public interface Interface {
 <summary style="font-size:20px">Collection Framework</summary>
 <div markdown="1">
 
+#### JAVA Collection
 * 데이터를 효율적으로 관리할 수 있는 자료구조와 알고리즘을 구조화하여 클래스로 구현한 것
 * `List, Set, Map 인터페이스`가 존재
   * Collection Interface -> List, Set
@@ -442,6 +447,8 @@ List<Integer> ii; //가능
 <details>
 <summary style="font-size:20px">String, StringBuilder, StringBuffer</summary>
 <div markdown="1">
+
+#### String, StringBuilder, StringBuffer 특성
 
 * String: `불변성`, StringBuilder/StringBuffer: `가변성`
 
