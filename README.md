@@ -28,7 +28,7 @@
 - [Algorithm](./Algorithm/README.md)
 - [Database](./Database/README.md)
 - [Datastructure](./Datastructure/README.md)
-- [Design](./Design/README.md)
+- [System Design](./SystemDesign/README.md)
 - [Design Pattern](./DesignPattern/README.md)
 - [Network](./Network/README.md)
 - [OOP](./OOP/README.md)
