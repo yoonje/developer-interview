@@ -12,7 +12,7 @@
 
 #### Application(7, Message or Data)
 * 사용자에게 `실제 애플리케이션 서비스를 제공`하는 계층
-* HTTP, FTP, DNS, DHCP
+* HTTP, FTP, DNS
 #### Presentation(6, Message or Data)
 * 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
 * 코드 간의 번역을 담당 -> 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어줌
@@ -46,7 +46,8 @@
 * TCP/IP 4계층에서 에플리케이션 계층을 3개로 쪼개고 인터넷 계층을 네트워크 계층이라고 부르면서 링크 계층을 데이터 링크 계층과 물리 계층으로 나누면 OSI 7계층이 됨
 
 #### Application(4, Message)
-* HTTP, FTP, DNS, DHCP 같은 응용 프로그램이 사용되는 프로토콜 계층
+* 응용 프로그램이 사용되는 프로토콜 계층
+* HTTP, FTP, DNS
 #### Transport(3, Segment)
 * 송신자와 수신자를 연결하는 통신 서비스를 제공하며 애플리케이션과 인터넷 계층 사이의 데이터가 전달될 때 중계하는 역할을 하는 계층
 * TCP, UDP
@@ -71,13 +72,13 @@
 #### 캡슐화와 비캡슐화
 * 캡슐화 과정은 상위 계층의 헤더와 데이터를 하위 계층의 데이터 부분에 포함시키고 해당 계층의 헤더를 삽입하는 과정
 * 비캡슐화 과정은 하위 계층에서 상위 계층으로 가며 각 계층의 헤더 부분을 제거하는 과정
-* 송신자의 애플리케이션 계층에서부터 각 계층에서 캡슐화를 통해 데이터가 생성되고 수신자의 링크 계층에서부터 각 계층에서 비캡슐화를 통해 데이터가 전달된다.
+* 송신자의 애플리케이션 계층에서부터 각 계층에서 캡슐화를 통해 데이터가 생성되고 수신자의 링크 계층에서부터 각 계층에서 비캡슐화를 통해 데이터가 전달
 
 </div>
 </details>
 
 <details>
-<summary style="font-size:20px">TCP와 UDP의 차이</summary>
+<summary style="font-size:20px">TCP와 UDP</summary>
 <div markdown="1"> 
 
 #### TCP
@@ -138,7 +139,7 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 3-way Handshake 란</summary>
+<summary style="font-size:20px">TCP 3-way Handshake</summary>
 <div markdown="1"> 
 
 * 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
@@ -172,7 +173,7 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 4-way Handshake란</summary>
+<summary style="font-size:20px">TCP 4-way Handshake</summary>
 <div markdown="1"> 
 
 * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
@@ -202,18 +203,16 @@
 <summary style="font-size:20px">CDN (Contents Delivery Network)</summary>
 <div markdown="1"> 
 
-![zz](https://user-images.githubusercontent.com/38900338/135851877-de1980d4-c90f-44c9-89d9-91899775feb6.PNG) 
-
-#### 정의
+#### CDN
 * `지리적, 물리적으로 떨어져 있는` 사용자에게 웹 페이지 콘텐츠 `로드 지연을 최소화`하는, 촘촘히 `분산된 서버`로 이루어진 플랫폼 기술
 * 각 지역에 캐시 서버(PoP, Points of Presence)를 분산 배치해, 가까운 사용자의 요청에 원본 서버가 아닌 캐시 서버가 콘텐츠를 전달 
 
-#### 사용 시의 이점
+#### CDN 사용 시의 이점
 * 지리적으로 가까운 캐시 서버가 응답하여 빠른 응답 가능
 * Origin 서버에 문제가 생겨도 다른 서버로 대체가 가능해 안전성 증가
 * 트래픽 집중 방지 가능 
 
-#### 과정
+#### CDN 처리 과정
 * 클라이언트는 HTML, 이미지, CSS, JavaScript 파일 등 필요한 콘텐츠를 요청
 * `콘텐츠에 대한 각 요청이 발생하면 최적으로 배치된 CDN 서버에 엔드유저가 매핑`
 * CDN 서버는 요청된 파일의 `캐싱`된(사전 저장된) 버전으로 응답 
@@ -240,6 +239,8 @@
 
 #### 로드 밸런서
 * 로드 밸런싱 작업을 담당하는 장비
+
+#### 로드 밸런서의 역할
 * NAT(Network Address Translation): 사설IP - 공인IP 전환
 * Tunneling: 데이터를 캡슐화하여 연결된 노드만 캡슐을 해제할 수 있게 만듦
 * DSR(동적 소스 라우팅): 요청에 대한 응답을 할 때 로드밸런서가 아닌 클라이언트의 IP로 응답
@@ -268,10 +269,9 @@
 </details>
 
 <details>
-<summary style="font-size:20px">GSLB</summary>
+<summary style="font-size:20px">GSLB (Global Server Load Balancing)</summary>
 <div markdown="1"> 
 
-#### GSLB(Global Server Load Balancing)
 * DNS 기반의 로드 밸런싱으로 IP가 아닌 도메인을 갖음
 * DNS와 VIP를 통해서 구성을 한 경우 한 IDC에 서버들이 몰려 있으면 DR 상황에서 문제가 생길 수 있기 때문에 서버의 위치를 고려할 수 있는 GSLB를 사용
 * VIP와 GLSB를 함께 사용 할 수도 있고 VIP 없이 GSLB만 서버에 묶어서 구성할 수도 있음
