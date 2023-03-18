@@ -99,48 +99,69 @@
 <summary style="font-size:20px">TCP 흐름제어</summary>
 <div markdown="1"> 
 
+#### TCP 흐름제어
 * `수신자와 송신자`의 메시지 처리속도 차이를 해결하기 위한 방법
+* 수신자는 윈도우 크기를 자신의 응답 헤더에 담아서 송신 측에게 전해주게 되고, 송신자는 상대방에게 데이터를 보낼 때 이 윈도우 크기를 확인
 
 #### 종류
 ##### Stop and Wait
 * 전송한 패킷의 ACK을 수신하면 다음 패킷 전송 
 
-##### Sliding Window
-* 수신측에서 설정한 윈도우 크기만큼의 패킷을 ACK의 확인 없이 전송, 데이터의 흐름을 동적으로 조절
-* `Go Back N`: Cumulative ACK(마지막으로 수신 성공한 패킷의 ACK을 계속 전송), 문제가 된 패킷부터 모두 재전송
-* `Selective Repeat`: Individual ACK(수신 성공한 패킷의 개별 ACK 전송), 문제가 된 패킷만 재전송 
+##### Sliding Window - Go Back N
+* 수신 측에서 설정한 윈도우 크기만큼의 패킷을 ACK의 확인 없이 전송, 데이터의 흐름을 동적으로 조절하는데 Cumulative ACK(마지막으로 수신 성공한 패킷의 ACK을 계속 전송)을 받고 문제가 된 패킷부터는 모두 재전송
+
+##### Sliding Window - Selective Repeat
+* 수신 측에서 설정한 윈도우 크기만큼의 패킷을 ACK의 확인 없이 전송, 데이터의 흐름을 동적으로 조절하는데 Selective ACK(수신 성공한 패킷의 개별 ACK 전송)을 받고 문제가 된 패킷만 재전송 
 
 </div>
 </details> 
 
 <details>
-<summary style="font-size:20px">TCP 혼잡제어</summary>
+<summary style="font-size:20px">TCP 오류제어</summary>
 <div markdown="1"> 
 
-* `송신자와 네트워크(라우터)`의 데이터 처리 속도 차이를 해결하기 위한 방법
-* 패킷 Loss 시의 확인되는 `Timeout이나 3개의 Duplicate ACK`을 통해서 파악 가능 
+#### TCP 오류제어
+* TCP 오류 제어는 수신자와 송신자의 패킷 오류 처리를 하는 방법
+* 수신자가 송신자에게 명시적으로 NACK(부정응답)을 보내거나 송신자에게 ACK(긍정응답)가 오지 않거나 중복된 ACK가 계속 해서 오면 오류가 발생했다고 판단
 
 #### 종류
-* [참고] CWND: Congestion Window, ACK을 확인하지 않고도 보낼 수 있는 데이터 양 (Window Size)
-* Slow Start: CWND가 1부터 지수적(2배)으로 증가
-* Congestion Avoidance(혼잡 회피): CWND가 1씩 증가
-* Fast Recovery(빠른 회복): CWND를 1/2배로 감소하고 선형적 증가 
 
-##### TCP Tahoe
-* Slow Start -> ssthresh 도달 -> Congestion Avoidance -> 3개의 duplicate ACK, Timeout 발생 -> Slow Start부터 반복 
+##### Stop and Wait ARQ
+* 송신 측에서 1개의 프레임을 송신하고, 수신측에서 수신된 프레임의 에러 유무에 따라 ACK 혹은 NAK를 보내는 방식
 
-##### TCP Reno
-* Slow Start -> ssthresh 도달 -> Congestion Avoidance까지는 동일
-* Congestion Avoidance 상황에서 3개의 duplicate ACK 발생 -> Fast Recovery
-  * TCP Tahoe는 Slow Start로 진입
-* Congestion Avoidance 상황에서 Timeout 발생 -> Slow Start 
+##### Go Back N ARQ
+* 전송된 프레임이 손상되거나 분실된 경우 그리고 ACK 패킷의 손실로 인한 타임아웃이 발생한 경우에 확인된 마지막 프레임 이후로 모든 프레임을 재전송하는 방식
+
+##### SR(Selective-Reject) ARQ
+* 손실된 프레임만 재전송하여 Go Back N ARQ의 확인된 마지막 프레임 이후의 모든 프레임을 재전송하는 단점을 보완한 기법
 
 </div>
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 3-way Handshake</summary>
+<summary style="font-size:20px">TCP 혼잡제어</summary>
 <div markdown="1"> 
+
+#### TCP 혼잡제어
+* `송신자와 네트워크(라우터)`의 데이터 처리 속도 차이를 해결하기 위한 방법
+* 패킷 손실 시 파악되는 타임 아웃이나 중복된 ACK을 통해서 혼잡을 파악
+* ACK을 확인하지 않고도 보낼 수 있는 데이터 양인 CWND(Congestion Window)를 기반으로 동작
+
+#### 종류
+* Additive Increase/Multicative Decrease: CWND를 기본 값에서 시작하여 1씩 증가시키는 방법
+* Slow Start: CWND가 1부터 지수적(2배)으로 증가시키는 방법
+* Congestion Avoidance(혼잡 회피): CWND가 임계치에 도달하면 1씩 증가키는 방법
+* Fast Recovery(빠른 회복): 혼잡 상황에서 사용되는 기법으로 CWND를 1/2배로 감소하고 선형적 증가시키는 방법
+* Fast Retransmit(빠른 재전송): 중복 ACK를 3개 받으면 재전송을 하는 방법
+
+</div>
+</details>
+
+<details>
+<summary style="font-size:20px">TCP 3-Way Handshake</summary>
+<div markdown="1"> 
+
+#### TCP 3-Way Handshake
 
 * 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
 * Client -> Server: 연결을 요청하는 `SYN(n) 전송`
@@ -159,7 +180,7 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 3-way Handshake 진행 시 서버의 포트가 닫혀있다면 어떻게 되는가?</summary>
+<summary style="font-size:20px">TCP 3-Way Handshake 진행 시 서버의 포트가 닫혀있다면</summary>
 <div markdown="1"> 
 
 * ACK RST 전송 
@@ -173,8 +194,10 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 4-way Handshake</summary>
+<summary style="font-size:20px">TCP 4-Way Handshake</summary>
 <div markdown="1"> 
+
+#### TCP 4-Way Handshake
 
 * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
 * Client -> Server : 연결을 종료하는 `FIN(n) 전송`
@@ -190,7 +213,7 @@
 </details>
 
 <details>
-<summary style="font-size:20px">TCP 4-way Handshake에서 타임아웃은 언제, 왜 일어나는가</summary>
+<summary style="font-size:20px">TCP 4-Way Handshake에서 타임아웃은 언제 그리고 왜 일어나는가</summary>
 <div markdown="1"> 
 
 * 클라이언트가 서버의 FIN을 수신한 이후에 발생
