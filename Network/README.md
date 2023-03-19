@@ -266,14 +266,14 @@
 * 외부에서 사설 IP를 알 방법이 없어 내부 네트워크와 호스트를 보호 가능 
 
 #### 동작 과정
-##### 외부로 요청 패킷 전송
-* 패켓 헤더 = `소스 IP: 사설 IP`, `목적 IP: 목적지 IP`
-* 게이트웨이에서 `소스 IP: 게이트웨이의 공인 IP`로 변경, `목적 IP: 목적지 IP` 변경 없음
-* NAT 테이블에 맵핑 내역을 저장 (포트도 기록) 
+##### 요청 패킷 전송하기
+* 패킷 헤더 = `소스 IP: 사설 IP`, `목적 IP: 목적지 IP`
+* 게이트 웨이에서 `소스 IP: 게이트웨이의 공인 IP`로 변경, `목적 IP: 목적지 IP` 변경 없음
+* NAT 테이블에 맵핑 내역을 저장
 
-##### 응답 패킷 받기
-* 패켓 헤더 = `소스 IP: 목적지 IP`, `목적 IP: 게이트웨이의 공인 IP`
-* 게이트웨이에서 `소스 IP: 목적지 IP` 변경 없음, `목적 IP: 사설 IP` 로 변경 (재기록)
+##### 응답 패킷받기
+* 패킷 헤더 = `소스 IP: 목적지 IP`, `목적 IP: 게이트웨이의 공인 IP`
+* 게이트 웨이에서 `소스 IP: 목적지 IP` 변경 없음, `목적 IP: 사설 IP`로 변경 (재기록)
 * NAT 테이블을 참조하여 수정 
 
 </div>
@@ -301,49 +301,14 @@
 </details>
 
 <details>
-<summary style="font-size:20px">DNS</summary>
+<summary style="font-size:20px">DNS (Domin Name System)</summary>
 <div markdown="1"> 
 
 #### 도메인
 * 네트워크 상에서 컴퓨터를 식별하는 호스트명
 
-#### DNS(Domin Name Server)
-* 도메인을 실제 서버와 연결 시켜주는 서버
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">로드 밸런싱</summary>
-<div markdown="1">
-
-#### 로드 밸런서
-* 로드 밸런싱 작업을 담당하는 장비
-
-#### 로드 밸런서의 역할
-* NAT(Network Address Translation): 사설IP - 공인IP 전환
-* Tunneling: 데이터를 캡슐화하여 연결된 노드만 캡슐을 해제할 수 있게 만듦
-* DSR(동적 소스 라우팅): 요청에 대한 응답을 할 때 로드밸런서가 아닌 클라이언트의 IP로 응답
-
-#### 로드 밸런싱
-* 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
-* Scale out 시에 사용
-* Server Load Balancing이라고도 불림
-
-#### L4 로드 밸런싱
-
-* IP와 PORT 기반의 로드 밸런싱
-* 보통 L4 스위치 장비로 로드밸런싱하며 가격이 비쌈
-* DNS, VIP, GSLB 를 통한 로드 밸런싱은 L4 로드밸런싱
-
-#### L7 로드 밸런싱
-* URI, Payload, Http Header, Cookie 등 기반의 로드 밸런싱
-* 보통 L7 스위치 장비로 로드밸런싱하며 가격이 비쌈
-* nginx나 apache 를 통한 로드 밸런싱은 L7 로드밸런싱이라고 할 수 있음
-
-#### VIP(Virtual IP)
-* 여러 개의 실제 서버를 대표하는 가상의 IP로 DNS와 VIP를 연결하여 다수의 서버에 연결할 때 사용
-* VIP는 IP 기반의 `로드 밸런싱`하는 역할을 겸할 수 있음
+#### DNS
+* 도메인을 실제 서버와 연결 시켜하는 시스템
 
 </div>
 </details>
@@ -357,6 +322,41 @@
 * VIP와 GLSB를 함께 사용 할 수도 있고 VIP 없이 GSLB만 서버에 묶어서 구성할 수도 있음
 * 일반적인 DNS 방식과 달리 헬스 체크를 통해서 서버가 죽은 경우 해당 서버로 요청이 가지 않도록 할 수 있음
 * 일반적인 DNS 방식과 달리 L4/L7의 스위치가 추가로 필요
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-size:20px">로드 밸런싱</summary>
+<div markdown="1">
+
+#### 로드 밸런싱
+* 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
+* Scale out 시에 사용
+* Server Load Balancing이라고도 불림
+
+#### 로드 밸런서
+* 로드 밸런싱 작업을 담당하는 장비
+
+#### 로드 밸런서의 역할
+* NAT(Network Address Translation): 사설IP - 공인IP 전환
+* Tunneling: 데이터를 캡슐화하여 연결된 노드만 캡슐을 해제할 수 있게 만듦
+* DSR(동적 소스 라우팅): 요청에 대한 응답을 할 때 로드밸런서가 아닌 클라이언트의 IP로 응답
+
+#### L4 로드 밸런싱
+* IP와 PORT 기반의 로드 밸런싱
+* 보통 L4 스위치 장비로 로드밸런싱하며 가격이 비쌈
+* VIP를 통한 로드 밸런싱은 L4 로드밸런싱
+
+#### L7 로드 밸런싱
+* URI, Payload, Http Header, Cookie 등 기반의 로드 밸런싱
+* 보통 L7 스위치 장비로 로드밸런싱하며 가격이 비쌈
+* nginx나 apache를 통한 로드 밸런싱은 L7 로드밸런싱
+
+#### VIP(Virtual IP)
+* 여러 개의 실제 서버를 대표하는 가상의 IP로 DNS와 VIP를 연결하여 다수의 서버에 연결할 때 사용
+* VIP는 IP 기반의 `로드 밸런싱`하는 역할을 겸할 수 있음
 
 </div>
 </details>
@@ -403,7 +403,6 @@
 <div markdown="1"> 
 
 * 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제
-* 브라우저에서 동작하는 정책
 
 </div>
 </details>
