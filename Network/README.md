@@ -247,9 +247,7 @@
 ![image](https://user-images.githubusercontent.com/38535571/230091358-80da4098-409a-4315-afa2-0b7fd03b7513.png)
 
 #### IPv4 IPv6 패킷
-* IPv4
 ![image](https://user-images.githubusercontent.com/38535571/230091472-20cb9246-77ef-47e2-9401-597a7e51d130.png)
-* IPv6
 ![image](https://user-images.githubusercontent.com/38535571/230091539-a2455449-b874-466c-8b37-9fe6d5af24b8.png)
 
 </div>
@@ -286,8 +284,10 @@
 <details>
 <summary style="font-size:20px">CIDR (Classless Inter-Domain Routing) 방식</summary>
 <div markdown="1"> 
+ 
 ![image](https://user-images.githubusercontent.com/38535571/230092405-0fa92be9-3fc4-43a0-a6b3-30e51d0441b1.png)
-* 클래스 없는 도메인 간 라우팅 기법
+
+ * 클래스 없는 도메인 간 라우팅 기법
 * 최신의 IP 주소 할당 방법으로 정적이였던 클래스 방식에 비해 IP 주소의 영역을 여러 네트워크 영역으로 나눌 수 있기 때문에 기존방식에 비해 유연 
 * 서브넷으로 최대 호스트 수를 유추할 수 있음
 * 예를 들면 10.0.2.23/xx 같은 형식
