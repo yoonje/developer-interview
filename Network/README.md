@@ -3,58 +3,53 @@
 <br>
 
 <details>
-<summary style="font-size:20px">OSI 7계층</summary>
+<summary style="font-size:20px">OSI 7계층와 TCP/IP 4계층</summary>
 <div markdown="1">
+
+![image](https://user-images.githubusercontent.com/38535571/230088639-3eeec45b-5ad5-48e6-8217-0e076cde69b0.png)
 
 #### OSI 7계층
 * 네트워크의 통신 과정을 7단계로 나눠 표준화한 것
 * ISO(국제표준기구)에서 만듦 
 
-#### Application(7, Message or Data)
+#### OSI Application(7, Message or Data)
 * 사용자에게 `실제 애플리케이션 서비스를 제공`하는 계층
 * HTTP, FTP, DNS
-#### Presentation(6, Message or Data)
+#### OSI Presentation(6, Message or Data)
 * 애플리케이션의 `데이터 형태와 구조를 변환(번역, 암호화, 압축)`시키는 계층
 * 코드 간의 번역을 담당 -> 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어줌
-#### Session(5, Message or Data)
+#### OSI Session(5, Message or Data)
 * 양 끝단의 응용 프로세스가 `통신을 관리하기 위한 방법`을 제공
   * 동시 송수신 방식(duplex)- 반이중 방식(half-duplex), 전이중 방식(Full Duplex)의 통신 등
 * 애플리케이션 간의 `TCP/IP 세션을 구축하고 관리하며 종료`시키는 계층
 * Socket
-#### Transport(4, Segment)
+#### OSI Transport(4, Segment)
 * 통신 `양단 간의 신뢰성 있는 통신`을 보장하는 계층
 * TCP, UDP
-#### Network(3, Packet)
+#### OSI Network(3, Packet)
 * 목적지까지의 경로를 선택하고 `경로에 따라 패킷을 전달(라우팅)`해주는 계층
 * IP / 라우터
-#### Link(2, Frame)
+#### OSI Link(2, Frame)
 * 인접한 `피어 간의 신뢰성 있는 통신`을 보장하는 계층
 * ARP, MAC / 브릿지, 스위치
-#### Physical(1, Bit)
+#### OSI Physical(1, Bit)
 * 전기적, 기계적, 기능적인 특성을 이용해서 `통신 케이블로 데이터를 전송`
 * 리피터, 케이블, 허브, NIC
-
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">TCP/IP 4계층</summary>
-<div markdown="1">
 
 #### TCP/IP 4계층
 * 네트워크 통신 과정을 4계층으로 나눠 표현한 것
 * TCP/IP 4계층에서 에플리케이션 계층을 3개로 쪼개고 인터넷 계층을 네트워크 계층이라고 부르면서 링크 계층을 데이터 링크 계층과 물리 계층으로 나누면 OSI 7계층이 됨
 
-#### Application(4, Message)
+#### TCP/IP Application(4, Message)
 * 응용 프로그램이 사용되는 프로토콜 계층
 * HTTP, FTP, DNS
-#### Transport(3, Segment)
+#### TCP/IP Transport(3, Segment)
 * 송신자와 수신자를 연결하는 통신 서비스를 제공하며 애플리케이션과 인터넷 계층 사이의 데이터가 전달될 때 중계하는 역할을 하는 계층
 * TCP, UDP
-#### Internet(2, Packet)
+#### TCP/IP Internet(2, Packet)
 * 장치로부터 받은 네트워크 패킷을 IP 주소로 지정된 목적지로 전송하기 위해 사용되는 계층
 * IP
-#### Link(1,Frame/Bit)
+#### TCP/IP Link(1,Frame/Bit)
 * 전선, 광섬유, 무선 등 실질적으로 데이터를 전달하며 장치 간에 신호를 주고 받는 규칙을 정하는 계층
 
 </div>
@@ -66,10 +61,12 @@
 <div markdown="1">
 
 #### PDU
+![image](https://user-images.githubusercontent.com/38535571/230087342-ff3182cc-c6e1-485b-aeb2-71fd91e492cc.png)
 * 네트워크 어떠한 계층에서 다른 계층으로 데이터가 전달될 때 한 덩이리의 단위를 PDU(Protocal Data Unit)이라고 함
 * PDU는 메타 정보를 갖고 있는 `헤더`와 데이터를 의미하는 `페이로드`로 구성되며 계층마다 부르는 명칭이 다름
 
 #### 캡슐화와 비캡슐화
+![image](https://user-images.githubusercontent.com/38535571/230087480-27c5292e-8066-4dae-aaf4-a21dd47ca4f9.png)
 * 캡슐화 과정은 상위 계층의 헤더와 데이터를 하위 계층의 데이터 부분에 포함시키고 해당 계층의 헤더를 삽입하는 과정
 * 비캡슐화 과정은 하위 계층에서 상위 계층으로 가며 각 계층의 헤더 부분을 제거하는 과정
 * 송신자의 애플리케이션 계층에서부터 각 계층에서 캡슐화를 통해 데이터가 생성되고 수신자의 링크 계층에서부터 각 계층에서 비캡슐화를 통해 데이터가 전달
@@ -105,9 +102,12 @@
 
 #### 종류
 ##### Stop and Wait
+![image](https://user-images.githubusercontent.com/38535571/230088843-64d1d387-0105-42a6-be71-5313a904db4d.png)
 * 전송한 패킷의 ACK을 수신하면 다음 패킷 전송 
 
 ##### Sliding Window - Go Back N
+![image](https://user-images.githubusercontent.com/38535571/230088958-430d6c0c-ccd1-44a1-b06a-e9e3f7191572.png)
+
 * 수신 측에서 설정한 윈도우 크기만큼의 패킷을 ACK의 확인 없이 전송, 데이터의 흐름을 동적으로 조절하는데 Cumulative ACK(마지막으로 수신 성공한 패킷의 ACK을 계속 전송)을 받고 문제가 된 패킷부터는 모두 재전송
 
 ##### Sliding Window - Selective Repeat
@@ -127,13 +127,14 @@
 #### 종류
 
 ##### Stop and Wait ARQ
+![image](https://user-images.githubusercontent.com/38535571/230089063-3f38e92f-18c8-4fe0-960f-574930b1b7c2.png)
 * 송신 측에서 1개의 프레임을 송신하고, 수신측에서 수신된 프레임의 에러 유무에 따라 ACK 혹은 NAK를 보내는 방식
 
-##### Go Back N ARQ
-* 전송된 프레임이 손상되거나 분실된 경우 그리고 ACK 패킷의 손실로 인한 타임아웃이 발생한 경우에 확인된 마지막 프레임 이후로 모든 프레임을 재전송하는 방식
+##### Go Back N ARQ과 SR(Selective-Reject) ARQ
+![image](https://user-images.githubusercontent.com/38535571/230089122-4e131f97-3c44-4a69-bf3d-76feb0c46f7d.png)
 
-##### SR(Selective-Reject) ARQ
-* 손실된 프레임만 재전송하여 Go Back N ARQ의 확인된 마지막 프레임 이후의 모든 프레임을 재전송하는 단점을 보완한 기법
+* Go Back N ARQ: 전송된 프레임이 손상되거나 분실된 경우 그리고 ACK 패킷의 손실로 인한 타임아웃이 발생한 경우에 확인된 마지막 프레임 이후로 모든 프레임을 재전송하는 방식
+* SR(Selective-Reject) ARQ: 손실된 프레임만 재전송하여 Go Back N ARQ의 확인된 마지막 프레임 이후의 모든 프레임을 재전송하는 단점을 보완한 기법
 
 </div>
 </details>
@@ -148,11 +149,21 @@
 * ACK을 확인하지 않고도 보낼 수 있는 데이터 양인 CWND(Congestion Window)를 기반으로 동작
 
 #### 종류
-* Additive Increase/Multicative Decrease: CWND를 기본 값에서 시작하여 1씩 증가시키는 방법
-* Slow Start: CWND가 1부터 지수적(2배)으로 증가시키는 방법
-* Congestion Avoidance(혼잡 회피): CWND가 임계치에 도달하면 1씩 증가키는 방법
-* Fast Recovery(빠른 회복): 혼잡 상황에서 사용되는 기법으로 CWND를 1/2배로 감소하고 선형적 증가시키는 방법
-* Fast Retransmit(빠른 재전송): 중복 ACK를 3개 받으면 재전송을 하는 방법
+
+##### Additive Increase/Multicative Decrease
+![image](https://user-images.githubusercontent.com/38535571/230089448-878526f9-afab-4fb3-a575-96af91da0c6e.png)
+* CWND를 기본 값에서 시작하여 1씩 증가시키는 방법
+
+##### Slow Start
+![image](https://user-images.githubusercontent.com/38535571/230089559-d3a441a1-9710-4762-b077-1e25420113be.png)
+* CWND가 1부터 지수적(2배)으로 증가시키는 방법
+##### Congestion Avoidance(혼잡 회피)
+* CWND가 임계치에 도달하면 1씩 증가키는 방법
+
+##### Fast Recovery(빠른 회복)
+* 혼잡 상황에서 사용되는 기법으로 CWND를 1/2배로 감소하고 선형적 증가시키는 방법
+##### Fast Retransmit(빠른 재전송)
+* 중복 ACK를 3개 받으면 재전송을 하는 방법
 
 </div>
 </details>
@@ -162,10 +173,20 @@
 <div markdown="1"> 
 
 #### TCP 3-Way Handshake
-* 서버와 클라이언트가 TCP `연결을 성립할 때` 사용
-* Client -> Server: 연결을 요청하는 `SYN(n) 전송`
-* Server -> Client: 요청을 수락하는 ` ACK(n+1) 전송` + 연결을 요청하는 `SYN(m) 전송`
-* Client -> Server: 요청을 수락하는 `ACK(m+1) 전송` 
+![image](https://user-images.githubusercontent.com/38535571/230090204-4d27034e-9954-4a5a-b14b-105cf1bcafef.png)
+* 서버와 클라이언트가 TCP `연결을 맺을 때` 사용
+
+#### TCP 3-Way Handshake 과정
+* 클라이언트는 서버로 통신을 시작하겠다는 SYN을 보낸다.
+* 서버는 그에 대한 응답으로 SYN+ACK를 보낸다.
+* 마지막으로 클라이언트는 서버로부터 받은 패킷에 대한 응답으로 ACK를 보낸다.
+
+#### TCP 3-Way Handshake 상태
+
+* LISTEN: 포트가 열린 상태로 연결 요청 대기 중인 상태
+* SYN-SENT: SYN 요청을 한 상태
+* SYN-RECEIVED: SYN 요청을 받고 상대방의 응답을 기다리는 중인 상태
+* ESTABLISEHD: 연결의 수립이 완료된 상태, 서로 데이터를 교환할 수 있음
 
 #### 필요성
 * TCP는 양방향 프로토콜이므로 클라이언트와 서버가 각각 서로에게 패킷을 전송할 수 있다는 것을 확인해야 됨 
@@ -183,11 +204,22 @@
 <div markdown="1"> 
 
 #### TCP 4-Way Handshake
+![image](https://user-images.githubusercontent.com/38535571/230090283-f712544c-4d3d-43c8-b751-3ce893704e20.png)
 * 서버와 클라이언트가 TCP `연결을 종료할 때` 사용
-* Client -> Server : 연결을 종료하는 `FIN(n) 전송`
-* Server -> Client : 요청을 수락하는 `ACK(n+1) 전송`
-* Server -> Client : 연결을 종료하는 `FIN(m) 전송`
-* Client -> Server : 요청을 수락하는 `ACK(m+1) 전송` 
+
+#### TCP 4-Way Handshake 과정
+* 클라이언트는 응답을 주고 연결을 끊기 위해 FIN패킷을 보낸다.
+* 서버는 클라이언트에서 보낸 패킷에 대한 응답으로 ACK 패킷을 보낸다.
+* 서버는 자신의 통신이 모두 끝나면 사용한 소켓을 정리하며 통신을 완전히 끝내도 된다는 의미로 FIN 패킷을 보낸다.
+* 클라이언트는 서버 패킷에 대한 응답으로 ACK패킷을 보낸다.
+
+#### TCP 4-Way Handshake 상태
+* CLOSE-WAIT	상대방의 FIN(종료 요청)을 받은 상태 (상대방 FIN에 대한 ACK를 보내고 애플리케이션에 종료를 알림)
+* FIN-WAIT-1	자신이 보낸 FIN에 대한 ACK를 기다리거나 상대방의 FIN을 기다리는 상태
+* LAST-ACK	CLOSE-WAIT 상태를 처리 후 자신의 FIN요청을 보낸 후 FIN에 대한 ACK를 기다리는 상태
+* FIN-WAIT-2	자신이 보낸 FIN에 대한 ACK를 받았고 상대방의 FIN을 기다리는 상태
+* TIME-WAIT	모든 FIN에 대한 ACK를 받고 연결 종료가 완료된 상태 (새 연결과 겹치지 않도록 일정 시간 동안 기다린 후 CLOSED로 전이)
+* CLOSE	연결 수립을 시작하기 전의 기본 상태 (연결 없음)
 
 #### 필요성
 * 클라이언트가 일방적으로 끊으면 서버는 `연결은 되어 있으나 요청이 없는 상태`로 오해할 수 있음
@@ -210,6 +242,16 @@
 * 64비트를 16비트 단위로 점을 찍어 표기하는 방식
 * 2001:db8::ff00:42:8329 같은 방식으로 표기됨
 
+
+#### IPv4 IPv6 헤더
+![image](https://user-images.githubusercontent.com/38535571/230091358-80da4098-409a-4315-afa2-0b7fd03b7513.png)
+
+#### IPv4 IPv6 패킷
+* IPv4
+![image](https://user-images.githubusercontent.com/38535571/230091472-20cb9246-77ef-47e2-9401-597a7e51d130.png)
+* IPv6
+![image](https://user-images.githubusercontent.com/38535571/230091539-a2455449-b874-466c-8b37-9fe6d5af24b8.png)
+
 </div>
 </details>
 
@@ -218,8 +260,10 @@
 <div markdown="1"> 
 
 #### 클래스 기반 할당 방식
+![image](https://user-images.githubusercontent.com/38535571/230091833-02061247-24a4-4a54-bce3-d8dbf125f81b.png)
 * 클래스를 구분하여 대역을 설정하여 앞에 있는 부분을 네트워크 주소, 그 뒷 부분을 주소인의 호스트 주소로 IP를 활용하는 방법
 * A 클래스의 12.0.0.0 네트워크를 부여받았다면 12.255.255.255.255는 브로드 캐스트용 주소가 되며 12.0.0.1 ~ 12.255.255.255.254의 호스트 주소로 사용 가능
+* 116.0.0.0 네트워크를 부여받았다면 A 클래스이며 116.0.0.1 ~ 12.255.255.255.254의 호스트 주소로 사용 가능
 
 #### 클래스 A
 * 앞에 첫번째 바이트를 네트워크 주소로 나머지 3개의 바이트를 호스트 주소로 사용
@@ -242,7 +286,7 @@
 <details>
 <summary style="font-size:20px">CIDR (Classless Inter-Domain Routing) 방식</summary>
 <div markdown="1"> 
-
+![image](https://user-images.githubusercontent.com/38535571/230092405-0fa92be9-3fc4-43a0-a6b3-30e51d0441b1.png)
 * 클래스 없는 도메인 간 라우팅 기법
 * 최신의 IP 주소 할당 방법으로 정적이였던 클래스 방식에 비해 IP 주소의 영역을 여러 네트워크 영역으로 나눌 수 있기 때문에 기존방식에 비해 유연 
 * 서브넷으로 최대 호스트 수를 유추할 수 있음
@@ -250,14 +294,14 @@
   * xx 자리수까지는 고정 IP
 * 서브넷의 사용 가능 IP 수: 2^(32-xx) - 2
   * 첫번째: 네트워크 주소, 마지막: 브로드캐스팅 주소
-  
+* 네트워크가 143.7.65.203/22 이면 앞에 22비트는 네트워크 주소를 나타내고 나머지 10비트는 호스트 주소를 나타내고 143.7.64.0 ~ 143.7.67.255의 호스트 주소를 사용
 </div>
 </details>
 
 <details>
 <summary style="font-size:20px">NAT (Network Address Translation)</summary>
 <div markdown="1"> 
-
+![image](https://user-images.githubusercontent.com/38535571/230092496-4cd47fc8-ea85-4f8e-b47b-82f74572f901.png)
 #### 정의
 * IP 패킷의 TCP/UDP 포트 숫자와 소스 및 목적지의 IP 주소 등을 `재기록`하면서 `라우터`를 통해 통신하는 기술
 * 외부에 공개된 `공인(Public) IP`와 내부에서 사용하는 `사설(Private) IP`를 `맵핑`하여 원활히 통신할 수 있게 하는 기술
@@ -304,11 +348,13 @@
 <summary style="font-size:20px">DNS (Domin Name System)</summary>
 <div markdown="1"> 
 
+![image](https://user-images.githubusercontent.com/38535571/230093255-b1d91c83-b6e0-4410-96c7-05d9c03c085d.png)
+
 #### 도메인
 * 네트워크 상에서 컴퓨터를 식별하는 호스트명
 
 #### DNS
-* 도메인을 실제 서버와 연결 시켜하는 시스템
+* 컴퓨터를 식별하는 호스트명인 도메인을 실제 서버와 연결 시켜주는 시스템
 
 </div>
 </details>
@@ -317,6 +363,9 @@
 <summary style="font-size:20px">GSLB (Global Server Load Balancing)</summary>
 <div markdown="1"> 
 
+![image](https://user-images.githubusercontent.com/38535571/230092667-f2fbf5e6-bc34-44e4-97a2-0ea5ddd37376.png)
+
+* 전통적인 DNS 서비스를 발전시킨 형태로 헬스 체크와 지리적 정보를 사용하는 시스템
 * DNS 기반의 로드 밸런싱으로 IP가 아닌 도메인을 갖음
 * DNS와 VIP를 통해서 구성을 한 경우 한 IDC에 서버들이 몰려 있으면 DR 상황에서 문제가 생길 수 있기 때문에 서버의 위치를 고려할 수 있는 GSLB를 사용
 * VIP와 GLSB를 함께 사용 할 수도 있고 VIP 없이 GSLB만 서버에 묶어서 구성할 수도 있음
@@ -330,7 +379,7 @@
 <details>
 <summary style="font-size:20px">로드 밸런싱</summary>
 <div markdown="1">
-
+![image](https://user-images.githubusercontent.com/38535571/230092566-e9686218-692f-43ce-8d0a-65171baacace.png)
 #### 로드 밸런싱
 * 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
 * Scale out 시에 사용
