@@ -382,7 +382,7 @@
  
 ![image](https://user-images.githubusercontent.com/38535571/230092566-e9686218-692f-43ce-8d0a-65171baacace.png)
 
- #### 로드 밸런싱
+#### 로드 밸런싱
 * 로드 밸런서를 클라이언트와 서버 사이에 두고, 부하가 집중되지 않도록 여러 서버에 분산하는 방식
 * Scale out 시에 사용
 * Server Load Balancing이라고도 불림
