@@ -300,8 +300,10 @@
 
 <details>
 <summary style="font-size:20px">NAT (Network Address Translation)</summary>
-<div markdown="1"> 
+<div markdown="1">
+
 ![image](https://user-images.githubusercontent.com/38535571/230092496-4cd47fc8-ea85-4f8e-b47b-82f74572f901.png)
+
 #### 정의
 * IP 패킷의 TCP/UDP 포트 숫자와 소스 및 목적지의 IP 주소 등을 `재기록`하면서 `라우터`를 통해 통신하는 기술
 * 외부에 공개된 `공인(Public) IP`와 내부에서 사용하는 `사설(Private) IP`를 `맵핑`하여 원활히 통신할 수 있게 하는 기술
