@@ -92,7 +92,7 @@
 
 
 <details>
-<summary style="font-size:20px">프로세스 생성과정</summary>
+<summary style="font-size:20px">프로세스 생성 과정</summary>
 <div markdown="1">
 
 * 프로세스 관리 정보를 갖는 `Process Control Block를 생성`하고 프로그램의 코드를 읽어 들여 `코드 영역`을 메모리에 할당
