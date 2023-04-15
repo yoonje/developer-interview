@@ -92,7 +92,7 @@
 
 
 <details>
-<summary style="font-size:20px">프로세스 생성 과정</summary>
+<summary style="font-size:20px">프로세스 생성과정</summary>
 <div markdown="1">
 
 * 프로세스 관리 정보를 갖는 `Process Control Block를 생성`하고 프로그램의 코드를 읽어 들여 `코드 영역`을 메모리에 할당
@@ -380,30 +380,19 @@
 </details>
 
 <details>
-<summary style="font-size:20px">CPU 스케줄링: SRT(Shortest Remaining Time)</summary>
+<summary style="font-size:20px">CPU 스케줄링 알고리즘</summary>
 <div markdown="1">
 
+#### SRT (Shortest Remaining Time)
 * 선점형 CPU 스케줄링 알고리즘
 * `남은 시간이 가장 적은` 프로세스를 실행
 
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">CPU 스케줄링: Round Robin</summary>
-<div markdown="1">
-
+#### Round Robin
 * 선점형 CPU 스케줄링 알고리즘
 * `Time Slice` 단위로 공평하게 프로세스 실행
 * 할당된 시간 내에 끝나지 않으면 다음 프로세스에게 CPU를 양보하고 준비 상태 큐의 가장 뒤로 배치
 
-</div>
-</details>
-
-<details>
-<summary style="font-size:20px">CPU 스케줄링: MLFQ (Multi Level Feedback Queue)</summary>
-<div markdown="1">
-
+#### MLFQ (Multi Level Feedback Queue)
 * 선점형 CPU 스케줄링 알고리즘
 * 우선 순위 개수만큼 Queue가 있으며 최상위 순위의 Queue부터 실행 후 해당 큐의 할당량이 끝나면 하위 우선 순위 Queue를 실행하는 스케줄링 기법
 * 처음 시작은 모든 프로세스가 가장 높은 우선 순위 Queue에 존재하나 할당된 Time Slice를 소진하면 우선 순위를 감소시켜서 우선 순위 결정
