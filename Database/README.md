@@ -283,6 +283,15 @@
 </div>
 </details>
 
+<details>
+<summary style="font-size:20px">복합 인덱스 효과적으로 달기</summary>
+<div markdown="1">
+
+* 여러 필드를 기반으로 조회할 때 복합 인덱스를 생성
+* 생성 순서에 따라 성능이 달라지는데 순서는 `같음`, `정렬`, `부호(> or <)`, `카디널리티` 순으로 생성해야함
+
+</div>
+</details>
 
 <details>
 <summary style="font-size:20px">인덱스 자료구조: 트리</summary>
